@@ -53,7 +53,7 @@ font pango: source code pro 12
 floating_modifier $super
 
 #autostart
-exec --no-startup-id ~/.fehbg
+#exec --no-startup-id ~/.fehbg
 exec --no-startup-id xsettingsd &
 #exec --no-startup-id pasystray
 exec --no-startup-id conky
@@ -61,17 +61,15 @@ exec --no-startup-id conky -c ~/.config/conky/conky-shcts
 exec --no-startup-id copyq
 exec --no-startup-id dunst
 exec --no-startup-id dex -a -s /etc/xdg/autostart/:~/.config/autostart/
-exec --no-startup-id redshift
+#exec --no-startup-id redshift
 exec --no-startup-id desktop-items
 exec --no-startup-id nm-applet
 exec --no-startup-id pamac-tray
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id xfce4-power-manager
-exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id setcursor
 #exec_always --no-startup-id ${HOME}/.config/polybar/launch.sh
 exec_always --no-startup-id numlockx on
-exec blueberry-tray
 exec --no-startup-id java -Xmx1024m -jar "/opt/xdman/xdman.jar" -m
 
 # hide/unhide i3status bar
@@ -325,3 +323,4 @@ mode "$mode_system" {
 hide_edge_borders both
 exec_always --no-startup-id picom --experimental-backends
 exec_always --no-startup-id autotiling
+exec --no-startup-id nitrogen --restore

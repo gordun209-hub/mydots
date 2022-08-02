@@ -1,5 +1,5 @@
 #!/bin/zsh
-
+tre() { command tre "$@" -e && source "/tmp/tre_aliases_$USER" 2>/dev/null; }
 # fd() {
 #   local dir
 #   dir=$(find ${1:-.} -path '*/\.*' -prune \

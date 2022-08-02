@@ -52,6 +52,22 @@ return packer.startup(function(use)
       'JoosepAlviste/nvim-ts-context-commentstring',
     },
   }
+  -- use { "ellisonleao/gruvbox.nvim", config = function() require('gruvbox').setup({
+  --     undercurl = true,
+  --     underline = true,
+  --     bold = true,
+  --     italic = true,
+  --     strikethrough = true,
+  --     invert_selection = false,
+  --     invert_signs = false,
+  --     invert_tabline = false,
+  --     invert_intend_guides = false,
+  --     inverse = true, -- invert background for search, diffs, statuslines and errors
+  --     contrast = "", -- can be "hard", "soft" or empty string
+  --     overrides = {},
+  --     vim.cmd("colorscheme gruvbox")
+  --   })
+  -- end }
   --use { "JoosepAlviste/nvim-ts-context-commentstring"  }
   --use { "windwp/nvim-ts-autotag" } -- auto closing tags
   -- use { "windwp/nvim-autopairs",
@@ -68,9 +84,9 @@ return packer.startup(function(use)
   use {
     "EdenEast/nightfox.nvim",
     config = function()
-      require("colorschemes.nightfox").setup()
+      require("colorschemes.nightfox")
     end,
-    run = ':lua require("nightfox").compile()',
+--    run = ':lua require("nightfox").compile()',
   }
   -- Telescope
   use {
@@ -127,7 +143,7 @@ return packer.startup(function(use)
     end,
   }
   -- LISP
-  use { 'eraserhd/parinfer-rust', opt = true, ft = { "racket", "scheme" } }
+  use { 'gpanders/nvim-parinfer', ft = { 'scheme', 'racket' } }
   -- AUTOCOMPLETE
   use { 'saadparwaiz1/cmp_luasnip', after = "LuaSnip" }
   use { 'L3MON4D3/LuaSnip', requires = { 'rafamadriz/friendly-snippets' }, } -- snippets
