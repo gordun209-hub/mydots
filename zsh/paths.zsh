@@ -5,10 +5,8 @@ export LANG=en_US.UTF-8
 export UPDATE_INTERVAL=15
 # Rust
 export PATH="$HOME/.cargo/bin:$PATH"
-
 export ZSH="$HOME/dotfiles/zsh"
 # Misc Paths
-
 # Bun
 export BUN_INSTALL="/home/ali/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"

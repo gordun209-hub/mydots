@@ -75,7 +75,6 @@ lspconfig.bashls.setup {
 }
 
 lspconfig.racket_langserver.setup {
-  filetypes = { "racket", "scheme" },
   root_dir = lspconfig.util.root_pattern(".git", "."),
   capabilities = capabilities,
   handlers = handlers,

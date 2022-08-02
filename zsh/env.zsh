@@ -3,13 +3,15 @@
 export BOOKMARKS="$HOME/.cache/bookmarks"
 export TODOS="$HOME/.cache/todos"
 export CURSOR_TYPE="ibeam"
-
+export DOTFILES="$HOME/dotfiles"
+export DEBUG_MODE=false
+export CURRENT_SHELL=zsh
+export BROWSER=firefox
 export PACKPATH="$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim"
 
 # FZF
 #export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 #export FZF_DEFAULT_OPTS='--bind ctrl-n:down,ctrl-p:up'
-
 
 #export ZSH_AUTOSUGGEST_MANUAL_REBIND=1  # make prompt faster
 #export DISABLE_MAGIC_FUNCTIONS=true     # make pasting into terminal faster

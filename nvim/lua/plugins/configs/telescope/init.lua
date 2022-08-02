@@ -1,5 +1,4 @@
 local actions    = require "telescope.actions"
-local previewers = require('telescope.previewers')
 local builtin    = require('telescope.builtin')
 local icons      = require('plugins.icons')
 local M          = {}
@@ -120,10 +119,6 @@ require('telescope').setup {
     }
   },
   extensions = {
-    project = {
-      hidden_files = false,
-
-    },
     fzf = {
       fuzzy = true,
       override_generic_sorter = true,
@@ -131,25 +126,10 @@ require('telescope').setup {
       case_mode = "smart_case",
     },
 
-    ['ui-select'] = {
-      require('telescope.themes').get_cursor { -- or get_dropdown
-        winblend = 0,
-        initial_mode = 'normal',
-      },
-    },
-    packer = {
-      theme = "ivy",
-      layout_config = {
-        height = .5
-      }
-    }
   }
 }
-require('telescope').load_extension('packer')
 require('telescope').load_extension('fzf')
 require('telescope').load_extension('repo')
-require('telescope').load_extension('ui-select')
-require('telescope').load_extension('gh')
 -- set_highlight({
 --   list = {
 --     { group = "TelescopePromptCounter", foreground = colors.orange },
@@ -160,40 +140,7 @@ require('telescope').load_extension('gh')
 -- Implement delta as previewer for diffs
 
 
-local delta_bcommits = previewers.new_termopen_previewer {
-  get_command = function(entry)
-    return { 'git', '-c', 'core.pager=delta', '-c', 'delta.side-by-side=false', 'diff', entry.value .. '^!', '--',
-      entry.current_file }
-  end
-}
 
-local delta = previewers.new_termopen_previewer {
-  get_command = function(entry)
-    return { 'git', '-c', 'core.pager=delta', '-c', 'delta.side-by-side=false', 'diff', entry.value .. '^!' }
-  end
-}
-
-M.my_git_commits = function(opts)
-  opts = opts or {}
-  opts.previewer = {
-    delta,
-    previewers.git_commit_message.new(opts),
-    previewers.git_commit_diff_as_was.new(opts),
-  }
-
-  builtin.git_commits(opts)
-end
-
-M.my_git_bcommits = function(opts)
-  opts = opts or {}
-  opts.previewer = {
-    delta_bcommits,
-    previewers.git_commit_message.new(opts),
-    previewers.git_commit_diff_as_was.new(opts),
-  }
-
-  builtin.git_bcommits(opts)
-end
 
 
 

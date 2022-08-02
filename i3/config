@@ -20,7 +20,6 @@ set $lockScreenWallpaper /usr/share/wallpapers/garuda-wallpapers/Garuda-Desert.p
 
 ### Applications: ###
 
-set $preferredTerminalEmulator /usr/bin/alacritty
 set $preferredBrowser /usr/bin/firefox
 set $preferredFileManager /usr/bin/thunar
 set $preferredMailClient /usr/bin/geary
@@ -45,11 +44,10 @@ bindsym Print exec --no-startup-id $preferredScreenCaptureTool
 # - You can change the preferredTerminalEmulator variable
 # - alacritty & xfce4-terminal can also be started using their individual keybindings
 
-bindsym $super+Return exec $preferredTerminalEmulator
-bindsym $super+t exec alacritty
+bindsym $super+Return exec alacritty
 
 # set font
-font pango: source code pro 10
+font pango: source code pro 12
 
 # Use Mouse+$super to drag floating windows to their wanted position
 floating_modifier $super
@@ -209,14 +207,14 @@ bindsym $super+Shift+r restart
 #bindsym $super+q exec "i3-nagbar -t warning -m 'Really, exit?' -b 'Yes' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
-mode "resize" {
-        bindsym Left resize shrink width 5 px or 5 ppt
-        bindsym Down resize grow height 5 px or 5 ppt
-        bindsym Up resize shrink height 5 px or 5 ppt
-        bindsym Right resize grow width 5 px or 5 ppt
-        bindsym Return mode "default"
-}
-bindsym $super+r mode "resize"
+# mode "resize" {
+#         bindsym Left resize shrink width 5 px or 5 ppt
+#         bindsym Down resize grow height 5 px or 5 ppt
+#         bindsym Up resize shrink height 5 px or 5 ppt
+#         bindsym Right resize grow width 5 px or 5 ppt
+#         bindsym Return mode "default"
+# }
+# bindsym $super+r mode "resize"
 
 # change borders
 #bindsym $super+u border none

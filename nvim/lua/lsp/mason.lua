@@ -6,5 +6,5 @@ require("mason").setup {
     }
 }
 require("mason-lspconfig").setup {
-    ensure_installed = {"shfmt","shellcheck", "typescript", "typescriptreact", "javascript","lua-language-server","luacheck","bash-language-server", "javascriptreact", "racket" },
+    ensure_installed = {"shfmt","shellcheck", "typescript", "typescriptreact", "javascript","lua-language-server","luacheck","bash-language-server", "javascriptreact", "racket-langserver" },
 }

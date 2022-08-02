@@ -1,13 +1,11 @@
 local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
-  print("cmp broke")
   return
 end
 local colors = require('utils.colors')
 local set_highlight = require("utils.set-highlight")
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
-  print("luasnipo broke")
   return
 end
 
@@ -48,16 +46,6 @@ local icons = {
 local kinds = icons
 
 
-local buffer_option = {
-  -- Complete from all visible buffers (splits)
-  get_bufnrs = function()
-    local bufs = {}
-    for _, win in ipairs(vim.api.nvim_list_wins()) do
-      bufs[vim.api.nvim_win_get_buf(win)] = true
-    end
-    return vim.tbl_keys(bufs)
-  end
-}
 
 
 
@@ -126,13 +114,10 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'npm', max_item_count = 15 },
     { name = 'luasnip' },
-    { name = "tmux" },
     { name = 'buffer', max_item_count = 15, option = {
       get_bufnrs = function() return vim.api.nvim_list_bufs() end,
     } },
     { name = 'nvim_lua', max_item_count = 20 }, -- nicer code action signs
-
-    { name = 'fish' },
     { name = 'path', max_item_count = 15, },
   },
 
@@ -185,4 +170,3 @@ cmp.setup.cmdline(':', {
   })
 })
 
-set_highlight({ group = "CmpItemKindDefault", foreground = colors.blue })

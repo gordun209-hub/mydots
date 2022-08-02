@@ -1,9 +1,9 @@
-require("plugins.configs.impatient")
-require('core.winbar')
+local present, impatient = pcall(require, "impatient")
+if present then
+  impatient.enable_profile()
+end
+
 require('core.options')
 require('core.keymaps')
 require('core.cmds')
-require("plugins")
-require("utils")
---require('lsp.null-ls')
-
+require('plugins')

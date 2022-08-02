@@ -1,0 +1,4 @@
+default_mode: locked
+mouse_mode: false
+env:
+  RUST_BACKTRACE: 1 # set RUST_BACKTRACE=1
