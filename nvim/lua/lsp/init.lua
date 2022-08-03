@@ -2,9 +2,9 @@ local typescript_ok, typescript = pcall(require, 'typescript')
 require("lsp.mason") -- this installs servers
 require("lsp.handlers").setup() -- this exposes handlers
 local lspconfig = require("lspconfig")
-require('lsp.null-ls')
-require("lsp.lsp-signatures")
-local util = require("lspconfig.util")
+--require('lsp.null-ls')
+--require("lsp.lsp-signatures")
+--local util = require("lspconfig.util")
 local handlers = {
   ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", width = 60 }),
   ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded", widht = 60 })
@@ -38,13 +38,6 @@ lspconfig.eslint.setup {
   on_attach = require('lsp.settings.eslint').on_attach,
   settings = require('lsp.settings.eslint').settings,
   handlers = handlers,
-  root_dir = util.root_pattern(
-    ".eslintrc.js",
-    ".eslintrc.cjs",
-    ".eslintrc.yaml",
-    ".eslintrc.yml",
-    ".eslintrc.json"
-  ),
 
 }
 
@@ -88,6 +81,17 @@ lspconfig.prismals.setup {
   on_attach = on_attach,
   handlers = handlers,
 }
+-- lspconfig.jsonls.setup({
+--   capabilities = capabilities,
+--   on_attach = function(client)
+--   end,
+--   settings = {
+--     json = {
+--       validate = { enable = true },
+--       schemas = require('schemastore').json.schemas(),
+--     },
+--   },
+-- })
 
 -- lspconfig.clangd.setup {
 --     capabilities = capabilities,

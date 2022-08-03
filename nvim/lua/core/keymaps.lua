@@ -69,7 +69,7 @@ keymap("n", "<leader>'", "<cmd>1ToggleTerm size=15 direction=horizontal<cr>", op
 -- Search and Replace
 keymap("n", "c.", ":%s//g<Left><Left>", opts)
 keymap("n", "\\c.", ":%s/\\<<C-r><C-w>\\>//g<Left><Left>", opts)
-keymap("n", "-", "<cmd>NnnPicker<cr>", { noremap = true })
+keymap("n", "-", "<cmd>Nnn<cr>", { noremap = true })
 vim.api.nvim_set_keymap(
   "n",
   "<leader>ni",
