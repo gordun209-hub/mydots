@@ -1,28 +1,23 @@
-local typescript_ok, typescript = pcall(require, 'typescript')
+local typescript = require("typescript")
 require("lsp.mason") -- this installs servers
 require("lsp.handlers").setup() -- this exposes handlers
 local lspconfig = require("lspconfig")
---require('lsp.null-ls')
---require("lsp.lsp-signatures")
---local util = require("lspconfig.util")
 local handlers = {
   ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", width = 60 }),
   ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded", widht = 60 })
 }
 local on_attach = require('lsp.handlers').on_attach
 local capabilities = require('lsp.handlers').capabilities
-if typescript_ok then
-  typescript.setup({
-    disable_commands = false, -- prevent the plugin from creating Vim commands
-    --disable_formatting = false, -- disable tsserver's formatting capabilities
-    debug = false, -- enable debug logging for commands
-    server = {
-      capabilities = require('lsp.settings.tsserver').capabilities,
-      on_attach = require('lsp.settings.tsserver').on_attach,
-      handlers = handlers
-    }
-  })
-end
+typescript.setup({
+  disable_commands = false, -- prevent the plugin from creating Vim commands
+  --disable_formatting = false, -- disable tsserver's formatting capabilities
+  debug = false, -- enable debug logging for commands
+  server = {
+    capabilities = require('lsp.settings.tsserver').capabilities,
+    on_attach = require('lsp.settings.tsserver').on_attach,
+    handlers = handlers
+  }
+})
 
 lspconfig.tailwindcss.setup {
   capabilities = capabilities,
@@ -48,39 +43,39 @@ lspconfig.sumneko_lua.setup {
   capabilities = capabilities
 }
 
-lspconfig.html.setup {
-  capabilities = capabilities,
-  handlers = handlers,
-  on_attach = on_attach,
-  settings = require('lsp.settings.html').settings,
-}
-lspconfig.emmet_ls.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  handlers = handlers,
-  settings = require('lsp.settings.emmet-ls').settings,
-}
-
-lspconfig.bashls.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  handlers = handlers,
-  settings = require('lsp.settings.bashls').settings
-}
-
-lspconfig.racket_langserver.setup {
-  root_dir = lspconfig.util.root_pattern(".git", "."),
-  capabilities = capabilities,
-  handlers = handlers,
-  on_attach = on_attach,
-}
---require('lsp.settings.rust').setup(on_attach, capabilities)
-
-lspconfig.prismals.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  handlers = handlers,
-}
+-- lspconfig.html.setup {
+--   capabilities = capabilities,
+--   handlers = handlers,
+--   on_attach = on_attach,
+--   settings = require('lsp.settings.html').settings,
+-- }
+-- lspconfig.emmet_ls.setup {
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+--   handlers = handlers,
+--   settings = require('lsp.settings.emmet-ls').settings,
+-- }
+--
+-- lspconfig.bashls.setup {
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+--   handlers = handlers,
+--   settings = require('lsp.settings.bashls').settings
+-- }
+--
+-- lspconfig.racket_langserver.setup {
+--   root_dir = lspconfig.util.root_pattern(".git", "."),
+--   capabilities = capabilities,
+--   handlers = handlers,
+--   on_attach = on_attach,
+-- }
+-- --require('lsp.settings.rust').setup(on_attach, capabilities)
+--
+-- lspconfig.prismals.setup {
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+--   handlers = handlers,
+-- }
 -- lspconfig.jsonls.setup({
 --   capabilities = capabilities,
 --   on_attach = function(client)

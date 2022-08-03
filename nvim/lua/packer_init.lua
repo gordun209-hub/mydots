@@ -44,7 +44,7 @@ return packer.startup(function(use)
   use { "lewis6991/impatient.nvim" } -- improve startup time
   use { "antoinemadec/FixCursorHold.nvim", run = function() vim.g.curshold_updatime = 1000 end } -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
   use { "nvim-lua/plenary.nvim" } -- needed for other plugins to work
-  use { "kyazdani42/nvim-web-devicons", config = function() require('plugins.configs.devicons') end, }
+  use { "kyazdani42/nvim-web-devicons", config = function() require('plugins.devicons') end, }
   use {
     "nvim-treesitter/nvim-treesitter", -- syntax highlighting
     run = ":TSUpdate",
@@ -54,17 +54,17 @@ return packer.startup(function(use)
       'JoosepAlviste/nvim-ts-context-commentstring', -- for commenting
       "m-demare/hlargs.nvim",
     },
-    config = function() require 'plugins.configs.treesitter'
+    config = function() require 'plugins.treesitter'
     end,
   }
 
   use { 'windwp/nvim-autopairs', event = "InsertCharPre", after = "nvim-cmp",
-    config = function() require('plugins.configs/autopairs') end }
+    config = function() require('plugins.autopairs') end }
   -- surround text
   use {
     "kylechui/nvim-surround",
     config = function()
-      require('plugins.configs.surround')
+      require('plugins.surround')
     end,
     event = { "InsertEnter" },
     keys = { 'c' }
@@ -83,19 +83,24 @@ return packer.startup(function(use)
     after = 'nvim-web-devicons',
   }
   -- Telescope
-  use {
-    "nvim-telescope/telescope.nvim",
-    after = { "plenary.nvim" },
-    requires = {
-      { "nvim-telescope/telescope-project.nvim" },
-      'cljoly/telescope-repo.nvim',
-      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-      "nvim-telescope/telescope-file-browser.nvim",
-    },
-    config = function()
-      require("plugins.configs.telescope")
-    end,
+  use { 'ibhagwan/fzf-lua',
+    -- optional for icon support
+    cmd = "Fzf",
+    requires = { 'kyazdani42/nvim-web-devicons' }
   }
+  -- use {
+  --   "nvim-telescope/telescope.nvim",
+  --   after = { "plenary.nvim" },
+  --   requires = {
+  --     { "nvim-telescope/telescope-project.nvim" },
+  --     'cljoly/telescope-repo.nvim',
+  --     { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+  --     "nvim-telescope/telescope-file-browser.nvim",
+  --   },
+  --   config = function()
+  --     require("plugins.telescope")
+  --   end,
+  -- }
   -- LSP --
   -- lsp configurations
   use {
@@ -103,9 +108,11 @@ return packer.startup(function(use)
     config = function()
       require("lsp")
     end,
-    requires = { { "jose-elias-alvarez/typescript.nvim", 
-      { "williamboman/mason.nvim", requires = { "williamboman/mason-lspconfig.nvim" } }
-    } }
+    requires = { { "jose-elias-alvarez/typescript.nvim",
+      { "williamboman/mason.nvim",
+        requires = { "williamboman/mason-lspconfig.nvim" }
+      } }
+    }
   }
   -- see function signatures when writing args
   use { "ray-x/lsp_signature.nvim", event = 'CursorHold', after = "nvim-lspconfig",
@@ -117,7 +124,7 @@ return packer.startup(function(use)
   use({
     "glepnir/lspsaga.nvim",
     branch = "main",
-    config = function() require('plugins.configs.lspsaga')
+    config = function() require('plugins.lspsaga')
     end,
     after = { "nvim-lspconfig" }
   })
@@ -138,7 +145,7 @@ return packer.startup(function(use)
   -- scheme dev
   use { 'gpanders/nvim-parinfer', ft = { 'scheme', 'racket' } }
   -- AUTOCOMPLETE
-  use { 'hrsh7th/nvim-cmp', event = 'InsertEnter', config = "require('plugins.configs.cmp')" }
+  use { 'hrsh7th/nvim-cmp', event = 'InsertEnter', config = "require('plugins.cmp')" }
   use { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' }
   use { 'hrsh7th/cmp-nvim-lsp', after = 'cmp-nvim-lua' }
   use { 'hrsh7th/cmp-buffer', after = 'cmp-nvim-lsp' }
@@ -160,7 +167,7 @@ return packer.startup(function(use)
   use({
     "github/copilot.vim",
     config = function()
-      require('plugins.configs.copilot')
+      require('plugins.copilot')
     end,
     cmd = { "Copilot" },
   })
@@ -177,7 +184,7 @@ return packer.startup(function(use)
   use {
     "norcalli/nvim-colorizer.lua",
     config = function()
-      require("plugins.configs.colorizer")
+      require("plugins.colorizer")
     end, after = "nvim-treesitter",
     event = { "BufRead", "BufNewFile" },
     ft = { "html", "css", "json", "yaml", "conf" },
@@ -186,9 +193,9 @@ return packer.startup(function(use)
   use {
     "ahmedkhalf/project.nvim",
     config = function()
-      require("plugins.configs.project")
+      require("plugins.project")
     end,
-    requires = { "nvim-telescope/telescope.nvim" }
+    --requires = { "nvim-telescope/telescope.nvim" }
   }
   -- Scrolling good
   use({
@@ -200,7 +207,7 @@ return packer.startup(function(use)
   })
   -- tree trying neotree
   use { 'is0n/fm-nvim', cmd = { 'Fzf', 'Nnn', 'Lazygit' },
-    config = function() require('plugins.configs.fm')
+    config = function() require('plugins.fm')
     end }
   -- tmux navigation
   use { "aserowy/tmux.nvim",
@@ -210,7 +217,7 @@ return packer.startup(function(use)
       '<C-k>',
       '<C-l>',
     },
-    config = function() require('plugins.configs.tmux') end, }
+    config = function() require('plugins.tmux') end, }
   -- oyun
 
 
@@ -223,7 +230,7 @@ return packer.startup(function(use)
   use {
     "numToStr/Comment.nvim",
     config = function()
-      require("plugins.configs.comment")
+      require("plugins.comment")
     end,
     keys = { "cc", "gc", "gb" }
   }
@@ -232,7 +239,7 @@ return packer.startup(function(use)
   use { 'folke/zen-mode.nvim', branch = 'main', cmd = { 'ZenMode' } }
   use { 'fladson/vim-kitty', ft = { 'kitty' } } -- kitty config
   use { 'vuki656/package-info.nvim', event = { "BufRead package.json" },
-    config = function() require("plugins.configs.package-info") end }
+    config = function() require("plugins.package-info") end }
   use { 'mboughaba/i3config.vim', ft = 'i3config' } -- i3 config file syntax
   -- calculate startup time
   use({

@@ -33,14 +33,16 @@ keymap("n", "<leader>rl", "<cmd> Telescope repo list<cr>", opts)
 --   "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
 --   opts
 -- )
-keymap(
-  "n",
-  "<leader>ff",
-  "<cmd> Telescope find_files <cr>"
-  ,
-  opts
-)
-
+-- keymap(
+--   "n",
+--   "<leader>ff",
+--   "<cmd> Fzf <cr>"
+--   ,
+--   opts
+-- )
+vim.api.nvim_set_keymap('n', '<leader>ff',
+    "<cmd>lua require('fzf-lua').files()<CR>",
+    { noremap = true, silent = true })
 -- keymap("n", "<leader>ff", "<CMD>lua require('plugins.configs.telescope').project_files()<CR>",opts)
 -- keymap("n", "<leader>ff", "<CMD>lua require('plugins.configs.telescope.pickers.multi-rg')()<CR>", opts)
 keymap("n", "<Leader>fw",
@@ -129,7 +131,8 @@ keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.format({async = true})<CR>", sile
 
 vim.keymap.set("n", "gh", require("lspsaga.finder").lsp_finder, { silent = true })
 -- code action
-vim.keymap.set("n", "<leader>ca", action.code_action, { silent = true }) vim.keymap.set("v", "<leader>ca", function()
+vim.keymap.set("n", "<leader>ca", action.code_action, { silent = true })
+vim.keymap.set("v", "<leader>ca", function()
   vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-U>", true, false, true))
   action.range_code_action()
 end, { silent = true })
@@ -160,5 +163,3 @@ end, { silent = true })
 vim.keymap.set("n", "<C-b>", function()
   action.smart_scroll_with_saga(-1)
 end, { silent = true })
-
-
