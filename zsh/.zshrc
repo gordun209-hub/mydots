@@ -1,3 +1,4 @@
+#!/usr/bin/zsh
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -5,22 +6,22 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-#!/usr/bin/zsh
 
 eval "$(fnm env --use-on-cd)"
 # eval "$(starship init zsh)"
 export DOTFILES="$HOME/dotfiles"
-source $DOTFILES/zsh/aliases.zsh 
-source $DOTFILES/zsh/env.zsh 
-source $DOTFILES/zsh/paths.zsh 
-source $DOTFILES/zsh/nnn.zsh 
+source $DOTFILES/zsh/aliases.zsh
+source $DOTFILES/zsh/env.zsh
+source $DOTFILES/zsh/paths.zsh
+source $DOTFILES/zsh/nnn.zsh
 source $DOTFILES/zsh/functions.zsh
-source $DOTFILES/zsh/options.zsh 
+source $DOTFILES/zsh/options.zsh
 source $DOTFILES/zsh/fzf.zsh
+source $HOME/.config/lf/icons
+
+
 source ~/.fzf/shell/completion.zsh
 source ~/.fzf/shell/key-bindings.zsh
-
-
 bindkey -v
 #autoload -U colors && colors
 # zmodload zsh/complist

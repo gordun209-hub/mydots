@@ -1,5 +1,5 @@
 local status_ok, typescript = pcall(require, "typescript")
-require("lsp.mason") -- this installs servers
+--require("lsp.mason") -- this installs servers
 require("lsp.handlers").setup() -- this exposes handlers
 local lspconfig = require("lspconfig")
 local handlers = {

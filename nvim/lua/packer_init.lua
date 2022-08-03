@@ -41,12 +41,18 @@ packer.init({
 return packer.startup(function(use)
   use { "wbthomason/packer.nvim" } -- manages itself
   use { "lewis6991/impatient.nvim" } -- improve startup time
-  use { "antoinemadec/FixCursorHold.nvim", run = function() vim.g.curshold_updatime = 1000 end } -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
+  use { "antoinemadec/FixCursorHold.nvim",event={"BufWinEnter"}, run = function() vim.g.curshold_updatime = 1000 end } -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
   use { "nvim-lua/plenary.nvim" } -- needed for other plugins to work
   use { "kyazdani42/nvim-web-devicons", config = function() require('plugins.devicons') end, }
   use {
     "nvim-treesitter/nvim-treesitter", -- syntax highlighting
     run = ":TSUpdate",
+    -- cmd = { "TSInstall",
+    --   "TSBufEnable",
+    --   "TSBufDisable",
+    --   "TSEnable",
+    --   "TSDisable",
+    --   "TSModuleInfo", },
     requires = {
       'windwp/nvim-ts-autotag', -- for autotag () {}
       'p00f/nvim-ts-rainbow', -- rainbow pairs
@@ -66,6 +72,19 @@ return packer.startup(function(use)
     end,
     event = { "InsertEnter" },
     keys = { 'c' }
+  }
+
+  use {
+    "simrat39/symbols-outline.nvim",
+    cmd = "SymbolsOutline",
+  }
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup()
+    end,
+    cmd = "Trouble",
   }
   -- THEME
   use {
@@ -98,17 +117,16 @@ return packer.startup(function(use)
   -- lsp configurations
   use {
     "neovim/nvim-lspconfig",
-    config = function()
-      require("lsp")
-    end,
-    requires = { { "jose-elias-alvarez/typescript.nvim", },
-      { "williamboman/mason.nvim",
-        requires = { "williamboman/mason-lspconfig.nvim" }
-      } }
+    requires = { "jose-elias-alvarez/typescript.nvim",
+    },
+    config = function() require('lsp') end
   }
-
+  use {
+    "williamboman/mason.nvim", config = function() require('lsp.mason') end,
+    requires = { "williamboman/mason-lspconfig.nvim" }
+  }
   -- see function signatures when writing args
-  use { "ray-x/lsp_signature.nvim", event = "InsertEnter", after = "nvim-lspconfig",
+  use { "ray-x/lsp_signature.nvim", event = "InsertEnter",
     config = function() require('lsp.lsp-signatures') end }
   -- formatting and diagnostic settings
   use { "jose-elias-alvarez/null-ls.nvim", config = function() require('lsp.null-ls') end,

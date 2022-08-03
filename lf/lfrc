@@ -1,0 +1,28 @@
+# lf doc - https://godoc.org/github.com/gokcehan/lf
+# lfrc example - https://github.com/gokcehan/lf/blob/master/etc/lfrc.example
+
+# ========== General settings ==========
+
+set shell zsh
+set shellopts '-eu'
+set ifs "\n"
+set scrolloff 10
+set icons
+set drawbox
+set incsearch
+set smartcase
+set ignorecase
+set anchorfind
+set findlen 1
+set tabstop 4
+set info 'size'
+set preview
+#set previewer ~/.config/lf/previewer
+#set cleaner ~/.config/lf/cleaner
+set dircounts
+
+# ========== Commands ==========
+
+# ========== Mappings ==========
+
+
