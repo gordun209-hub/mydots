@@ -1,4 +1,4 @@
-local typescript = require("typescript")
+local status_ok, typescript = pcall(require, "typescript")
 require("lsp.mason") -- this installs servers
 require("lsp.handlers").setup() -- this exposes handlers
 local lspconfig = require("lspconfig")
@@ -8,17 +8,18 @@ local handlers = {
 }
 local on_attach = require('lsp.handlers').on_attach
 local capabilities = require('lsp.handlers').capabilities
-typescript.setup({
-  disable_commands = false, -- prevent the plugin from creating Vim commands
-  --disable_formatting = false, -- disable tsserver's formatting capabilities
-  debug = false, -- enable debug logging for commands
-  server = {
-    capabilities = require('lsp.settings.tsserver').capabilities,
-    on_attach = require('lsp.settings.tsserver').on_attach,
-    handlers = handlers
-  }
-})
-
+if status_ok then
+  typescript.setup({
+    disable_commands = false, -- prevent the plugin from creating Vim commands
+    --disable_formatting = false, -- disable tsserver's formatting capabilities
+    debug = false, -- enable debug logging for commands
+    server = {
+      capabilities = require('lsp.settings.tsserver').capabilities,
+      on_attach = require('lsp.settings.tsserver').on_attach,
+      handlers = handlers
+    }
+  })
+end
 lspconfig.tailwindcss.setup {
   capabilities = capabilities,
   filetypes = require('lsp.settings.tailwindcss').filetypes,

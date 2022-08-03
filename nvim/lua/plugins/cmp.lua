@@ -2,8 +2,6 @@ local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
   return
 end
-local colors = require('utils.colors')
-local set_highlight = require("utils.set-highlight")
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
   return

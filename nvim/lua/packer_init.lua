@@ -14,12 +14,12 @@ if fn.empty(fn.glob(install_path)) > 0 then
   vim.cmd([[packadd packer.nvim]])
 end
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
--- local packer_group = vim.api.nvim_create_augroup("Packer", { clear = true })
--- vim.api.nvim_create_autocmd("BufWritePost", {
---   command = "source <afile> | PackerSync",
---   group = packer_group,
---   pattern = "init.lua",
--- })
+local packer_group = vim.api.nvim_create_augroup("Packer", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePost", {
+  command = "source <afile> | PackerSync",
+  group = packer_group,
+  pattern = "packer_init.lua",
+})
 
 local status_ok, packer = pcall(require, "packer")
 
@@ -39,8 +39,7 @@ packer.init({
   },
 })
 return packer.startup(function(use)
-  use { "wbthomason/packer.nvim",
-  } -- manages itself
+  use { "wbthomason/packer.nvim" } -- manages itself
   use { "lewis6991/impatient.nvim" } -- improve startup time
   use { "antoinemadec/FixCursorHold.nvim", run = function() vim.g.curshold_updatime = 1000 end } -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
   use { "nvim-lua/plenary.nvim" } -- needed for other plugins to work
@@ -52,7 +51,6 @@ return packer.startup(function(use)
       'windwp/nvim-ts-autotag', -- for autotag () {}
       'p00f/nvim-ts-rainbow', -- rainbow pairs
       'JoosepAlviste/nvim-ts-context-commentstring', -- for commenting
-      "m-demare/hlargs.nvim",
     },
     config = function() require 'plugins.treesitter'
     end,
@@ -76,11 +74,6 @@ return packer.startup(function(use)
       require("colorschemes.nightfox")
     end,
     run = ':lua require("nightfox").compile()',
-  }
-  use {
-    'sindrets/diffview.nvim',
-    cmd = { 'DiffviewOpen', 'DiffviewFileHistory' },
-    after = 'nvim-web-devicons',
   }
   -- Telescope
   use { 'ibhagwan/fzf-lua',
@@ -108,14 +101,14 @@ return packer.startup(function(use)
     config = function()
       require("lsp")
     end,
-    requires = { { "jose-elias-alvarez/typescript.nvim",
+    requires = { { "jose-elias-alvarez/typescript.nvim", },
       { "williamboman/mason.nvim",
         requires = { "williamboman/mason-lspconfig.nvim" }
       } }
-    }
   }
+
   -- see function signatures when writing args
-  use { "ray-x/lsp_signature.nvim", event = 'CursorHold', after = "nvim-lspconfig",
+  use { "ray-x/lsp_signature.nvim", event = "InsertEnter", after = "nvim-lspconfig",
     config = function() require('lsp.lsp-signatures') end }
   -- formatting and diagnostic settings
   use { "jose-elias-alvarez/null-ls.nvim", config = function() require('lsp.null-ls') end,
@@ -151,9 +144,8 @@ return packer.startup(function(use)
   use { 'hrsh7th/cmp-buffer', after = 'cmp-nvim-lsp' }
   use { 'hrsh7th/cmp-path', after = 'cmp-buffer' }
   use { 'hrsh7th/cmp-cmdline', after = 'cmp-path' }
-  --use { 'saadparwaiz1/cmp_luasnip' , after="" }
-  use { 'L3MON4D3/LuaSnip', requires = { 'rafamadriz/friendly-snippets',
-    "saadparwaiz1/cmp_luasnip"
+  use { 'L3MON4D3/LuaSnip', requires = { { 'rafamadriz/friendly-snippets', after = { "nvim-cmp" } },
+    { "saadparwaiz1/cmp_luasnip", after = { "nvim-cmp" } }
   }, event = "InsertEnter" }
 
   -- for prime
@@ -241,7 +233,18 @@ return packer.startup(function(use)
   use { 'vuki656/package-info.nvim', event = { "BufRead package.json" },
     config = function() require("plugins.package-info") end }
   use { 'mboughaba/i3config.vim', ft = 'i3config' } -- i3 config file syntax
+  use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim', config = function() require('plugins.neogit') end,
+    cmd = { "Neogit" } }
+
+
+  use { 'kevinhwang91/nvim-bqf', ft = 'qf' }
+  use {
+    'sindrets/diffview.nvim',
+    cmd = { 'DiffviewOpen', 'DiffviewFileHistory' },
+    after = 'nvim-web-devicons',
+  }
   -- calculate startup time
+  --
   use({
     "dstein64/vim-startuptime",
     cmd = "StartupTime",
