@@ -1,21 +1,5 @@
-
-# Configuration for Alacritty, the GPU enhanced terminal emulator.
-
-#
-# Imports are loaded in order, skipping all missing files, with the importing
-# file being loaded last. If a field is already present in a previous import, it
-# will be replaced.
-#
-# environment variables. Some entries may override variables
-# set by alacritty itself.
 env:
-  # TERM variable
-  #
-  # This value is used to set the `$TERM` environment variable for
-  # each instance of Alacritty. If it is not present, alacritty will
-  # check the local terminfo database and use `alacritty` if it is
-  # available, otherwise `xterm-256color` is used.
-  TERM: xterm-256color
+  TERM: alacritty
 
 window:
   dynamic_title: true
@@ -27,11 +11,6 @@ window:
     x: 0
     y: 0
 
-  #startup_mode: SimpleFullscreen
-  #position:
-    #x: 0
-    #y: 0
-  #padding
   padding:
     x: 5
     y: 5 
@@ -45,25 +24,17 @@ scrolling:
 
 
 font:
-  # Normal (roman) font face
   normal:
     family: JetBrainsMono Nerd Font
-    #   style: Regular
 
-  # Bold font face
   bold:
      family: JetBrainsMono Nerd Font
-    # style: Bold
 
-  # Italic font face
   italic:
      family: JetBrainsMono Nerd Font
-    #style: Italic
 
-  # Bold italic font face
   bold_italic:
        family: JetBrainsMono Nerd Font 
-    #style: Bold Italic
 
   # Point size
   size: 14.0
@@ -121,3 +92,30 @@ colors:
   indexed_colors:
     - { index: 16, color: '0xf4a261' }
     - { index: 17, color: '0xd67ad2' }
+
+  vi_mode_cursor:
+    text: CellBackground
+    cursor: '0x268bd2'
+
+    
+selection:
+  # This string contains all characters that are used as separators for
+  # "semantic words" in Alacritty.
+  #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+
+  # When set to `true`, selected text will be copied to the primary clipboard.
+  save_to_clipboard: true
+
+cursor:
+  # Cursor style
+  style:
+    # Cursor shape
+    #
+    # Values for `shape`:
+    #   - ▇ Block
+    #   - _ Underline
+    #   - | Beam
+    shape: Block
+
+    vi_mode_style: Block
+

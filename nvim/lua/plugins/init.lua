@@ -28,6 +28,10 @@ if not status_ok then
 end
 
 packer.init({
+  profile = {
+    enalbe = true,
+  }
+  ,
   display = {
     open_fn = function()
       return require("packer.util").float({ border = "single" })
@@ -37,42 +41,21 @@ packer.init({
 return packer.startup(function(use)
   use { "wbthomason/packer.nvim" } -- manages itself
   use { "lewis6991/impatient.nvim" } -- improve startup time
-
   use { "antoinemadec/FixCursorHold.nvim" } -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
   use { "nvim-lua/plenary.nvim" } -- needed for other plugins to work
   use { "kyazdani42/nvim-web-devicons", config = function() require('plugins.configs.devicons') end, }
   use {
-    "nvim-treesitter/nvim-treesitter",
+    "nvim-treesitter/nvim-treesitter", -- syntax highlighting
     run = ":TSUpdate",
     config = function() require('plugins.configs.treesitter') end,
     requires = {
-      'windwp/nvim-ts-autotag',
-      { 'windwp/nvim-autopairs', config = function() require('plugins.configs.autopairs') end },
-      'p00f/nvim-ts-rainbow',
-      'JoosepAlviste/nvim-ts-context-commentstring',
+      { 'windwp/nvim-ts-autotag' }, -- for autotag () {}
+      { 'windwp/nvim-autopairs', event = { "InsertEnter" }, config = function() require('plugins.configs.autopairs') end },
+      'p00f/nvim-ts-rainbow', -- rainbow pairs
+      { 'JoosepAlviste/nvim-ts-context-commentstring' }, -- for commenting
     },
   }
-  -- use { "ellisonleao/gruvbox.nvim", config = function() require('gruvbox').setup({
-  --     undercurl = true,
-  --     underline = true,
-  --     bold = true,
-  --     italic = true,
-  --     strikethrough = true,
-  --     invert_selection = false,
-  --     invert_signs = false,
-  --     invert_tabline = false,
-  --     invert_intend_guides = false,
-  --     inverse = true, -- invert background for search, diffs, statuslines and errors
-  --     contrast = "", -- can be "hard", "soft" or empty string
-  --     overrides = {},
-  --     vim.cmd("colorscheme gruvbox")
-  --   })
-  -- end }
-  --use { "JoosepAlviste/nvim-ts-context-commentstring"  }
-  --use { "windwp/nvim-ts-autotag" } -- auto closing tags
-  -- use { "windwp/nvim-autopairs",
-  --  config = function() require('plugins.configs.autopairs') end, }
-  --use { 'p00f/nvim-ts-rainbow'  } -- rainbow brackets
+  -- surround text
   use {
     "kylechui/nvim-surround",
     config = function()
@@ -86,14 +69,14 @@ return packer.startup(function(use)
     config = function()
       require("colorschemes.nightfox")
     end,
---    run = ':lua require("nightfox").compile()',
+    --    run = ':lua require("nightfox").compile()',
   }
   -- Telescope
   use {
     "nvim-telescope/telescope.nvim",
+    after = { "plenary.nvim" },
     requires = {
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope-project.nvim",
+      { "nvim-telescope/telescope-project.nvim" },
       'cljoly/telescope-repo.nvim',
       { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
       "nvim-telescope/telescope-file-browser.nvim",
@@ -103,21 +86,25 @@ return packer.startup(function(use)
     end,
   }
   -- LSP --
+  -- lsp configurations
   use {
     "neovim/nvim-lspconfig",
     config = function()
       require("lsp")
     end,
-    requires = { "jose-elias-alvarez/typescript.nvim" }
+    requires = { { "jose-elias-alvarez/typescript.nvim",
+      { "williamboman/mason.nvim", requires = { "williamboman/mason-lspconfig.nvim" } }
+    } }
   }
-  use "ray-x/lsp_signature.nvim"
+  -- see function signatures when writing args
+  use { "ray-x/lsp_signature.nvim", after = "nvim-lspconfig" }
+  -- formatting and diagnostic settings
   use { "jose-elias-alvarez/null-ls.nvim", config = function() require('lsp.null-ls') end,
     requires = { "nvim-lua/plenary.nvim" } }
-  -- new nvim-lsp-installer
-  use { "williamboman/mason.nvim", requires = {
-    { "williamboman/mason-lspconfig.nvim" }, config = function() require('lsp.mason') end,
-  }, }
-  use { "b0o/schemastore.nvim", config = function() require('lsp.settings.jsonls') end } -- generate schema stores
+  -- generate schemas auto
+  use { "b0o/schemastore.nvim", config = function() require('lsp.settings.jsonls') end,
+    wants = { "neovim/nvim-lspconfig" } } -- generate schema stores
+  -- better lsp actions
   use({
     "glepnir/lspsaga.nvim",
     branch = "main",
@@ -125,14 +112,14 @@ return packer.startup(function(use)
     end,
     after = { "nvim-lspconfig" }
   })
-  -- I3
+  -- I3 config syntax highlight
   use { 'mboughaba/i3config.vim', ft = 'i3config' } -- i3 config file syntax
   -- JAVASCRIPT
-  use { 'jose-elias-alvarez/typescript.nvim' } -- extra capability for typescript
-  use { 'vuki656/package-info.nvim', event = { "BufRead package.json" }, requires = "MunifTanjim/nui.nvim",
+  use { 'vuki656/package-info.nvim', event = { "BufRead package.json" },
     config = function() require("plugins.configs.package-info") end }
   -- RUST
   -- use({ 'simrat39/rust-tools.nvim'}) -- extra capability for rust lang
+  -- package json for rust
   use {
     'saecki/crates.nvim',
     tag = 'v0.2.1',
@@ -142,33 +129,43 @@ return packer.startup(function(use)
       require('crates').setup()
     end,
   }
-  -- LISP
+  -- scheme dev
   use { 'gpanders/nvim-parinfer', ft = { 'scheme', 'racket' } }
   -- AUTOCOMPLETE
-  use { 'saadparwaiz1/cmp_luasnip', after = "LuaSnip" }
-  use { 'L3MON4D3/LuaSnip', requires = { 'rafamadriz/friendly-snippets' }, } -- snippets
-  use {
-    "hrsh7th/nvim-cmp",
-    requires = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-nvim-lua",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-cmdline",
-    },
-    config = function()
-      require "plugins.configs.cmp"
-    end,
-  }
-  -- Marks
+  -- use { 'saadparwaiz1/cmp_luasnip', after = "LuaSnip" }
+  -- use { 'L3MON4D3/LuaSnip', requires = { 'rafamadriz/friendly-snippets' }, } -- snippets
+  -- use {
+  --   "hrsh7th/nvim-cmp",
+  --   requires = {
+  --     "hrsh7th/cmp-nvim-lsp",
+  --     "hrsh7th/cmp-nvim-lua",
+  --     "hrsh7th/cmp-buffer",
+  --     "hrsh7th/cmp-path",
+  --     "hrsh7th/cmp-cmdline",
+  --   },
+  --   config = function()
+  --     require "plugins.configs.cmp"
+  --   end,
+  -- }
+  use { 'hrsh7th/nvim-cmp', event = 'InsertEnter', config = "require('plugins.configs.cmp')" }
+  use { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' }
+  use { 'hrsh7th/cmp-nvim-lsp', after = 'cmp-nvim-lua' }
+  use { 'hrsh7th/cmp-buffer', after = 'cmp-nvim-lsp' }
+  use { 'hrsh7th/cmp-path', after = 'cmp-buffer' }
+  use { 'hrsh7th/cmp-cmdline', after = 'cmp-path' }
+  use { 'saadparwaiz1/cmp_luasnip' }
 
+
+  use { 'L3MON4D3/LuaSnip', requires = { 'rafamadriz/friendly-snippets' }, after = 'cmp_luasnip' }
+
+  -- for prime
   use({
     "theprimeagen/harpoon",
     requires = { "nvim-lua/plenary.nvim" },
     config = function() require('plugins.configs.harpoon') end
   })
 
-
+  -- autosuggestion ai
   use({
     "github/copilot.vim",
     config = function()
@@ -176,14 +173,16 @@ return packer.startup(function(use)
     end,
     event = { "InsertEnter" }
   })
+  -- lualine at bottom
   use {
     "nvim-lualine/lualine.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
+    requires = { "kyazdani42/nvim-web-devicons", },
     opt = true,
     config = function()
       require("plugins.configs.lualine")
     end,
   }
+  -- color the colors like #33214 that looks orange
   use {
     "norcalli/nvim-colorizer.lua",
     config = function()
@@ -191,22 +190,15 @@ return packer.startup(function(use)
     end, after = "nvim-treesitter",
     event = { "BufRead", "BufNewFile" }
   }
+  -- can recognize projects when it sees
   use {
     "ahmedkhalf/project.nvim",
     config = function()
       require("plugins.configs.project")
     end,
+    requires = { "nvim-telescope/telescope.nvim" }
   }
-  use {
-    'numToStr/Navigator.nvim',
-    config = function()
-      require('Navigator').setup({
-        auto_save = 'current'
-      })
-    end,
-    event = "BufRead"
-  }
-
+  -- Scrolling good
   use({
     'karb94/neoscroll.nvim',
     event = 'WinScrolled',
@@ -214,30 +206,30 @@ return packer.startup(function(use)
       require('neoscroll').setup({ hide_cursor = false })
     end,
   })
-  -- use { "aserowy/tmux.nvim",
-  --   config = function() require('plugins.configs.tmux') end, }
-
+  -- tmux navigation
+  use { "aserowy/tmux.nvim",
+    config = function() require('plugins.configs.tmux') end, }
+  -- highlighting
   use { "RRethy/vim-illuminate" }
+
+  -- nnn neovim support
   use {
     "luukvbaal/nnn.nvim",
     config = function()
       require("plugins.configs.nnn").setup()
     end,
+    cmd = "NnnPicker"
   }
+
+
+  -- commenting easy
   use {
     "numToStr/Comment.nvim",
     config = function()
       require("plugins.configs.comment")
     end,
-    --  after = "joosepalviste/nvim-ts-context-commentstring",
-    event = 'BufRead',
   }
-
-  -- use({ 'andweeb/presence.nvim', config = function() require("presence"):setup({
-  --     auto_update = true,
-  --   })
-  -- end, event = "BufWinEnter" })
-
+  -- calculate startup time
   use({
     "dstein64/vim-startuptime",
     cmd = "StartupTime",

@@ -6,12 +6,23 @@ else
   alias vi="vim"
 fi
 
+# GIT
 alias gs="git status"
 alias ga="git add"
 alias gcm="git commit -m"
 alias gp="git push"
-alias ta="tmux attach"
 alias gpom="git push origin master"
+alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+#TMUX
+alias ta="tmux attach"
+alias ts="tmux ls"
+alias td="tmux detach"
+alias tka"tmux kill-session -a"
+alias tan="tmux at -t"
+alias tinfo="tmux info"
+
+# GENERAL
 alias q="exit"
 alias n='nvim'
 alias install='sudo pacman -S'
@@ -23,12 +34,17 @@ alias ysearch='yay -Ss'
 alias yremove='yay -R'
 alias yupdate='yay -Sy'
 alias c="clear"
+
+
 alias yw="yarn workspace"
+#IMPROVE DEFAULTS
 alias cat="bat"
 alias sl="exa --icons --sort type -a"
 alias ls="nnn -e -H"
 alias ll="exa --icons --long --sort type -a"
 alias l="exa --icons --long --sort type -a"
+
+#CONFIG FILES
 alias zshrc="nvim ~/dotfiles/zsh/.zshrc"
 alias zshrcs="source ~/dotfiles/zsh/.zshrc"
 alias vimrc="nvim ~/dotfiles/nvim/init.lua"
@@ -36,7 +52,6 @@ alias vimrcs="source ~/dotfiles/nvim/init.lua"
 alias tmuxrc="nvim ~/dotfiles/tmux/tmux.conf"
 alias tmuxrcs="tmux source-file ~/dotfiles/tmux/tmux.conf"
 alias tree="exa --icons --git -a --tree -s type -I '.git|node_modules|bower_components'"
-alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
  ## Useful aliases
 alias grubup="sudo update-grub"
 alias fixpacman="sudo rm /var/lib/pacman/db.lck"
@@ -66,11 +81,6 @@ alias mirrord="sudo reflector --latest 50 --number 20 --sort delay --save /etc/p
 alias mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist"
 alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist"
 
-# doesnt work
-# bindkey '^[[A' history-substring-search-up
-# bindkey '^[[B' history-substring-search-down
-# bindkey '^k' history-substring-search-up
-# bindkey '^j' history-substring-search-down
 # Help people new to Arch
 alias apt-get='man pacman'
 alias apt='man pacman'

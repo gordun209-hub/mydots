@@ -69,7 +69,7 @@ keymap("n", "<leader>'", "<cmd>1ToggleTerm size=15 direction=horizontal<cr>", op
 -- Search and Replace
 keymap("n", "c.", ":%s//g<Left><Left>", opts)
 keymap("n", "\\c.", ":%s/\\<<C-r><C-w>\\>//g<Left><Left>", opts)
-keymap("n", "-", "<cmd>:e %:h<cr>", { noremap = true })
+keymap("n", "-", "<cmd>NnnPicker<cr>", { noremap = true })
 vim.api.nvim_set_keymap(
   "n",
   "<leader>ni",
@@ -162,9 +162,3 @@ vim.keymap.set("n", "<C-b>", function()
 end, { silent = true })
 
 
--- Keybindings
-vim.keymap.set('n', "<C-h>", '<CMD>NavigatorLeft<CR>')
-vim.keymap.set('n', "<C-l>", '<CMD>NavigatorRight<CR>')
-vim.keymap.set('n', "<C-k>", '<CMD>NavigatorUp<CR>')
-vim.keymap.set('n', "<C-j>", '<CMD>NavigatorDown<CR>')
-vim.keymap.set('n', "<C-p>", '<CMD>NavigatorPrevious<CR>')

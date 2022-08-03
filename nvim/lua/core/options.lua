@@ -7,7 +7,7 @@ vim.o.autoindent = true
 vim.o.smartindent = true
 --vim.o.inccommand = "nosplit"
 vim.o.completeopt = "menu,menuone,noselect"
-vim.o.clipboard = 'unnamedplus'
+--vim.o.clipboard = 'unnamedplus'
 vim.o.history = 100
 vim.opt.expandtab = true -- Use spaces instead of tabs
 vim.opt.shiftwidth = 2 -- Size of an indent
@@ -29,7 +29,7 @@ vim.opt.formatoptions:remove('c');
 vim.opt.formatoptions:remove('r');
 vim.opt.formatoptions:remove('o');
 vim.o.relativenumber = true
-vim.o.shell = "/usr/bin/zsh"
+vim.o.shell = "/usr/bin/bash"
 vim.opt.cmdheight = 1
 -- Use filetype.lua instead
 vim.opt.laststatus = 3

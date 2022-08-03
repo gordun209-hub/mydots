@@ -2,6 +2,7 @@ local typescript_ok, typescript = pcall(require, 'typescript')
 require("lsp.mason") -- this installs servers
 require("lsp.handlers").setup() -- this exposes handlers
 local lspconfig = require("lspconfig")
+require('lsp.null-ls')
 require("lsp.lsp-signatures")
 local util = require("lspconfig.util")
 local handlers = {
