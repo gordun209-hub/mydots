@@ -57,26 +57,38 @@ lspconfig.sumneko_lua.setup {
 --   settings = require('lsp.settings.emmet-ls').settings,
 -- }
 --
--- lspconfig.bashls.setup {
---   capabilities = capabilities,
---   on_attach = on_attach,
---   handlers = handlers,
---   settings = require('lsp.settings.bashls').settings
--- }
+lspconfig.bashls.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  handlers = handlers,
+  settings = require('lsp.settings.bashls').settings
+}
 --
--- lspconfig.racket_langserver.setup {
---   root_dir = lspconfig.util.root_pattern(".git", "."),
---   capabilities = capabilities,
---   handlers = handlers,
---   on_attach = on_attach,
--- }
+lspconfig.racket_langserver.setup {
+  root_dir = lspconfig.util.root_pattern(".git", "."),
+  capabilities = capabilities,
+  handlers = handlers,
+  on_attach = on_attach,
+}
 -- --require('lsp.settings.rust').setup(on_attach, capabilities)
 --
--- lspconfig.prismals.setup {
---   capabilities = capabilities,
---   on_attach = on_attach,
---   handlers = handlers,
--- }
+lspconfig.prismals.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  handlers = handlers,
+}
+lspconfig.yamlls.setup {
+  settings = {
+    yaml = {
+      schemastore = {
+        enable = true
+      }
+    }
+  },
+  capabilities = capabilities,
+  on_attach = on_attach,
+  handlers = handlers
+}
 -- lspconfig.jsonls.setup({
 --   capabilities = capabilities,
 --   on_attach = function(client)

@@ -41,7 +41,7 @@ packer.init({
 return packer.startup(function(use)
   use { "wbthomason/packer.nvim" } -- manages itself
   use { "lewis6991/impatient.nvim" } -- improve startup time
-  use { "antoinemadec/FixCursorHold.nvim",event={"BufWinEnter"}, run = function() vim.g.curshold_updatime = 1000 end } -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
+  use { "antoinemadec/FixCursorHold.nvim", event = { "BufWinEnter" }, run = function() vim.g.curshold_updatime = 1000 end } -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
   use { "nvim-lua/plenary.nvim" } -- needed for other plugins to work
   use { "kyazdani42/nvim-web-devicons", config = function() require('plugins.devicons') end, }
   use {
@@ -87,13 +87,15 @@ return packer.startup(function(use)
     cmd = "Trouble",
   }
   -- THEME
-  use {
-    "EdenEast/nightfox.nvim",
-    config = function()
-      require("colorschemes.nightfox")
-    end,
-    run = ':lua require("nightfox").compile()',
-  }
+  use { "rebelot/kanagawa.nvim", config = function() require('colorschemes.kanagawa') end }
+  --use{"Tsuzat/NeoSolarized.nvim",config=function()require('colorschemes.solarized')end}
+  -- use {
+  --   "EdenEast/nightfox.nvim",
+  --   config = function()
+  --     require("colorschemes.nightfox")
+  --   end,
+  --   run = ':lua require("nightfox").compile()',
+  -- }
   -- Telescope
   use { 'ibhagwan/fzf-lua',
     -- optional for icon support
@@ -166,6 +168,8 @@ return packer.startup(function(use)
     { "saadparwaiz1/cmp_luasnip", after = { "nvim-cmp" } }
   }, event = "InsertEnter" }
 
+
+--use "b0o/schemastore.nvim"
   -- for prime
   -- use({
   --   "theprimeagen/harpoon",

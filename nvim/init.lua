@@ -4,7 +4,6 @@ require('options')
 require('keymaps')
 require('cmds')
 require('packer_init')
-vim.cmd("colorscheme nightfox")
 
 --vim.opt.shadafile = "NONE"
 vim.opt.termguicolors = true

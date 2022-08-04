@@ -3,7 +3,9 @@ local on_attach = require('lsp.handlers').on_attach
 local capabilities = require('lsp.handlers').capabilities
 local fmt = nls.builtins.formatting
 local dgn = nls.builtins.diagnostics
-
+local h = require('null-ls.helpers')
+local methods = require('null-ls.methods')
+local FORMATTING = methods.internal.FORMATTING
 -- Configuring null-ls
 nls.setup({
   sources = {
@@ -22,13 +24,17 @@ nls.setup({
     }),
     dgn.jsonlint,
     dgn.markdownlint,
-
+dgn.yamllint,
     -- fmt.raco_fmt.with({
-    --     filetypes = {'scheme', 'racket'}
+    --   filetypes = { 'scheme', 'racket' },
+    --   --arg = { "fsmt --widhsst 30" },
     -- }),
     dgn.shellcheck.with({
-      filetypes = {"sh","zsh"}
+      filetypes = { "sh", "zsh" },
     }),
+    -- fmt.fnlfmt.with({
+    --   filetypes={"scheme"}
+    -- }),
     fmt.prettier_d_slim.with({
       filetypes = { "yaml", "markdown", "css", "scss", "html", "json", "jsonc" }
     })
@@ -36,6 +42,7 @@ nls.setup({
   on_attach = on_attach,
   capabilities = capabilities
 })
+
 
 -- vim.api.nvim_create_autocmd("FileType", {
 --   pattern = "null-ls-info",

@@ -16,7 +16,12 @@ set $alt Mod1
 ### Wallpaper: ###
 # - You need to specify homescreen wallpaper using azote
 
-set $lockScreenWallpaper /usr/share/wallpapers/garuda-wallpapers/Garuda-Desert.png
+# GET DEM BORDERS OUT OF HEREc:w
+#
+# Thanks Childz
+for_window [class="^.*"] border pixel 2
+                          # class                 border  backgr. text    indicator child_border
+for_window [class="^.*"] client.focused          #77dd77 #285577 #ffffff #2e9ef4   #285577
 
 ### Applications: ###
 
@@ -30,10 +35,7 @@ set $preferredScreenCaptureTool /usr/bin/flameshot gui
 ### Commonly Used Application Keybinds: ###
 ###########################################
 
-bindsym $super+F1 exec $preferredBrowser;focus
-bindsym $super+F2 exec $preferredMailClient;focus
-bindsym $super+F3 exec $preferredFileManager;focus
-bindsym $super+F4 exec $preferredTextEditor;focus
+
 
 ### Screen Capturing & Print Screen: ###
 
@@ -47,30 +49,30 @@ bindsym Print exec --no-startup-id $preferredScreenCaptureTool
 bindsym $super+Return exec alacritty
 
 # set font
-font pango: source code pro 12
+font pango: SauceCodePro Nerd 12
 
 # Use Mouse+$super to drag floating windows to their wanted position
 floating_modifier $super
 
 #autostart
 #exec --no-startup-id ~/.fehbg
-exec --no-startup-id xsettingsd &
+#exec --no-startup-id xsettingsd &
 #exec --no-startup-id pasystray
-exec --no-startup-id conky
-exec --no-startup-id conky -c ~/.config/conky/conky-shcts
+#exec --no-startup-id conky
+#exec --no-startup-id conky -c ~/.config/conky/conky-shcts
 exec --no-startup-id copyq
 exec --no-startup-id dunst
-exec --no-startup-id dex -a -s /etc/xdg/autostart/:~/.config/autostart/
+#exec --no-startup-id dex -a -s /etc/xdg/autostart/:~/.config/autostart/
 #exec --no-startup-id redshift
-exec --no-startup-id desktop-items
+#exec --no-startup-id desktop-items
 exec --no-startup-id nm-applet
-exec --no-startup-id pamac-tray
+#exec --no-startup-id pamac-tray
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id xfce4-power-manager
+#exec --no-startup-id xfce4-power-manager
 exec_always --no-startup-id setcursor
 #exec_always --no-startup-id ${HOME}/.config/polybar/launch.sh
 exec_always --no-startup-id numlockx on
-exec --no-startup-id java -Xmx1024m -jar "/opt/xdman/xdman.jar" -m
+#exec --no-startup-id java -Xmx1024m -jar "/opt/xdman/xdman.jar" -m
 
 # hide/unhide i3status bar
 bindsym $super+m bar mode toggle
@@ -215,9 +217,6 @@ bindsym $super+Shift+r restart
 # bindsym $super+r mode "resize"
 
 # change borders
-#bindsym $super+u border none
-#bindsym $super+y border pixel 1
-#bindsym $super+n border normal
 
 
 # panel

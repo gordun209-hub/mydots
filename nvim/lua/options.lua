@@ -1,6 +1,6 @@
 vim.o.hlsearch = false
 vim.o.incsearch = true
---vim.o.breakindent = false
+vim.o.breakindent = false
 vim.opt.encoding = "utf-8"
 vim.o.updatetime = 50
 vim.o.autoindent = true

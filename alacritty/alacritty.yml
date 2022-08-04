@@ -1,7 +1,9 @@
+---
 env:
   TERM: alacritty
 
 window:
+  opacity: 0.87
   dynamic_title: true
   dimensions:
     columns: 0
@@ -12,13 +14,14 @@ window:
     y: 0
 
   padding:
-    x: 5
-    y: 5 
+    x: 0
+    y: 0
 
   dynamic_padding: false
   decorations: none
 
-scrolling:
+
+  scrolling:
   history: 50000
   multiplier: 3
 
@@ -28,35 +31,33 @@ font:
     family: JetBrainsMono Nerd Font
 
   bold:
-     family: JetBrainsMono Nerd Font
+    family: JetBrainsMono Nerd Font
 
   italic:
-     family: JetBrainsMono Nerd Font
+    family: JetBrainsMono Nerd Font
 
   bold_italic:
-       family: JetBrainsMono Nerd Font 
+    family: JetBrainsMono Nerd Font
 
   # Point size
-  size: 14.0
-
+  size: 15.0
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
   # spacing.
   offset:
-   x: 0
-   y: 0
+    x: 0
+    y: 0
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the
   # right, increasing `y` moves the glyph upward.
   glyph_offset:
-   x: 0
-   y: 0
+    x: 0
+    y: 0
 
-# If `true`, bold text is drawn using the bright color variants.
+  # If `true`, bold text is drawn using the bright color variants.
   draw_bold_text_with_bright_colors: true
-  transparent_background_colors: false
-#
+  # transparent_background_colors: true
 
 shell:
   program: /usr/bin/zsh
@@ -64,44 +65,44 @@ shell:
     # - -l
     # - -c
     - --login
+
+# Kanagawa Alacritty Colors
 colors:
-  # Default colors
   primary:
-    background: '0x192330'
-    foreground: '0xcdcecf'
-  # Normal colors
+    background: '0x1f1f28'
+    foreground: '0xdcd7ba'
+
   normal:
-    black:   '0x393b44'
-    red:     '0xc94f6d'
-    green:   '0x81b29a'
-    yellow:  '0xdbc074'
-    blue:    '0x719cd6'
-    magenta: '0x9d79d6'
-    cyan:    '0x63cdcf'
-    white:   '0xdfdfe0'
-  # Bright colors
+    black: '0x090618'
+    red: '0xc34043'
+    green: '0x76946a'
+    yellow: '0xc0a36e'
+    blue: '0x7e9cd8'
+    magenta: '0x957fb8'
+    cyan: '0x6a9589'
+    white: '0xc8c093'
+
   bright:
-    black:   '0x575860'
-    red:     '0xd16983'
-    green:   '0x8ebaa4'
-    yellow:  '0xe0c989'
-    blue:    '0x86abdc'
-    magenta: '0xbaa1e2'
-    cyan:    '0x7ad4d6'
-    white:   '0xe4e4e5'
+    black: '0x727169'
+    red: '0xe82424'
+    green: '0x98bb6c'
+    yellow: '0xe6c384'
+    blue: '0x7fb4ca'
+    magenta: '0x938aa9'
+    cyan: '0x7aa89f'
+    white: '0xdcd7ba'
+
+  selection:
+    background: '0x2d4f67'
+    foreground: '0xc8c093'
+
   indexed_colors:
-    - { index: 16, color: '0xf4a261' }
-    - { index: 17, color: '0xd67ad2' }
+    - {index: 16, color: '0xffa066'}
+    - {index: 17, color: '0xff5d62'}
 
-  vi_mode_cursor:
-    text: CellBackground
-    cursor: '0x268bd2'
-
-    
 selection:
   # This string contains all characters that are used as separators for
   # "semantic words" in Alacritty.
-  #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
 
   # When set to `true`, selected text will be copied to the primary clipboard.
   save_to_clipboard: true
