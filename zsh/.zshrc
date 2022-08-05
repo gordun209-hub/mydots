@@ -24,9 +24,6 @@ source ~/.fzf/shell/completion.zsh
 source ~/.fzf/shell/key-bindings.zsh
 bindkey -v
 #autoload -U colors && colors
-# zmodload zsh/complist
-# compinit
-# Completion.
 
 
 # Replace yay with paru if installed

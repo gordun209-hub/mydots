@@ -1,164 +1,38 @@
--- local actions    = require "telescope.actions"
--- local builtin    = require('telescope.builtin')
--- local icons      = require('plugins.icons')
--- local M          = {}
--- local git_icons  = {
---   added = icons.gitAdd,
---   changed = icons.gitChange,
---   copied = ">",
---   deleted = icons.gitRemove,
---   renamed = "➡",
---   unmerged = "‡",
---   untracked = "?",
--- }
---
---
---
--- require('telescope').setup {
---   defaults = {
---     vimgrep_arguments    = {
---       "rg",
---       "--color=never",
---       "--no-heading",
---       "--with-filename",
---       "--line-number", "--column",
---       "--smart-case",
---       "--hidden",
---       "--trim",
---       "--glob=!.git/",
---       "--glob=!package-lock.json",
---     },
---     pickers              = {
---
---       live_grep = {
---         theme = "dropdown",
---       },
---       grep_string = {
---         theme = "dropdown",
---       },
---       find_files = {
---         theme = "dropdown",
---         previewer = false,
---         hidden = true,
---       },
---       buffers = {
---         theme = "dropdown",
---         previewer = false,
---         initial_mode = "normal",
---       },
---       planets = {
---         show_pluto = true,
---       },
---       colorscheme = {
---         -- enable_preview = true,
---       },
---       lsp_references = {
---         theme = "dropdown",
---         initial_mode = "normal",
---       },
---       lsp_definitions = {
---         theme = "dropdown",
---         initial_mode = "normal",
---       },
---       lsp_declarations = {
---         theme = "dropdown",
---         initial_mode = "normal",
---       },
---       lsp_implementations = {
---         theme = "dropdown",
---         initial_mode = "normal",
---       },
---
---
---     },
---     layout_config        = {
---       prompt_position = "bottom",
---       horizontal = { preview_width = 0.6, results_width = 0.8 },
---       width = 0.95,
---       height = 0.95,
---       preview_cutoff = 120,
---     },
---     set_env              = { ["COLORTERM"] = "truecolor" }, -- default = nil,
---     file_sorter          = require('telescope.sorters').get_fzy_sorter,
---     generic_sorter       = require("telescope.sorters").get_generic_fuzzy_sorter,
---     file_previewer       = require("telescope.previewers").vim_buffer_cat.new,
---     use_less             = true,
---     sorting_strategy     = "descending",
---     file_ignore_patterns = { "node_modules", "yarn.lock", ".yarn", "package-lock.json", ".next", ".git/", "dist/",
---       "build/", "migrations/" },
---     prompt_prefix        = ' 🔍 ',
---     color_devicons       = true,
---     git_icons            = git_icons,
---     selection_strategy   = "reset",
---     layout_strategy      = "horizontal",
---     grep_previewer       = require('telescope.previewers').vim_buffer_vimgrep.new,
---     qflist_previewer     = require('telescope.previewers').vim_buffer_qflist.new,
---
---     mappings = {
---       i = {
---         ["<C-x>"] = false,
---         ["<C-j>"] = actions.move_selection_next,
---         ["<C-k>"] = actions.move_selection_previous,
---         ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
---         ["<C-s>"] = actions.cycle_previewers_next,
---         ["<C-a>"] = actions.cycle_previewers_prev,
---         ["<ESC>"] = actions.close,
---       },
---       n = {
---         ["<C-s>"] = actions.cycle_previewers_next,
---         ["<C-a>"] = actions.cycle_previewers_prev,
---       }
---     }
---   },
---   extensions = {
---     fzf = {
---       fuzzy = true,
---       override_generic_sorter = true,
---       override_file_sorter = true,
---       case_mode = "smart_case",
---     },
---
---   }
--- }
--- require('telescope').load_extension('fzf')
--- require('telescope').load_extension('repo')
--- require('telescope').load_extension('projects')
---
---
---
---
---
---
---
--- return M
+local config = {}
 
-require('telescope').setup{
-  defaults = {
-    -- Default configuration for telescope goes here:
-    -- config_key = value,
-    mappings = {
-      i = {
-        -- map actions.which_key to <C-h> (default: <C-/>)
-        -- actions.which_key shows the mappings for your picker,
-        -- e.g. git_{create, delete, ...}_branch for the git_branches picker
-        ["<C-h>"] = "which_key"
-      }
-    }
-  },
-  pickers = {
-    -- Default configuration for builtin pickers goes here:
-    -- picker_name = {
-    --   picker_config_key = value,
-    --   ...
-    -- }
-    -- Now the picker_config_key will be applied every time you call this
-    -- builtin picker
-  },
-  extensions = {
-    -- Your extension configuration goes here:
-    -- extension_name = {
-    --   extension_config_key = value,
-    -- }
-    -- please take a look at the readme of the extension you want to configure
-  }
-}
+function config.telescope()
+  if not packer_plugins['plenary.nvim'].loaded then
+    vim.cmd([[packadd plenary.nvim]])
+    vim.cmd([[packadd popup.nvim]])
+    vim.cmd([[packadd telescope-project.nvim ]])
+    vim.cmd([[packadd telescope-fzy-native.nvim]])
+    vim.cmd([[packadd telescope-file-browser.nvim]])
+  end
+  require('telescope').setup({
+    defaults = {
+      prompt_prefix = '🔭 ',
+      selection_caret = ' ',
+      layout_config = {
+        horizontal = { prompt_position = 'top', results_width = 0.6 },
+        vertical = { mirror = false },
+      },
+      sorting_strategy = 'ascending',
+      file_previewer = require('telescope.previewers').vim_buffer_cat.new,
+      grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
+      qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
+    },
+    extensions = {
+      fzy_native = {
+        override_generic_sorter = false,
+        override_file_sorter = true,
+      },
+    },
+  })
+  require'telescope'.load_extension('project')
+  require('telescope').load_extension('fzy_native')
+  --require('telescope').load_extension('dotfiles')
+  --require('telescope').load_extension('gosource')
+  require('telescope').load_extension('file_browser')
+end
+
+return config

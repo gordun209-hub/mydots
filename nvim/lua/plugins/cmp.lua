@@ -109,14 +109,14 @@ cmp.setup {
     end,
   },
   sources = {
-    { name = 'nvim_lsp' },
-    { name = 'npm', max_item_count = 15 },
-    { name = 'luasnip' },
+    { name = 'nvim_lsp',max_item_count=10 },
+    { name = 'npm', max_item_count = 10 },
+    { name = 'luasnip',max_item_count=10 },
     { name = 'buffer', max_item_count = 15, option = {
       get_bufnrs = function() return vim.api.nvim_list_bufs() end,
     } },
-    { name = 'nvim_lua', max_item_count = 20 }, -- nicer code action signs
-    { name = 'path', max_item_count = 15, },
+    { name = 'nvim_lua', max_item_count = 10 }, -- nicer code action signs
+    { name = 'path', max_item_count = 10, },
   },
 
   sorting = {

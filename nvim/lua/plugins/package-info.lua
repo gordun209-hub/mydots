@@ -23,4 +23,10 @@ require('package-info').setup
       package_manager = 'npm'
     }
 
--- Keymappings are set in which key config
+
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>ni",
+  "<cmd>lua require('package-info').install()<cr>",
+  { silent = true, noremap = true }
+)

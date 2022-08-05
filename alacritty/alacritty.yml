@@ -3,7 +3,7 @@ env:
   TERM: alacritty
 
 window:
-  opacity: 0.87
+  opacity: 0.80
   dynamic_title: true
   dimensions:
     columns: 0
@@ -40,7 +40,7 @@ font:
     family: JetBrainsMono Nerd Font
 
   # Point size
-  size: 15.0
+  size: 16.0
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
   # spacing.
@@ -67,39 +67,43 @@ shell:
     - --login
 
 # Kanagawa Alacritty Colors
+# Colors (Solarized Dark)
 colors:
+  # Default colors
   primary:
-    background: '0x1f1f28'
-    foreground: '0xdcd7ba'
+    background: '0x020221'
+    foreground: '0xb4b4b9'
 
+  # Colors the cursor will use if `custom_cursor_colors` is true
+  cursor:
+    text: '0x020221'
+    cursor: '0xffe8c0'
+
+  # Normal colors
   normal:
-    black: '0x090618'
-    red: '0xc34043'
-    green: '0x76946a'
-    yellow: '0xc0a36e'
-    blue: '0x7e9cd8'
-    magenta: '0x957fb8'
-    cyan: '0x6a9589'
-    white: '0xc8c093'
+    black: '0x000004'
+    red: '0xff3600'
+    green: '0x859933'
+    yellow: '0xffc552'
+    blue: '0x635196'
+    magenta: '0xff761a'
+    cyan: '0x34bfa4'
+    white: '0xb4b4b9'
 
+  # Bright colors
   bright:
-    black: '0x727169'
-    red: '0xe82424'
-    green: '0x98bb6c'
-    yellow: '0xe6c384'
-    blue: '0x7fb4ca'
-    magenta: '0x938aa9'
-    cyan: '0x7aa89f'
-    white: '0xdcd7ba'
+    black: '0x020221'
+    red: '0xff8e78'
+    green: '0xb2bc55'
+    yellow: '0xffd392'
+    blue: '0x99a4bc'
+    magenta: '0xffb07b'
+    cyan: '0x8bccbf'
+    white: '0xf8f8ff'
 
-  selection:
-    background: '0x2d4f67'
-    foreground: '0xc8c093'
-
-  indexed_colors:
-    - {index: 16, color: '0xffa066'}
-    - {index: 17, color: '0xff5d62'}
-
+# Use custom cursor colors. If true, display the cursor in the cursor.foreground
+# and cursor.background colors, otherwise invert the colors of the cursor.
+custom_cursor_colors: true
 selection:
   # This string contains all characters that are used as separators for
   # "semantic words" in Alacritty.
@@ -119,4 +123,3 @@ cursor:
     shape: Block
 
     vi_mode_style: Block
-

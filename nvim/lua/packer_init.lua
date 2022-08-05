@@ -1,4 +1,5 @@
 local fn = vim.fn
+local conf = require("plugins.telescope")
 -- Automatically install packer
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -11,14 +12,13 @@ if fn.empty(fn.glob(install_path)) > 0 then
   print(
     "Installing packer, plugins and treesitter parsers. After the installation is finished close and open Neovim."
   )
-  vim.cmd([[packadd packer.nvim]])
+ -- vim.cmd([[packadd packer.nvim]])
 end
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
-local packer_group = vim.api.nvim_create_augroup("Packer", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePost", {
-  command = "source <afile> | PackerSync",
-  group = packer_group,
-  pattern = "packer_init.lua",
+vim.api.nvim_create_autocmd('BufWritePost', {
+    group = vim.api.nvim_create_augroup('PACKER', { clear = true }),
+    pattern = 'packer_init.lua',
+    command = 'source <afile> | PackerCompile',
 })
 
 local status_ok, packer = pcall(require, "packer")
@@ -42,26 +42,19 @@ return packer.startup(function(use)
   use { "wbthomason/packer.nvim" } -- manages itself
   use { "lewis6991/impatient.nvim" } -- improve startup time
   use { "antoinemadec/FixCursorHold.nvim", event = { "BufWinEnter" }, run = function() vim.g.curshold_updatime = 1000 end } -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
-  use { "nvim-lua/plenary.nvim" } -- needed for other plugins to work
+  -- use { "nvim-lua/plenary.nvim" } -- needed for other plugins to work
   use { "kyazdani42/nvim-web-devicons", config = function() require('plugins.devicons') end, }
   use {
     "nvim-treesitter/nvim-treesitter", -- syntax highlighting
     run = ":TSUpdate",
-    -- cmd = { "TSInstall",
-    --   "TSBufEnable",
-    --   "TSBufDisable",
-    --   "TSEnable",
-    --   "TSDisable",
-    --   "TSModuleInfo", },
-    requires = {
-      'windwp/nvim-ts-autotag', -- for autotag () {}
-      'p00f/nvim-ts-rainbow', -- rainbow pairs
-      'JoosepAlviste/nvim-ts-context-commentstring', -- for commenting
-    },
+    --after="telescope.nvim",
     config = function() require 'plugins.treesitter'
     end,
   }
 
+  use { 'windwp/nvim-ts-autotag', after = "nvim-treesitter" }
+  use { 'p00f/nvim-ts-rainbow', after = "nvim-treesitter" } -- rainbow pairs
+  use { 'JoosepAlviste/nvim-ts-context-commentstring', after = "nvim-treesitter" } -- for commenting
   use { 'windwp/nvim-autopairs', event = "InsertCharPre", after = "nvim-cmp",
     config = function() require('plugins.autopairs') end }
   -- surround text
@@ -80,41 +73,46 @@ return packer.startup(function(use)
   }
   use {
     "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
+    --requires = "kyazdani42/nvim-web-devicons",
     config = function()
       require("trouble").setup()
     end,
     cmd = "Trouble",
   }
   -- THEME
-  use { "rebelot/kanagawa.nvim", config = function() require('colorschemes.kanagawa') end }
-  --use{"Tsuzat/NeoSolarized.nvim",config=function()require('colorschemes.solarized')end}
+  -- use { 'shaunsingh/oxocarbon.nvim', run = './install.sh' }
+  -- use { "sainnhe/gruvbox-material" }
+  -- use { 'luisiacc/gruvbox-baby' }
+  -- use { "catppuccin/nvim", as = "catppuccin" }
+  use 'fenetikm/falcon'
+  -- use 'sainnhe/sonokai'
+  -- use 'marko-cerovac/material.nvim'
+  -- use { 'folke/tokyonight.nvim', config = function() require('colorschemes.tokyonight') end }
+  -- use 'bluz71/vim-nightfly-guicolors'
+  -- use { "rebelot/kanagawa.nvim", config = function() require('colorschemes.kanagawa') end }
+  -- -- use { "Tsuzat/NeoSolarized.nvim", config = function() require('colorschemes.solarized') end }
   -- use {
   --   "EdenEast/nightfox.nvim",
   --   config = function()
   --     require("colorschemes.nightfox")
   --   end,
-  --   run = ':lua require("nightfox").compile()',
+  --run = ':lua require("nightfox").compile()',
   -- }
   -- Telescope
-  use { 'ibhagwan/fzf-lua',
-    -- optional for icon support
-    cmd = "Fzf",
-    requires = { 'kyazdani42/nvim-web-devicons' }
+  use {
+    "nvim-telescope/telescope.nvim",
+    cmd = 'Telescope',
+    config = conf.telescope,
+    requires = {
+      { 'nvim-lua/popup.nvim', opt = true },
+      { 'nvim-lua/plenary.nvim', opt = true },
+      { "nvim-telescope/telescope-project.nvim", opt = true },
+      --{'cljoly/telescope-repo.nvim',opt=true},
+      { 'nvim-telescope/telescope-fzy-native.nvim', opt = true },
+      { "nvim-telescope/telescope-file-browser.nvim", opt = true },
+    },
   }
-  -- use {
-  --   "nvim-telescope/telescope.nvim",
-  --   after = { "plenary.nvim" },
-  --   requires = {
-  --     { "nvim-telescope/telescope-project.nvim" },
-  --     'cljoly/telescope-repo.nvim',
-  --     { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-  --     "nvim-telescope/telescope-file-browser.nvim",
-  --   },
-  --   config = function()
-  --     require("plugins.telescope")
-  --   end,
-  -- }
+
   -- LSP --
   -- lsp configurations
   use {
@@ -136,14 +134,12 @@ return packer.startup(function(use)
   -- better lsp actions
   use({
     "glepnir/lspsaga.nvim",
+    --keys = { "gh", "<leader>ca", "K", "L", "gr", "gd", "<leader>cd", "[d", "]d", "[G", },
     branch = "main",
     config = function() require('plugins.lspsaga')
     end,
     after = { "nvim-lspconfig" }
   })
-  -- I3 config syntax highlight
-  -- JAVASCRIPT
-  -- RUST
   -- use({ 'simrat39/rust-tools.nvim'}) -- extra capability for rust lang
   -- package json for rust
   use {
@@ -169,7 +165,7 @@ return packer.startup(function(use)
   }, event = "InsertEnter" }
 
 
---use "b0o/schemastore.nvim"
+  --use "b0o/schemastore.nvim"
   -- for prime
   -- use({
   --   "theprimeagen/harpoon",
@@ -186,21 +182,16 @@ return packer.startup(function(use)
     cmd = { "Copilot" },
   })
   -- lualine at bottom
-  -- use {
-  --   "nvim-lualine/lualine.nvim",
-  --   requires = { "kyazdani42/nvim-web-devicons", },
-  --   opt = true,
-  --   config = function()
-  --     require('plugins.configs.lualine')
-  --   end,
-  -- }
+
+  -- use { 'feline-nvim/feline.nvim',event="BufEnter",  after = "nvim-web-devicons", config = function() require('feline').setup() end }
+
   -- color the colors like #33214 that looks orange
   use {
     "norcalli/nvim-colorizer.lua",
     config = function()
       require("plugins.colorizer")
     end, after = "nvim-treesitter",
-    event = { "BufRead", "BufNewFile" },
+    event = { "CursorHold" },
     ft = { "html", "css", "json", "yaml", "conf" },
   }
   -- can recognize projects when it sees
@@ -209,7 +200,8 @@ return packer.startup(function(use)
     config = function()
       require("plugins.project")
     end,
-    --requires = { "nvim-telescope/telescope.nvim" }
+    opt = true,
+    after = "telescope.nvim"
   }
   -- Scrolling good
   use({
@@ -258,18 +250,14 @@ return packer.startup(function(use)
   use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim', config = function() require('plugins.neogit') end,
     cmd = { "Neogit" } }
 
-
   use { 'kevinhwang91/nvim-bqf', ft = 'qf' }
   use {
     'sindrets/diffview.nvim',
     cmd = { 'DiffviewOpen', 'DiffviewFileHistory' },
     after = 'nvim-web-devicons',
   }
-  -- calculate startup time
-  --
   use({
-    "dstein64/vim-startuptime",
-    cmd = "StartupTime",
+    "dstein64/vim-startuptime", cmd = "StartupTime"
   })
   if PACKER_BOOTSTRAP then
     require('packer').sync()

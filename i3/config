@@ -16,19 +16,13 @@ set $alt Mod1
 ### Wallpaper: ###
 # - You need to specify homescreen wallpaper using azote
 
-# GET DEM BORDERS OUT OF HEREc:w
-#
-# Thanks Childz
-for_window [class="^.*"] border pixel 2
-                          # class                 border  backgr. text    indicator child_border
-for_window [class="^.*"] client.focused          #77dd77 #285577 #ffffff #2e9ef4   #285577
 
 ### Applications: ###
 
 set $preferredBrowser /usr/bin/firefox
-set $preferredFileManager /usr/bin/thunar
+set $preferredFileManager /usr/bin/nnn
 set $preferredMailClient /usr/bin/geary
-set $preferredTextEditor /usr/bin/geany
+set $preferredTextEditor /usr/bin/nvim
 set $preferredScreenCaptureTool /usr/bin/flameshot gui
 
 ###########################################
@@ -218,6 +212,13 @@ bindsym $super+Shift+r restart
 
 # change borders
 
+
+# GET DEM BORDERS OUT OF HEREc:w
+#
+# Thanks Childz
+for_window [class="^.*"] border pixel 2
+                          # class                 border  backgr. text    indicator child_border
+for_window [class="^.*"] client.focused          #77dd77 #285577 #ffffff #2e9ef4   #285577
 
 # panel
 # Start i3bar to display a workspace bar
