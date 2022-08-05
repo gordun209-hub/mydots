@@ -9,8 +9,9 @@ export FZF_DEFAULT_OPTS="
 --prompt '⯈ '
 --marker=+
 --preview-window='right:hidden:wrap'
---color=dark
---color=fg:250,fg+:15,hl:203,hl+:203
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8
 --color=info:100,pointer:15,marker:220,spinner:11,header:-1,gutter:-1,prompt:15
 --layout=reverse
 --height=60%

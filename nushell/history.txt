@@ -1,0 +1,50 @@
+ls
+lsd
+exa
+ls
+which nu
+ls Music/
+10/2
+10 / "bob"
+10 / 2
+for x < 10 ; do echo laa
+q
+ls
+nvim
+fish
+q
+nvim
+fish
+q
+nvim
+q
+ls
+nvim
+q
+nvim
+q
+nvim
+ls
+lsd
+exa
+ls
+nvim
+q
+2 + 3
+2 / 3
+2 / 3 * 6
+2 / 3 * 6  "Mason",
+  "MasonInstall",
+  "MasonInstallAll",
+  "MasonUninstall",
+  "MasonUninstallAll",
+  "MasonLog",ls
+sl
+ls
+q
+cd
+cd .config/nushell/
+ls
+nvim config.nu
+nvim env.nu
+q

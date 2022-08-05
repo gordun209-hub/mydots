@@ -1,18 +1,16 @@
 local status_ok, catppuccin = pcall(require, "catppuccin")
 if not status_ok then
-  print("laa")
   return
 end
 
 vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
 require("catppuccin").setup({
   dim_inactive = {
-    enabled = true,
-    shade = "dark",
-    percentage = 0.15,
+    enabled = false,
+
   },
 
-  transparent_background = false,
+  transparent_background = true,
   term_colors = true,
   compile = {
     enabled = true,
@@ -50,10 +48,10 @@ require("catppuccin").setup({
       },
     },
     cmp = true,
-    lsp_saga = false,
+    lsp_saga = true,
 
     gitgutter = false,
-    gitsigns = true,
+    gitsigns = false,
     leap = false,
     telescope = true,
     -- nvimtree = {
@@ -72,20 +70,19 @@ require("catppuccin").setup({
     -- },
     which_key = false,
     indent_blankline = {
-      enabled = true,
-      colored_indent_levels = false,
+      enabled = false,
     },
-    dashboard = true,
+    dashboard = false,
     neogit = false,
     vim_sneak = false,
     fern = false,
-    barbar = true,
-    markdown = true,
+    barbar = false,
+    markdown = false,
     lightspeed = false,
     ts_rainbow = true,
     hop = false,
-    notify = true,
-    telekasten = true,
+    notify = false,
+    telekasten = false,
   },
   color_overrides = {},
   custom_highlights = {},

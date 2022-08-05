@@ -11,4 +11,4 @@ export ZSH="$HOME/dotfiles/zsh"
 export BUN_INSTALL="/home/ali/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 # Yarn
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="$HOME/.yarn/bin:$HOME/.local/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

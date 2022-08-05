@@ -12,13 +12,13 @@ if fn.empty(fn.glob(install_path)) > 0 then
   print(
     "Installing packer, plugins and treesitter parsers. After the installation is finished close and open Neovim."
   )
- -- vim.cmd([[packadd packer.nvim]])
+  -- vim.cmd([[packadd packer.nvim]])
 end
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
 vim.api.nvim_create_autocmd('BufWritePost', {
-    group = vim.api.nvim_create_augroup('PACKER', { clear = true }),
-    pattern = 'packer_init.lua',
-    command = 'source <afile> | PackerCompile',
+  group = vim.api.nvim_create_augroup('PACKER', { clear = true }),
+  pattern = 'packer_init.lua',
+  command = 'source <afile> | PackerCompile',
 })
 
 local status_ok, packer = pcall(require, "packer")
@@ -82,11 +82,12 @@ return packer.startup(function(use)
   -- THEME
   -- use { 'shaunsingh/oxocarbon.nvim', run = './install.sh' }
   -- use { "sainnhe/gruvbox-material" }
-  -- use { 'luisiacc/gruvbox-baby' }
-  -- use { "catppuccin/nvim", as = "catppuccin" }
-  use 'fenetikm/falcon'
-  -- use 'sainnhe/sonokai'
-  -- use 'marko-cerovac/material.nvim'
+  -- use {'luisiacc/gruvbox-baby' ,config=function()require('colorschemes.gruvbox')end}
+  use { "catppuccin/nvim", run = ":CatppuccinCompile", as = "catppuccin",
+    config = function() require('colorschemes.catppuccin') end }
+
+  -- use 'fenetikm/falcon'
+  --use 'sainnhe/sonokai'
   -- use { 'folke/tokyonight.nvim', config = function() require('colorschemes.tokyonight') end }
   -- use 'bluz71/vim-nightfly-guicolors'
   -- use { "rebelot/kanagawa.nvim", config = function() require('colorschemes.kanagawa') end }
@@ -130,7 +131,7 @@ return packer.startup(function(use)
     config = function() require('lsp.lsp-signatures') end }
   -- formatting and diagnostic settings
   use { "jose-elias-alvarez/null-ls.nvim", config = function() require('lsp.null-ls') end,
-    requires = { "nvim-lua/plenary.nvim" } }
+    requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" } }
   -- better lsp actions
   use({
     "glepnir/lspsaga.nvim",
