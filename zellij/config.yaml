@@ -1,6 +1,15 @@
+---
 theme: catppuccin-mocha
 default_mode: locked
+simplified_ui: true
+
+pane_frames: false
+default_shell: nu
 mouse_mode: false
 env:
-  RUST_BACKTRACE: 1 # set RUST_BACKTRACE=1
+  RUST_BACKTRACE: 1
 
+
+ui:
+  pane_frames:
+    rounded_corners: true

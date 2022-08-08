@@ -88,7 +88,7 @@ return packer.startup(function(use)
 
   -- use 'fenetikm/falcon'
   --use 'sainnhe/sonokai'
-  -- use { 'folke/tokyonight.nvim', config = function() require('colorschemes.tokyonight') end }
+   --use { 'folke/tokyonight.nvim', config = function() require('colorschemes.tokyonight') end }
   -- use 'bluz71/vim-nightfly-guicolors'
   -- use { "rebelot/kanagawa.nvim", config = function() require('colorschemes.kanagawa') end }
   -- -- use { "Tsuzat/NeoSolarized.nvim", config = function() require('colorschemes.solarized') end }

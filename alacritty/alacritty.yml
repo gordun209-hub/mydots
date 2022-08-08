@@ -3,7 +3,7 @@ env:
   TERM: alacritty
 
 window:
-  opacity: 0.82
+  opacity: 0.80
   dynamic_title: true
   dimensions:
     columns: 0
@@ -49,9 +49,9 @@ font:
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the
   # right, increasing `y` moves the glyph upward.
-  glyph_offset:
-    x: 0
-    y: 0
+  # glyph_offset:
+  #   x: 0
+  #   y: 0
 
   # If `true`, bold text is drawn using the bright color variants.
   draw_bold_text_with_bright_colors: true
@@ -396,7 +396,7 @@ color_schemes:
 colors: *mocha
 # Use custom cursor colors. If true, display the cursor in the cursor.foreground
 # and cursor.background colors, otherwise invert the colors of the cursor.
-custom_cursor_colors: true
+# custom_cursor_colors: true
 selection:
   # This string contains all characters that are used as separators for
   # "semantic words" in Alacritty.

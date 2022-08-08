@@ -1,2 +1,28 @@
+
+# Layout
+#
+
+monospace normal 15
+map D set "first-page-column 1:1"
+map <C-d> set "first-page-column 1:2"
+tabbed -c zathura -e
+
+set window-title-home-tilde true
+set statusbar-h-padding 0
+set statusbar-v-padding 0
+set page-padding 3
+set synctex true
+set highlight-transparency 0.1
+# Keybindings
+map u scroll half-up 
+map d scroll half-down
+map D toggle_page_mode
+map r reload
+map R rotate
+map K zoom in
+map J zoom out
+map i recolor
+map p print
+
 include catppuccin-mocha
 
