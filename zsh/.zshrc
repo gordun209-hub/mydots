@@ -18,8 +18,6 @@ source $DOTFILES/zsh/functions.zsh
 source $DOTFILES/zsh/options.zsh
 source $DOTFILES/zsh/fzf.zsh
 source $HOME/.config/lf/icons
-
-
 source ~/.fzf/shell/completion.zsh
 source ~/.fzf/shell/key-bindings.zsh
 bindkey -v
@@ -61,9 +59,7 @@ zinit wait lucid for \
  atload"!_zsh_autosuggest_start" \
     zsh-users/zsh-autosuggestions
 
-#zinit load marlonrichert/zsh-autocomplete
-
-# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
-[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
 
+# To customize prompt, run `p10k configure` or edit ~/dotfiles/zsh/.p10k.zsh.
+[[ ! -f ~/dotfiles/zsh/.p10k.zsh ]] || source ~/dotfiles/zsh/.p10k.zsh

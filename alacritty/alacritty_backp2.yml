@@ -1,0 +1,417 @@
+---
+env:
+  TERM: alacritty
+
+window:
+  opacity: 0.80
+  dynamic_title: true
+  dimensions:
+    columns: 0
+    lines: 0
+
+  position:
+    x: 0
+    y: 0
+
+  padding:
+    x: 0
+    y: 0
+
+  dynamic_padding: false
+  decorations: none
+
+  scrolling: null
+  history: 50000
+  multiplier: 3
+
+font:
+  normal:
+    family: JetBrainsMono Nerd Font
+
+  bold:
+    family: JetBrainsMono Nerd Font
+
+  italic:
+    family: JetBrainsMono Nerd Font
+
+  bold_italic:
+    family: JetBrainsMono Nerd Font
+
+  # Point size
+  size: 16.0
+  # Offset is the extra space around each character. `offset.y` can be thought
+  # of as modifying the line spacing, and `offset.x` as modifying the letter
+  # spacing.
+  offset:
+    x: 0
+    y: 0
+
+  # Glyph offset determines the locations of the glyphs within their cells with
+  # the default being at the bottom. Increasing `x` moves the glyph to the
+  # right, increasing `y` moves the glyph upward.
+  # glyph_offset:
+  #   x: 0
+  #   y: 0
+
+  # If `true`, bold text is drawn using the bright color variants.
+  draw_bold_text_with_bright_colors: true
+  # transparent_background_colors: true
+
+shell:
+  program: /usr/bin/zsh
+  args:
+    # - -l
+    # - -c
+    - --login
+
+color_schemes:
+
+  latte: &latte
+
+    # Default colors
+    primary:
+      background: '#EFF1F5'
+      foreground: '#4C4F69'
+      # Bright and dim foreground colors
+      dim_foreground: '#4C4F69'
+      bright_foreground: '#4C4F69'
+
+    # Cursor colors
+    cursor:
+      text: '#EFF1F5'
+      cursor: '#DC8A78'
+    vi_mode_cursor:
+      text: '#EFF1F5'
+      cursor: '#7287FD'
+
+    # Search colors
+    search:
+      matches:
+        foreground: '#EFF1F5'
+        background: '#6C6F85'
+      focused_match:
+        foreground: '#EFF1F5'
+        background: '#40A02B'
+      footer_bar:
+        foreground: '#EFF1F5'
+        background: '#6C6F85'
+
+    # Keyboard regex hints
+    hints:
+      start:
+        foreground: '#EFF1F5'
+        background: '#DF8E1D'
+      end:
+        foreground: '#EFF1F5'
+        background: '#6C6F85'
+
+    # Selection colors
+    selection:
+      text: '#EFF1F5'
+      background: '#DC8A78'
+
+    # Normal colors
+    normal:
+      black: '#5C5F77'
+      red: '#D20F39'
+      green: '#40A02B'
+      yellow: '#DF8E1D'
+      blue: '#1E66F5'
+      magenta: '#EA76CB'
+      cyan: '#179299'
+      white: '#ACB0BE'
+
+    # Bright colors
+    bright:
+      black: '#6C6F85'
+      red: '#D20F39'
+      green: '#40A02B'
+      yellow: '#DF8E1D'
+      blue: '#1E66F5'
+      magenta: '#EA76CB'
+      cyan: '#179299'
+      white: '#BCC0CC'
+
+    # Dim colors
+    dim:
+      black: '#5C5F77'
+      red: '#D20F39'
+      green: '#40A02B'
+      yellow: '#DF8E1D'
+      blue: '#1E66F5'
+      magenta: '#EA76CB'
+      cyan: '#179299'
+      white: '#ACB0BE'
+
+    indexed_colors:
+      - {index: 16, color: '#FE640B'}
+      - {index: 17, color: '#DC8A78'}
+
+
+  frappe: &frappe
+
+    # Default colors
+    primary:
+      background: '#303446'
+      foreground: '#C6D0F5'
+      # Bright and dim foreground colors
+      dim_foreground: '#C6D0F5'
+      bright_foreground: '#C6D0F5'
+
+    # Cursor colors
+    cursor:
+      text: '#303446'
+      cursor: '#F2D5CF'
+    vi_mode_cursor:
+      text: '#303446'
+      cursor: '#BABBF1'
+
+    # Search colors
+    search:
+      matches:
+        foreground: '#303446'
+        background: '#A5ADCE'
+      focused_match:
+        foreground: '#303446'
+        background: '#A6D189'
+      footer_bar:
+        foreground: '#303446'
+        background: '#A5ADCE'
+
+    # Keyboard regex hints
+    hints:
+      start:
+        foreground: '#303446'
+        background: '#E5C890'
+      end:
+        foreground: '#303446'
+        background: '#A5ADCE'
+
+    # Selection colors
+    selection:
+      text: '#303446'
+      background: '#F2D5CF'
+
+    # Normal colors
+    normal:
+      black: '#51576D'
+      red: '#E78284'
+      green: '#A6D189'
+      yellow: '#E5C890'
+      blue: '#8CAAEE'
+      magenta: '#F4B8E4'
+      cyan: '#81C8BE'
+      white: '#B5BFE2'
+
+    # Bright colors
+    bright:
+      black: '#626880'
+      red: '#E78284'
+      green: '#A6D189'
+      yellow: '#E5C890'
+      blue: '#8CAAEE'
+      magenta: '#F4B8E4'
+      cyan: '#81C8BE'
+      white: '#A5ADCE'
+
+    # Dim colors
+    dim:
+      black: '#51576D'
+      red: '#E78284'
+      green: '#A6D189'
+      yellow: '#E5C890'
+      blue: '#8CAAEE'
+      magenta: '#F4B8E4'
+      cyan: '#81C8BE'
+      white: '#B5BFE2'
+
+    indexed_colors:
+      - {index: 16, color: '#EF9F76'}
+      - {index: 17, color: '#F2D5CF'}
+
+  macchiato: &macchiato
+
+    # Default colors
+    primary:
+      background: '#24273A'
+      foreground: '#CAD3F5'
+      # Bright and dim foreground colors
+      dim_foreground: '#CAD3F5'
+      bright_foreground: '#CAD3F5'
+
+    # Cursor colors
+    cursor:
+      text: '#24273A'
+      cursor: '#F4DBD6'
+    vi_mode_cursor:
+      text: '#24273A'
+      cursor: '#B7BDF8'
+
+    # Search colors
+    search:
+      matches:
+        foreground: '#24273A'
+        background: '#A5ADCB'
+      focused_match:
+        foreground: '#24273A'
+        background: '#A6DA95'
+      footer_bar:
+        foreground: '#24273A'
+        background: '#A5ADCB'
+
+    # Keyboard regex hints
+    hints:
+      start:
+        foreground: '#24273A'
+        background: '#EED49F'
+      end:
+        foreground: '#24273A'
+        background: '#A5ADCB'
+
+    # Selection colors
+    selection:
+      text: '#24273A'
+      background: '#F4DBD6'
+
+    # Normal colors
+    normal:
+      black: '#494D64'
+      red: '#ED8796'
+      green: '#A6DA95'
+      yellow: '#EED49F'
+      blue: '#8AADF4'
+      magenta: '#F5BDE6'
+      cyan: '#8BD5CA'
+      white: '#B8C0E0'
+
+    # Bright colors
+    bright:
+      black: '#5B6078'
+      red: '#ED8796'
+      green: '#A6DA95'
+      yellow: '#EED49F'
+      blue: '#8AADF4'
+      magenta: '#F5BDE6'
+      cyan: '#8BD5CA'
+      white: '#A5ADCB'
+
+    # Dim colors
+    dim:
+      black: '#494D64'
+      red: '#ED8796'
+      green: '#A6DA95'
+      yellow: '#EED49F'
+      blue: '#8AADF4'
+      magenta: '#F5BDE6'
+      cyan: '#8BD5CA'
+      white: '#B8C0E0'
+
+    indexed_colors:
+      - {index: 16, color: '#F5A97F'}
+      - {index: 17, color: '#F4DBD6'}
+
+
+  mocha: &mocha
+
+    # Default colors
+    primary:
+      background: '#1E1E2E'
+      foreground: '#CDD6F4'
+      # Bright and dim foreground colors
+      dim_foreground: '#CDD6F4'
+      bright_foreground: '#CDD6F4'
+
+    # Cursor colors
+    cursor:
+      text: '#1E1E2E'
+      cursor: '#F5E0DC'
+    vi_mode_cursor:
+      text: '#1E1E2E'
+      cursor: '#B4BEFE'
+
+    # Search colors
+    search:
+      matches:
+        foreground: '#1E1E2E'
+        background: '#A6ADC8'
+      focused_match:
+        foreground: '#1E1E2E'
+        background: '#A6E3A1'
+      footer_bar:
+        foreground: '#1E1E2E'
+        background: '#A6ADC8'
+
+    # Keyboard regex hints
+    hints:
+      start:
+        foreground: '#1E1E2E'
+        background: '#F9E2AF'
+      end:
+        foreground: '#1E1E2E'
+        background: '#A6ADC8'
+
+    # Selection colors
+    selection:
+      text: '#1E1E2E'
+      background: '#F5E0DC'
+
+    # Normal colors
+    normal:
+      black: '#45475A'
+      red: '#F38BA8'
+      green: '#A6E3A1'
+      yellow: '#F9E2AF'
+      blue: '#89B4FA'
+      magenta: '#F5C2E7'
+      cyan: '#94E2D5'
+      white: '#BAC2DE'
+
+    # Bright colors
+    bright:
+      black: '#585B70'
+      red: '#F38BA8'
+      green: '#A6E3A1'
+      yellow: '#F9E2AF'
+      blue: '#89B4FA'
+      magenta: '#F5C2E7'
+      cyan: '#94E2D5'
+      white: '#A6ADC8'
+
+    # Dim colors
+    dim:
+      black: '#45475A'
+      red: '#F38BA8'
+      green: '#A6E3A1'
+      yellow: '#F9E2AF'
+      blue: '#89B4FA'
+      magenta: '#F5C2E7'
+      cyan: '#94E2D5'
+      white: '#BAC2DE'
+
+    indexed_colors:
+      - {index: 16, color: '#FAB387'}
+      - {index: 17, color: '#F5E0DC'}
+
+
+colors: *mocha
+# Use custom cursor colors. If true, display the cursor in the cursor.foreground
+# and cursor.background colors, otherwise invert the colors of the cursor.
+# custom_cursor_colors: true
+selection:
+  # This string contains all characters that are used as separators for
+  # "semantic words" in Alacritty.
+  # When set to `true`, selected text will be copied to the primary clipboard.
+  save_to_clipboard: true
+
+cursor:
+  # Cursor style
+  style:
+    # Cursor shape
+    #
+    # Values for `shape`:
+    #   - ▇ Block
+    #   - _ Underline
+    #   - | Beam
+    shape: Block
+
+    vi_mode_style: Block
