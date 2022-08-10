@@ -1,1 +1,0 @@
-conky -c /home/ali/.config/conky/syclo/AP-clock-crimson-nobg-topleft.conkyrc & sleep 1s

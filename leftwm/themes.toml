@@ -7,8 +7,8 @@ definitions_version = 0
 name = "Orange Forest"
 repository = "https://github.com/PVautour/leftwm-theme-orange-forest/"
 commit = "*"
-version = "0.0.1"
-leftwm_versions = "<0.3.0"
+version = "0.0.2"
+leftwm_versions = "^0.3.0"
 current = false
 
 [[repos.themes]]
@@ -21,6 +21,7 @@ current = false
 
 [[repos.themes]]
 name = "Soothe"
+directory = "/home/ali/.config/leftwm/themes/Soothe"
 repository = "https://github.com/b4skyx/leftwm-soothe/"
 commit = "*"
 version = "0.0.1"
@@ -46,18 +47,20 @@ current = false
 
 [[repos.themes]]
 name = "Dracula Rounded"
+directory = "/home/ali/.config/leftwm/themes/Dracula Rounded"
 repository = "https://github.com/AethanFoot/leftwm-theme-dracula-rounded/"
 commit = "*"
-version = "0.0.2"
-leftwm_versions = "^0.2.7, <0.3.0"
+version = "0.0.3"
+leftwm_versions = "^0.3.0"
 current = false
 
 [[repos.themes]]
 name = "Forest"
+directory = "/home/ali/.config/leftwm/themes/Forest"
 repository = "https://github.com/lex148/forest/"
 commit = "*"
 version = "0.0.1"
-leftwm_versions = "<0.3.0"
+leftwm_versions = "^0.3.0"
 current = false
 
 [[repos.themes]]
@@ -78,6 +81,7 @@ current = false
 
 [[repos.themes]]
 name = "Blue Coffee"
+directory = "/home/ali/.config/leftwm/themes/Blue Coffee"
 repository = "https://github.com/Qwart376/Blue-Coffee/"
 commit = "*"
 version = "0.0.1"
@@ -110,6 +114,7 @@ current = false
 
 [[repos.themes]]
 name = "Garden"
+directory = "/home/ali/.config/leftwm/themes/Garden"
 repository = "https://github.com/taylor85345/leftwm-theme-garden"
 commit = "*"
 version = "0.0.4"
@@ -120,7 +125,7 @@ current = false
 name = "Epitaph"
 repository = "https://github.com/VentGrey/Epitaph"
 commit = "*"
-version = "0.0.1"
+version = "0.0.2"
 leftwm_versions = "*"
 current = false
 
@@ -176,8 +181,8 @@ current = false
 name = "Double Bar"
 repository = "https://github.com/PeterDauwe/doublebar/"
 commit = "*"
-version = "0.0.1"
-leftwm_versions = "<0.3.0"
+version = "0.0.2"
+leftwm_versions = "^0.3.0"
 current = false
 
 [[repos.themes]]
@@ -196,6 +201,22 @@ version = "1.0.0"
 leftwm_versions = ">0.2.7"
 current = false
 
+[[repos.themes]]
+name = "Zexanima"
+repository = "https://github.com/calebgasser/zexanima-leftwm-theme/tree/develop"
+commit = "*"
+version = "0.0.1"
+leftwm_versions = ">0.3.0"
+current = false
+
+[[repos.themes]]
+name = "minimal-solarized"
+repository = "https://github.com/minda1975/minimal_solarized"
+commit = "*"
+version = "0.1.0"
+leftwm_versions = "^0.3.0"
+current = false
+
 [[repos]]
 url = "localhost"
 name = "LOCAL"
@@ -203,9 +224,10 @@ definitions_version = 0
 
 [[repos.themes]]
 name = "candy"
-version = "2.4.1"
+directory = "/home/ali/.config/leftwm/themes/candy"
+version = "0.0.0"
 leftwm_versions = "*"
-current = true
+current = false
 
 [[repos]]
 url = "https://raw.githubusercontent.com/arcolinux/arcolinux-leftwm-themes/master/known.toml"
@@ -246,6 +268,7 @@ current = false
 
 [[repos.themes]]
 name = "matrix"
+directory = "/home/ali/.config/leftwm/themes/matrix"
 repository = "https://github.com/arcolinux/arcolinux-leftwm-theme-matrix/"
 commit = "*"
 version = "2.4.1"
@@ -254,6 +277,7 @@ current = false
 
 [[repos.themes]]
 name = "parker"
+directory = "/home/ali/.config/leftwm/themes/parker"
 repository = "https://github.com/arcolinux/arcolinux-leftwm-theme-parker/"
 commit = "*"
 version = "2.4.1"
@@ -270,6 +294,7 @@ current = false
 
 [[repos.themes]]
 name = "shades"
+directory = "/home/ali/.config/leftwm/themes/shades"
 repository = "https://github.com/arcolinux/arcolinux-leftwm-theme-shades/"
 commit = "*"
 version = "2.4.1"
@@ -371,6 +396,7 @@ definitions_version = 0
 
 [[repos.themes]]
 name = "doublebar"
+directory = "/home/ali/.config/leftwm/themes/doublebar"
 repository = "https://github.com/PeterDauwe/doublebar/"
 commit = "*"
 version = "2.3.2"
@@ -387,6 +413,7 @@ current = false
 
 [[repos.themes]]
 name = "db-scifi"
+directory = "/home/ali/.config/leftwm/themes/db-scifi"
 repository = "https://github.com/PeterDauwe/db-scifi"
 commit = "*"
 version = "2.3.2"
@@ -403,6 +430,7 @@ current = false
 
 [[repos.themes]]
 name = "db-comic"
+directory = "/home/ali/.config/leftwm/themes/db-comic"
 repository = "https://github.com/PeterDauwe/db-comic"
 commit = "*"
 version = "2.3.2"
@@ -423,10 +451,13 @@ repository = "https://github.com/etrigan63/kittycafe-sm"
 commit = "*"
 version = "2.3.2"
 leftwm_versions = "*"
+current = false
 
 [[repos.themes]]
 name = "kittycafe-dm"
+directory = "/home/ali/.config/leftwm/themes/kittycafe-dm"
 repository = "https://github.com/etrigan63/kittycafe-dm"
 commit = "*"
 version = "2.3.2"
 leftwm_versions = "*"
+current = true

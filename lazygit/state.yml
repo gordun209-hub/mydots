@@ -3,4 +3,4 @@ recentrepos:
 - /home/ali/dotfiles
 startuppopupversion: 5
 customcommandshistory: []
-hidecommandlog: false
+hidecommandlog: true

@@ -42,12 +42,10 @@ return packer.startup(function(use)
   use { "wbthomason/packer.nvim" } -- manages itself
   use { "lewis6991/impatient.nvim" } -- improve startup time
   use { "antoinemadec/FixCursorHold.nvim", event = { "BufWinEnter" }, run = function() vim.g.curshold_updatime = 1000 end } -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
-  -- use { "nvim-lua/plenary.nvim" } -- needed for other plugins to work
   use { "kyazdani42/nvim-web-devicons", config = function() require('plugins.devicons') end, }
   use {
     "nvim-treesitter/nvim-treesitter", -- syntax highlighting
     run = ":TSUpdate",
-    --after="telescope.nvim",
     config = function() require 'plugins.treesitter'
     end,
   }
@@ -85,7 +83,7 @@ return packer.startup(function(use)
   -- use {'luisiacc/gruvbox-baby' ,config=function()require('colorschemes.gruvbox')end}
   use { "catppuccin/nvim", run = ":CatppuccinCompile", as = "catppuccin",
     config = function() require('colorschemes.catppuccin') end }
-
+  --
   -- use 'fenetikm/falcon'
   --use 'sainnhe/sonokai'
    --use { 'folke/tokyonight.nvim', config = function() require('colorschemes.tokyonight') end }
@@ -213,7 +211,7 @@ return packer.startup(function(use)
     end,
   })
   -- tree trying neotree
-  use { 'is0n/fm-nvim', cmd = { 'Fzf', 'Nnn', 'Lazygit' },
+  use { 'is0n/fm-nvim', cmd = {"Joshuto","Lf", 'Fzf', 'Nnn', 'Lazygit' },
     config = function() require('plugins.fm')
     end }
   -- tmux navigation

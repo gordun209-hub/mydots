@@ -40,7 +40,7 @@ alias yw="yarn workspace"
 #IMPROVE DEFAULTS
 alias cat="bat"
 alias sl="exa --icons --sort type -a"
-alias ls="nnn -e -H"
+alias ls="joshuto"
 alias ll="exa --icons --long --sort type -a"
 alias l="exa --icons --long --sort type -a"
 
@@ -158,11 +158,6 @@ alias update-fc='sudo fc-cache -fv'
 #backup contents of /etc/skel to hidden backup folder in home/user
 alias bupskel='cp -Rf /etc/skel ~/.skel-backup-$(date +%Y.%m.%d-%H.%M.%S)'
 
-#copy shell configs
-alias cb='cp /etc/skel/.bashrc ~/.bashrc && echo "Copied."'
-alias cz='cp /etc/skel/.zshrc ~/.zshrc && exec zsh'
-alias cf='cp /etc/skel/.config/fish/config.fish ~/.config/fish/config.fish && echo "Copied."'
-
 #switch between bash and zsh
 alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
 alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
@@ -245,8 +240,7 @@ alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
 #clear
 alias clean="clear; seq 1 $(tput cols) | sort -R | sparklines | lolcat"
 
-#search content with ripgrep
-alias rg="rg --sort path"
+
 
 #get the error messages from journalctl
 alias jctl="journalctl -p 3 -xb"

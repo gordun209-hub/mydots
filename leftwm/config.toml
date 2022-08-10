@@ -19,11 +19,6 @@ focus_behaviour = "Sloppy"
 #focus_behaviour = "ClickTo"
 focus_new_windows = true
 
-[[keybind]]
-command = "Execute"
-value = "xfce4-terminal --drop-down"
-modifier = []
-key = "F12"
 
 #[[keybind]]
 #command = "ToggleScratchPad"
@@ -39,7 +34,7 @@ key = "c"
 
 [[keybind]]
 command = "Execute"
-value = "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'"
+value = "rofi -modi drun -matching fuzzy -sorting-method fzf drun -show"
 modifier = ["modkey","Shift"]
 key = "d"
 
@@ -63,7 +58,7 @@ key = "f"
 
 [[keybind]]
 command = "Execute"
-value = "urxvt"
+value = "kitty"
 modifier = ["modkey"]
 key = "t"
 
