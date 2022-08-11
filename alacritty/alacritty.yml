@@ -58,7 +58,7 @@ font:
   # transparent_background_colors: true
 
 shell:
-  program: /usr/bin/zsh
+  program: /usr/bin/fish
   args:
     # - -l
     # - -c

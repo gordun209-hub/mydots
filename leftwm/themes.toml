@@ -61,7 +61,7 @@ repository = "https://github.com/lex148/forest/"
 commit = "*"
 version = "0.0.1"
 leftwm_versions = "^0.3.0"
-current = false
+current = true
 
 [[repos.themes]]
 name = "Ground Zero"
@@ -460,4 +460,4 @@ repository = "https://github.com/etrigan63/kittycafe-dm"
 commit = "*"
 version = "2.3.2"
 leftwm_versions = "*"
-current = true
+current = false

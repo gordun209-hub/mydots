@@ -46,11 +46,6 @@ set -gx NNN_SSHFS_OPTS sshfs -o follow_symlinks
 set -gx NNN_USE_EDITOR 1
 set -gx NNN_COLORS 2136
 set -gx NNN_TRASH 2 # configure gio trash
-# d: detail mode
-# e: open text files in terminal
-# u: use selection, don't prompt to choose between selection and hovered entry
-# r: show cp/mv progress
-# U: show file's owner and group in status bar
 set -gx NNN_OPTS dreuU
 set -gx NNN_PLUG "k:pskill;t:preview-tui;o:fzopen;m:nmount;z:autojump;h:fzhist;c:diffs;p:fzplug;"
 
@@ -84,10 +79,10 @@ end
 
 
 
-#Starship prompt
-if status --is-interactive
-    source ("/usr/bin/starship" init fish --print-full-init | psub)
-end
+# #Starship prompt
+# if status --is-interactive
+#     source ("/usr/bin/starship" init fish --print-full-init | psub)
+# end
 
 
 ## Advanced command-not-found hook
@@ -152,7 +147,7 @@ alias l='exa --icons --group-directories-first'
 alias lg='lazygit'
 alias ll='exa -la --git --group-directories-first --icons'
 alias logme="script -f /tmp/(date +\"%Y%m%d_%H%M\")_shell.log"
-alias ls='exa --icons --group-directories-first'
+alias ls='lf'
 alias lzd='lazydocker'
 alias mkdir='mkdir -p -v'
 alias ping='ping -c 5'
@@ -262,10 +257,15 @@ set -U __done_min_cmd_duration 10000
 set -U __done_exclude n
 
 
+set LOCAL_CONFIG (dirname (status --current-filename))/config-local.fish
+if test -f $LOCAL_CONFIG
+  source $LOCAL_CONFIG
+end
 ## Run fastfetch if session is interactive
 if status --is-interactive && type -q fastfetch
     fastfetch --load-config neofetch
 end
+  
 # THEME PURE #
 # set fish_function_path /home/ali/.config/fish/plugins/theme-pure/functions/ $fish_function_path
 # source /home/ali/.config/fish/plugins/theme-pure/conf.d/pure.fish
