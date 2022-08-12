@@ -1,0 +1,1 @@
+/home/ali/.fzf/shell/key-bindings.fish

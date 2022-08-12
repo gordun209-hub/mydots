@@ -1,5 +1,6 @@
 vim.opt.hlsearch = false
-
+local o = vim.opt
+local fn = vim.fn
 vim.opt.incsearch = true
 vim.opt.breakindent = false
 vim.opt.encoding = "utf-8"
@@ -8,7 +9,7 @@ vim.opt.redrawtime = 15000
 vim.opt.autoindent = true
 --vim.o.inccommand = "nosplit"
 vim.opt.completeopt = "menuone,noselect"
---vim.o.clipboard = 'unnamedplus'
+vim.o.clipboard = 'unnamed'
 vim.opt.history = 100
 vim.opt.startofline = false
 vim.opt.expandtab = true -- Use spaces instead of tabs
@@ -32,6 +33,14 @@ vim.opt.formatoptions:remove('o');
 vim.opt.shell = "/usr/bin/bash"
 vim.opt.cmdheight = 1
 vim.opt.shada = "!,'300,<50,@100,s10,h"
+
+if fn.executable "ugrep" == 1 then
+  o.grepprg = "ugrep -RInkju. --ignore-files --tabs=1"
+  o.grepformat = { "%f:%l:%c:%m", "%f+%l+%c+%m", [[%-G%f\|%l\|%c\|%m]] }
+elseif fn.executable "rg" == 1 then
+  o.grepprg = "rg --vimgrep --hidden"
+  o.grepformat = { "%f:%l:%c:%m", "%f:%l:%m" }
+end
 -- Use filetype.lua instead
 vim.opt.laststatus = 0
 vim.opt.swapfile = false
