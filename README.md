@@ -1,3 +1,3 @@
 # mydots
-my garuda linux dotfiles
+my arco linux dotfiles
 
