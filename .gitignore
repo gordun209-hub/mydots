@@ -1,5 +1,5 @@
 ./tmux/plugins
-./awesome_backup 
+./awesome_backup/*
 ./leftwm_backup 
 ./polybarbackup 
 
