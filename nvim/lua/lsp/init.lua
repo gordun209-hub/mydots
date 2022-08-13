@@ -43,7 +43,11 @@ lspconfig.sumneko_lua.setup {
   settings = require('lsp.settings.sumneko-lua').settings,
   capabilities = capabilities
 }
-
+lspconfig.clojure_lsp.setup {
+  handlers = handlers,
+  on_attach = on_attach,
+  capabilities = capabilities
+}
 -- lspconfig.html.setup {
 --   capabilities = capabilities,
 --   handlers = handlers,
@@ -89,6 +93,7 @@ lspconfig.yamlls.setup {
   on_attach = on_attach,
   handlers = handlers
 }
+
 -- lspconfig.jsonls.setup({
 --   capabilities = capabilities,
 --   on_attach = function(client)

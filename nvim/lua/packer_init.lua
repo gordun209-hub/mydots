@@ -49,7 +49,6 @@ return packer.startup(function(use)
     config = function() require 'plugins.treesitter'
     end,
   }
-
   use { 'windwp/nvim-ts-autotag', after = "nvim-treesitter" }
   use { 'p00f/nvim-ts-rainbow', after = "nvim-treesitter" } -- rainbow pairs
   use { 'JoosepAlviste/nvim-ts-context-commentstring', after = "nvim-treesitter" } -- for commenting
@@ -86,7 +85,7 @@ return packer.startup(function(use)
   --
   -- use 'fenetikm/falcon'
   --use 'sainnhe/sonokai'
-   --use { 'folke/tokyonight.nvim', config = function() require('colorschemes.tokyonight') end }
+  --use { 'folke/tokyonight.nvim', config = function() require('colorschemes.tokyonight') end }
   -- use 'bluz71/vim-nightfly-guicolors'
   -- use { "rebelot/kanagawa.nvim", config = function() require('colorschemes.kanagawa') end }
   -- -- use { "Tsuzat/NeoSolarized.nvim", config = function() require('colorschemes.solarized') end }
@@ -95,7 +94,7 @@ return packer.startup(function(use)
   --   config = function()
   --     require("colorschemes.nightfox")
   --   end,
-  --run = ':lua require("nightfox").compile()',
+  -- run = ':lua require("nightfox").compile()',
   -- }
   -- Telescope
   use {
@@ -211,7 +210,7 @@ return packer.startup(function(use)
     end,
   })
   -- tree trying neotree
-  use { 'is0n/fm-nvim', cmd = {"Joshuto","Lf", 'Fzf', 'Nnn', 'Lazygit' },
+  use { 'is0n/fm-nvim', cmd = { "Joshuto", "Lf", 'Fzf', 'Nnn', 'Lazygit' },
     config = function() require('plugins.fm')
     end }
   -- tmux navigation

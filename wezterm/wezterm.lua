@@ -1,9 +1,8 @@
 local wezterm = require 'wezterm'
 return {
-  font = wezterm.font('JetBrains Mono', { weight = 'Bold', italic = true }),
-  default_prog = { '/usr/bin/zsh', '-l' },
-  enable_tab_bar=false,
-  window_background_opacity = 0.87,
+  font = wezterm.font('MonoLisa', { weight = 'Bold', italic = true }),
+  default_prog = { '/usr/bin/fish', '-l' },
+  enable_tab_bar=true,
   force_reverse_video_cursor = true,
   colors = {
     foreground = "#dcd7ba",

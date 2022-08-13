@@ -265,7 +265,7 @@ alias ltu="leftwm-theme uninstall"
 alias lta="leftwm-theme apply"
 alias ltupd="leftwm-theme update"
 alias ltupg="leftwm-theme upgrade"
-alias ls="lf"
+alias ls="joshuto"
 alias lg="lazygit"
 
 #arcolinux applications

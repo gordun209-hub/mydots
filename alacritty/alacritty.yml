@@ -26,16 +26,16 @@ window:
 
 font:
   normal:
-    family: JetBrainsMono Nerd Font
+    family: MonoLisa
 
   bold:
-    family: JetBrainsMono Nerd Font
+    family: MonoLisa
 
   italic:
-    family: JetBrainsMono Nerd Font
+    family: MonoLisa
 
   bold_italic:
-    family: JetBrainsMono Nerd Font
+    family: MonoLisa
 
   # Point size
   size: 16.0

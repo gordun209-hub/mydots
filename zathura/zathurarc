@@ -2,7 +2,7 @@
 # Layout
 #
 
-monospace normal 15
+monospace bold 25
 map D set "first-page-column 1:1"
 map <C-d> set "first-page-column 1:2"
 tabbed -c zathura -e
