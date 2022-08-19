@@ -8,7 +8,7 @@ fi
 
 eval "$(fnm env --use-on-cd)"
 # eval "$(starship init zsh)"
-export DOTFILES="$HOME/dotfiles"
+export DOTFILES="$HOME/dots"
 source $DOTFILES/zsh/aliases.zsh
 source $DOTFILES/zsh/env.zsh
 source $DOTFILES/zsh/paths.zsh
@@ -62,3 +62,6 @@ zinit wait lucid for \
 
 # To customize prompt, run `p10k configure` or edit ~/dotfiles/zsh/.p10k.zsh.
 [[ ! -f ~/dotfiles/zsh/.p10k.zsh ]] || source ~/dotfiles/zsh/.p10k.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
+[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh

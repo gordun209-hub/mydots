@@ -1,10 +1,9 @@
 ---
-env:
+env : 
   TERM: alacritty
-
 window:
   opacity: 0.80
-  dynamic_title: true
+  dynamic_title: false
   dimensions:
     columns: 0
     lines: 0
@@ -24,27 +23,28 @@ window:
   history: 50000
   multiplier: 3
 
+
 font:
   normal:
     family: MonoLisa
 
   bold:
-    family: MonoLisa
+    family: DankMono
 
   italic:
-    family: MonoLisa
+    family: DankMono
 
   bold_italic:
-    family: MonoLisa
+    family: DankMono
 
   # Point size
-  size: 16.0
+  size: 12.0
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
   # spacing.
   offset:
     x: 0
-    y: 0
+    y: 2
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the
@@ -60,9 +60,8 @@ font:
 shell:
   program: /usr/bin/fish
   args:
-    # - -l
+     - -l
     # - -c
-    - --login
 
 color_schemes:
 

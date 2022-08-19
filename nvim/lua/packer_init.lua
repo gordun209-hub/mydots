@@ -1,6 +1,4 @@
 local fn = vim.fn
-local conf = require("plugins.telescope")
--- Automatically install packer
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
   PACKER_BOOTSTRAP = fn.system({
@@ -99,14 +97,11 @@ return packer.startup(function(use)
   -- Telescope
   use {
     "nvim-telescope/telescope.nvim",
-    cmd = 'Telescope',
-    config = conf.telescope,
+    config =function() require('plugins.telescope')end ,
     requires = {
-      { 'nvim-lua/popup.nvim', opt = true },
-      { 'nvim-lua/plenary.nvim', opt = true },
+      { 'nvim-lua/popup.nvim' },
+      { 'nvim-lua/plenary.nvim' },
       { "nvim-telescope/telescope-project.nvim", opt = true },
-      --{'cljoly/telescope-repo.nvim',opt=true},
-      { 'nvim-telescope/telescope-fzy-native.nvim', opt = true },
       { "nvim-telescope/telescope-file-browser.nvim", opt = true },
     },
   }

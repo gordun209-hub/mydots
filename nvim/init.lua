@@ -8,7 +8,7 @@ vim.g.maplocalleader = ' '
 require('packer_init')
 require('options')
 require('keymaps')
-require('cmds')
+--require('cmds')
 local disabled_built_ins = {
   "2html_plugin",
   "bugreport",

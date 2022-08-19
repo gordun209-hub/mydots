@@ -98,6 +98,7 @@ neofetch
 #sysinfo-retro
 #cpufetch
 #colorscript random
+
 fundle plugin 'pure-fish/pure'
 #fundle plugin 'IlanCosman/tide'
 fundle plugin 'andreiborisov/sponge'

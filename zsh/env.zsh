@@ -3,7 +3,7 @@
 export BOOKMARKS="$HOME/.cache/bookmarks"
 export TODOS="$HOME/.cache/todos"
 export CURSOR_TYPE="ibeam"
-export DOTFILES="$HOME/dotfiles"
+export DOTFILES="$HOME/dots"
 export DEBUG_MODE=false
 export CURRENT_SHELL=zsh
 export BROWSER=firefox

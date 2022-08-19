@@ -1,6 +1,6 @@
 local wezterm = require 'wezterm'
 return {
-  font = wezterm.font('MonoLisa', { weight = 'Bold', italic = true }),
+  font = wezterm.font('MonoLisa' ),
   default_prog = { '/usr/bin/fish', '-l' },
   enable_tab_bar=true,
   force_reverse_video_cursor = true,
