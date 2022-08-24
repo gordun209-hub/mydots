@@ -1,5 +1,4 @@
-#!/bin/bash
-
+#!/usr/bin/sh
 if [[ -f $(which nvim) ]]; then
   alias vi="nvim"
 else
@@ -40,17 +39,17 @@ alias yw="yarn workspace"
 #IMPROVE DEFAULTS
 alias cat="bat"
 alias sl="exa --icons --sort type -a"
-alias ls="joshuto"
+alias ls="lf"
 alias ll="exa --icons --long --sort type -a"
 alias l="exa --icons --long --sort type -a"
 
 #CONFIG FILES
-alias zshrc="nvim ~/dotfiles/zsh/.zshrc"
-alias zshrcs="source ~/dotfiles/zsh/.zshrc"
-alias vimrc="nvim ~/dotfiles/nvim/init.lua"
-alias vimrcs="source ~/dotfiles/nvim/init.lua"
-alias tmuxrc="nvim ~/dotfiles/tmux/tmux.conf"
-alias tmuxrcs="tmux source-file ~/dotfiles/tmux/tmux.conf"
+alias zshrc="nvim ~/dots/zsh/.zshrc"
+alias zshrcs="source ~/dots/zsh/.zshrc"
+alias vimrc="nvim ~/dots/nvim/init.lua"
+alias vimrcs="source ~/dots/nvim/init.lua"
+alias tmuxrc="nvim ~/dots/tmux/tmux.conf"
+alias tmuxrcs="tmux source-file ~/dots/tmux/tmux.conf"
 alias tree="exa --icons --git -a --tree -s type -I '.git|node_modules|bower_components'"
  ## Useful aliases
 alias grubup="sudo update-grub"
@@ -87,7 +86,6 @@ alias upd="/usr/bin/update"
 
 ### ALIASES ###
 
-#list
 
 #fix obvious typo's
 alias cd..='cd ..'
@@ -99,6 +97,10 @@ alias updqte='sudo pacman -Syyu'
 alias upqll='paru -Syu --noconfirm'
 alias upal='paru -Syu --noconfirm'
 
+## Colorize the grep command output for ease of use (good for log files)##
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
 
 #readable output
 alias df='df -h'
@@ -157,6 +159,11 @@ alias update-fc='sudo fc-cache -fv'
 
 #backup contents of /etc/skel to hidden backup folder in home/user
 alias bupskel='cp -Rf /etc/skel ~/.skel-backup-$(date +%Y.%m.%d-%H.%M.%S)'
+
+#copy shell configs
+alias cb='cp /etc/skel/.bashrc ~/.bashrc && echo "Copied."'
+alias cz='cp /etc/skel/.zshrc ~/.zshrc && exec zsh'
+alias cf='cp /etc/skel/.config/fish/config.fish ~/.config/fish/config.fish && echo "Copied."'
 
 #switch between bash and zsh
 alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
@@ -240,7 +247,8 @@ alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
 #clear
 alias clean="clear; seq 1 $(tput cols) | sort -R | sparklines | lolcat"
 
-
+#search content with ripgrep
+alias rg="rg --sort path"
 
 #get the error messages from journalctl
 alias jctl="journalctl -p 3 -xb"
@@ -263,6 +271,9 @@ alias nsamba="sudo $EDITOR /etc/samba/smb.conf"
 alias ngnupgconf="sudo $EDITOR /etc/pacman.d/gnupg/gpg.conf"
 alias nhosts="sudo $EDITOR /etc/hosts"
 alias nhostname="sudo $EDITOR /etc/hostname"
+alias nb="$EDITOR ~/.bashrc"
+alias nz="$EDITOR ~/.zshrc"
+alias nf="$EDITOR ~/.config/fish/config.fish"
 alias nneofetch="$EDITOR ~/.config/neofetch/config.conf"
 
 #reading logs with bat

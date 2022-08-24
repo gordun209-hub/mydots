@@ -1,6 +1,4 @@
 --vim.g.loaded_clipboard_provider=0
---
-
 require 'impatient'
 vim.opt.termguicolors = true
 vim.g.mapleader = ' '

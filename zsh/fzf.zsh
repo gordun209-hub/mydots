@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/sh
 
 export FD="fd --hidden --follow --strip-cwd-prefix"
 

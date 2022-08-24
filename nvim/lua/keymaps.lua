@@ -77,7 +77,6 @@ end, { silent = true })
 -- show hover doc and press twice will jumpto hover window
 vim.keymap.set("n", "K", require("lspsaga.hover").render_hover_doc, opts)
 -- show signature help
-vim.keymap.set("n", "L", require("lspsaga.signaturehelp").signature_help, { silent = true })
 -- rename
 vim.keymap.set("n", "gr", require("lspsaga.rename").lsp_rename, { silent = true })
 -- preview definition
