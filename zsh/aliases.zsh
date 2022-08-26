@@ -39,7 +39,7 @@ alias yw="yarn workspace"
 #IMPROVE DEFAULTS
 alias cat="bat"
 alias sl="exa --icons --sort type -a"
-alias ls="lf"
+alias ls="joshuto"
 alias ll="exa --icons --long --sort type -a"
 alias l="exa --icons --long --sort type -a"
 

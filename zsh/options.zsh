@@ -2,7 +2,7 @@
 
 
 # Tab completion moves to end of word.
-#setopt ALWAYS_TO_END
+setopt ALWAYS_TO_END
 # # Zstyle.
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*:matches' group 'yes'
@@ -23,7 +23,7 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))' zstyle ':completion:*' rehash true
 
-# History.
+
 HISTFILE="${ZDOTDIR:-$HOME}/.zhistory"
 HISTSIZE=100000
 SAVEHIST=5000

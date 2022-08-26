@@ -28,7 +28,6 @@ source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
-##zinit ice depth=1; zinit light romkatv/powerlevel10k
 zinit wait lucid for \
  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
     zdharma-continuum/fast-syntax-highlighting \
@@ -38,6 +37,11 @@ zinit wait lucid for \
     zsh-users/zsh-autosuggestions
 
 
+if [[ $EUID -ne 0 ]]; then
+#     PROMPT="%B%1F[%f%3F%n%f%2F@%f%6F%m%f %4F%1~%f%5F\$(git_info)%f%1F]%f%7F$%f %b"
+    PROMPT="%B%1F[%f%3F%n%f%2F@%f%6F%m%f %4F%1~%f%1F]%f%7F$%f %b"
+else
+    PROMPT="%B%3F[%n@%m %1~]# %f%b"
+fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-eval "$(starship init zsh)"
 

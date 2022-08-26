@@ -29,36 +29,9 @@ M.setup = function()
   }
 end
 
-local function lsp_highlight_document(client, bufnr)
-  if client.server_capabilities.documentHighlightProvider then
-    vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
-    vim.api.nvim_create_autocmd("CursorHold", {
-      callback = function()
-        vim.lsp.buf.document_highlight()
-      end,
-      buffer = bufnr,
-    })
-    vim.api.nvim_create_autocmd("CursorMoved", {
-      callback = function()
-        vim.lsp.buf.clear_references()
-      end,
-      buffer = bufnr,
-    })
-  end
-end
 
--- local function lsp_highlight_document(client)
--- if client.server_capabilities.document_highlight then
--- local status_ok, illuminate = pcall(require, "illuminate")
--- if not status_ok then
--- return
--- end
--- illuminate.on_attach(client)
--- end
--- end
 
 M.on_attach = function(client, bufnr)
-  lsp_highlight_document(client)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

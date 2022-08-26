@@ -54,6 +54,7 @@ return packer.startup(function(use)
         use { 'windwp/nvim-autopairs', event = "InsertCharPre", after = "nvim-cmp",
                 config = function() require('plugins.autopairs') end }
         -- surround text
+        use {"RRethy/vim-illuminate", config = function() require('plugins.illuminate') end }
         use {
                 "kylechui/nvim-surround",
                 config = function()
