@@ -27,6 +27,7 @@ vim.opt.showmode = false
 vim.opt.lazyredraw = true
 vim.opt.emoji = false -- turn off as they are treated as double width characters
 vim.opt.shortmess:append('c');
+vim.opt.showtabline=2
 vim.opt.formatoptions:remove('c');
 vim.opt.formatoptions:remove('r');
 vim.opt.formatoptions:remove('o');
@@ -41,7 +42,7 @@ vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 vim.opt.foldlevel = 1000
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-vim.opt.laststatus = 0
+vim.opt.laststatus = 3
 vim.opt.showbreak = '↳  '
 vim.opt.listchars = 'tab:»·,nbsp:+,trail:·,extends:→,precedes:←'
 --vim.opt.pumblend = 10

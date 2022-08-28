@@ -163,7 +163,7 @@ return packer.startup(function(use)
   use { 'L3MON4D3/LuaSnip', requires = { { 'rafamadriz/friendly-snippets', after = { "nvim-cmp" } },
     { "saadparwaiz1/cmp_luasnip", after = { "nvim-cmp" } }
   }, event = "InsertEnter" }
-	use("andersevenrud/cmp-tmux")
+  use("andersevenrud/cmp-tmux")
 
   --use "b0o/schemastore.nvim"
   -- for prime
@@ -181,12 +181,12 @@ return packer.startup(function(use)
     end,
     cmd = { "Copilot" },
   })
-
-use {
-  'nvim-lualine/lualine.nvim',
-    config=function() require('plugins.lualine')end,
-  requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-}
+  use {"tamton-aquib/staline.nvim", config = function() require("plugins.staline") end }
+  -- use {
+  --   'nvim-lualine/lualine.nvim',
+  --   config = function() require('plugins.lualine') end,
+  --   requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  -- }
   -- color the colors like #33214 that looks orange
   use {
     "norcalli/nvim-colorizer.lua",
@@ -226,7 +226,6 @@ use {
       '<C-l>',
     },
     config = function() require('plugins.tmux') end, }
-  -- oyun
 
 
 
