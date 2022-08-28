@@ -12,7 +12,7 @@ source $HOME/.config/lf/icons
 source ~/.fzf/shell/completion.zsh
 source ~/.fzf/shell/key-bindings.zsh
 bindkey -v
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=180'
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=6'
 [ ! -x /usr/bin/yay ] && [ -x /usr/bin/paru ] && alias yay='paru'
 
 
@@ -44,4 +44,3 @@ else
     PROMPT="%B%3F[%n@%m %1~]# %f%b"
 fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-

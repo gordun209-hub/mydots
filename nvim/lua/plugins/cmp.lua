@@ -6,7 +6,7 @@ local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
   return
 end
-
+vim.opt.pumheight = 15
 require("luasnip/loaders/from_vscode").lazy_load()
 
 local check_backspace = function()
@@ -14,6 +14,17 @@ local check_backspace = function()
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 end
 
+
+local buffer_option = {
+  -- Complete from all visible buffers (splits)
+  get_bufnrs = function()
+    local bufs = {}
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+      bufs[vim.api.nvim_win_get_buf(win)] = true
+    end
+    return vim.tbl_keys(bufs)
+  end
+}
 local icons = {
   Text = "",
   Method = "",
@@ -56,20 +67,29 @@ cmp.setup {
   view = {
     entries = "custom",
   },
+
+
+  window = {
+    completion = cmp.config.window.bordered({
+      winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder"
+    }),
+    documentation = cmp.config.window.bordered({
+      winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder"
+    }),
+  },
   mapping = cmp.mapping.preset.insert {
     ["<C-k>"] = cmp.mapping.select_prev_item(),
     ["<C-j>"] = cmp.mapping.select_next_item(),
     ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-    -- ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
     ["<C-e>"] = cmp.mapping {
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
     },
     -- Accept currently selected item. If none selected, `select` first item.
     -- Set `select` to `false` to only confirm explicitly selected items.
-    ["<CR>"] = cmp.mapping.confirm { select = true },
+    ["<CR>"] = cmp.mapping.confirm { select = true, behavior = cmp.ConfirmBehavior.Replace },
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -101,54 +121,38 @@ cmp.setup {
   },
   formatting = {
     fields = { "kind", "abbr", "menu" },
-    format = function(_, vim_item)
-      vim_item.menu = vim_item.kind
-      vim_item.kind = kinds[vim_item.kind]
+    format = function(entry, vim_item)
+      vim_item.abbr = string.sub(vim_item.abbr, 1, 30)
+
+      vim_item.menu = ({
+        buffer = "[Buf]",
+        nvim_lsp = "[LSP]",
+        luasnip = "[LuaSnip]",
+        nvim_lua = "[Lua]",
+        path = "[Path]",
+      })[entry.source.name]
+      vim_item.kind = string.format('%s %s', kinds[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+
 
       return vim_item
     end,
   },
   sources = {
-    { name = 'nvim_lsp',max_item_count=10 },
-    { name = 'npm', max_item_count = 10 },
-    { name = 'luasnip',max_item_count=10 },
-    { name = 'buffer', max_item_count = 15, option = {
-      get_bufnrs = function() return vim.api.nvim_list_bufs() end,
-    } },
-    { name = 'nvim_lua', max_item_count = 10 }, -- nicer code action signs
-    { name = 'path', max_item_count = 10, },
+    { name = 'nvim_lsp', priority = 9 },
+    { name = 'path', priority = 4 },
+    { name = 'nvim_lua', priority = 5 },
+    { name = 'path' },
+    { name = 'buffer', priority = 7, keyword_length = 5, option = buffer_option, max_item_count = 8 },
   },
 
-  sorting = {
-    comparators = {
-      -- cmp.config.compare.exact,
-      -- cmp.config.compare.locality,
-      -- cmp.config.compare.recently_used,
-      cmp.config.compare.score,
-      cmp.config.compare.offset,
-      -- cmp.config.compare.sort_text,
-      -- cmp.config.compare.order,
-    },
-  },
 
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
     select = false,
   },
-  window = {
-    documentation = {
-      border = "rounded",
-      winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
-    },
-    completion = {
-      completeopt = "menuone,noinsert,noselect",
-      keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
-      keyword_length = 1,
-    },
-  },
 
   experimental = {
-    ghost_text = false, native_menu = false
+    ghost_text = false
   },
 }
 
@@ -167,4 +171,5 @@ cmp.setup.cmdline(':', {
     { name = 'cmdline' }
   })
 })
+
 

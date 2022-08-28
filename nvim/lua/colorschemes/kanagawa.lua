@@ -3,6 +3,7 @@ local ok, kanagawa = pcall(require, "kanagawa")
 if not ok then
   return
 end
+
 -- Default options:
 kanagawa.setup({
   undercurl = true, -- enable undercurls
@@ -16,7 +17,7 @@ kanagawa.setup({
   specialException = true, -- special highlight for exception handling keywords
   transparent = true, -- do not set background color
   dimInactive = false, -- dim inactive window `:h hl-NormalNC`
-  globalStatus = true, -- adjust window separators highlight for laststatus=3
+  globalStatus = false, -- adjust window separators highlight for laststatus=3
   terminalColors = true, -- define vim.g.terminal_color_{0,17}
   colors = {},
   overrides = {},
@@ -24,6 +25,6 @@ kanagawa.setup({
 
 
 -- setup must be called before loading
---vim.cmd("colorscheme kanagawa")
+vim.cmd("colorscheme kanagawa")
 
 

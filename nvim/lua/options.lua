@@ -11,9 +11,9 @@ vim.opt.completeopt = "menuone,noselect"
 vim.o.clipboard = 'unnamed'
 vim.opt.history = 100
 vim.opt.expandtab = true -- Use spaces instead of tabs vim.opt.shiftwidth = 2 -- Size of an indent
+vim.opt.shiftwidth = 2
 vim.opt.smartindent = true -- Insert indents automatically
-vim.opt.tabstop = 2 -- Number of spaces tabs count for
-vim.opt.softtabstop = -1
+vim.opt.tabstop = 4 -- Number of spaces tabs count for
 vim.opt.errorbells = false
 --vim.opt.nu = true -- Print line number
 vim.opt.relativenumber = true -- Relative line numbers
@@ -21,7 +21,7 @@ vim.opt.signcolumn = 'yes' -- 'auto:1-2'
 vim.opt.cursorline = false
 vim.opt.wrap = false
 vim.opt.linebreak = true
-vim.opt.colorcolumn ='100'
+vim.opt.colorcolumn = '100'
 vim.opt.whichwrap = 'h,l,<,>,[,],~'
 vim.opt.showmode = false
 vim.opt.lazyredraw = true
@@ -37,15 +37,15 @@ vim.opt.formatoptions:remove('o');
 vim.opt.textwidth = 80
 vim.o.foldcolumn = '1'
 vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-vim.o.foldlevelstart = 99
-vim.o.foldenable = true
--- Use filetype.lua instead
-vim.opt.laststatus = 3
-vim.opt.display='lastline'
+-- Use
+vim.opt.foldlevel = 1000
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.laststatus = 0
 vim.opt.showbreak = '↳  '
 vim.opt.listchars = 'tab:»·,nbsp:+,trail:·,extends:→,precedes:←'
 --vim.opt.pumblend = 10
+vim.opt.pumheight = 10
 --vim.opt.winblend = 10
 vim.opt.swapfile = false
 vim.opt.backup = false
@@ -57,12 +57,13 @@ vim.opt.scrolloff = 8 -- Lines of context
 vim.opt.hidden = true -- Enable modified buffers in background
 vim.opt.wildmenu = true
 vim.opt.wildignore = {
-  'node_modules',
-  '.git,.svn',
+        'node_modules',
+        '.git,.svn',
 }
 
 --vim.opt.ttimeout = true
 -- vim.opt.timeoutlen = 500
 -- vim.opt.ttimeoutlen = 10
 vim.opt.mouse = 'a'
---vim.g.netrw_banner = 0
+vim.cmd [[set nocompatible]]
+vim.cmd [[set path+=** ]] -- Searches current directory recursively.

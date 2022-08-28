@@ -11,3 +11,15 @@ autocmd('BufEnter', {
     command = 'set fo-=c fo-=r fo-=o',
 })
 
+
+
+-- Highlight Yanked Text
+vim.api.nvim_create_augroup("Highlight", { clear = true })
+autocmd("TextYankPost", {
+  command = "silent! lua vim.highlight.on_yank({higroup='IncSearch', timeout=1500, on_visual = true})",
+  group = "Highlight",
+  desc = "Highlight yanked text",
+})
+
+-- Use relative & absolute line numbers in 'n' & 'i' modes respectively
+vim.cmd [[autocmd filetype c nnoremap <F8> :!gcc -lm % -o %< && ./%< && rm %<<CR>]]
