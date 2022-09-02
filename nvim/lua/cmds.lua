@@ -16,7 +16,7 @@ autocmd('BufEnter', {
 -- Highlight Yanked Text
 vim.api.nvim_create_augroup("Highlight", { clear = true })
 autocmd("TextYankPost", {
-  command = "silent! lua vim.highlight.on_yank({higroup='IncSearch', timeout=1500, on_visual = true})",
+  command = "silent! lua vim.highlight.on_yank({higroup='IncSearch', timeout=500, on_visual = true})",
   group = "Highlight",
   desc = "Highlight yanked text",
 })

@@ -10,7 +10,6 @@ require 'nvim-treesitter.configs'.setup {
     enable = true,
   },
 
-
   indent = {
     enable = true
   },
@@ -24,6 +23,5 @@ require 'nvim-treesitter.configs'.setup {
     enable_autocmd = false,
   },
   autotag = { enable = true },
-
 
 }

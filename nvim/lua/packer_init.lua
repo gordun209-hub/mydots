@@ -10,7 +10,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
   print(
     "Installing packer, plugins and treesitter parsers. After the installation is finished close and open Neovim."
   )
-  -- vim.cmd([[packadd packer.nvim]])
+  vim.cmd([[packadd packer.nvim]])
 end
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
 vim.api.nvim_create_autocmd('BufWritePost', {
@@ -26,10 +26,6 @@ if not status_ok then
 end
 
 packer.init({
-  profile = {
-    enalbe = true,
-  }
-  ,
   display = {
     open_fn = function()
       return require("packer.util").float({ border = "single" })
@@ -63,39 +59,19 @@ return packer.startup(function(use)
     event = { "InsertEnter" },
     keys = { 'c' }
   }
-
+  use { 'onsails/lspkind-nvim'}
   use {
     "simrat39/symbols-outline.nvim",
     cmd = "SymbolsOutline",
   }
   use {
     "folke/trouble.nvim",
-    --requires = "kyazdani42/nvim-web-devicons",
     config = function()
       require("trouble").setup()
     end,
     cmd = "Trouble",
   }
-  -- THEME
-  -- use { 'shaunsingh/oxocarbon.nvim', run = './install.sh' }
-  -- use { "sainnhe/gruvbox-material", config = function() require('colorschemes.gruvbox_material') end }
-  -- use {'luisiacc/gruvbox-baby' ,config=function()require('colorschemes.gruvbox')end}
-  -- use { "catppuccin/nvim", run = ":CatppuccinCompile", as = "catppuccin",
-  --         config = function() require('colorschemes.catppuccin') end }
-  --
-  -- use 'fenetikm/falcon'
-  --use 'sainnhe/sonokai'
   use { 'folke/tokyonight.nvim', config = function() require('colorschemes.tokyonight') end }
-  -- use 'bluz71/vim-nightfly-guicolors'
-  -- use { "rebelot/kanagawa.nvim", config = function() require('colorschemes.kanagawa') end }
-  -- -- use { "Tsuzat/NeoSolarized.nvim", config = function() require('colorschemes.solarized') end }
-  -- use {
-  --   "EdenEast/nightfox.nvim",
-  --   config = function()
-  --     require("colorschemes.nightfox")
-  --   end,
-  -- run = ':lua require("nightfox").compile()',
-  -- }
   -- Telescope
   use {
     "nvim-telescope/telescope.nvim",
@@ -134,7 +110,6 @@ return packer.startup(function(use)
   -- better lsp actions
   use({
     "glepnir/lspsaga.nvim",
-    --keys = { "gh", "<leader>ca", "K", "L", "gr", "gd", "<leader>cd", "[d", "]d", "[G", },
     branch = "main",
     config = function() require('plugins.lspsaga')
     end,
@@ -155,23 +130,15 @@ return packer.startup(function(use)
   use { 'gpanders/nvim-parinfer', ft = { 'scheme', 'racket' } }
   -- AUTOCOMPLETE
   use { 'hrsh7th/nvim-cmp', event = 'InsertEnter', config = function() require('plugins.cmp') end }
-  use { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' }
-  use { 'hrsh7th/cmp-nvim-lsp', after = 'cmp-nvim-lua' }
+  --use { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' }
+  use { 'hrsh7th/cmp-nvim-lsp' }
   use { 'hrsh7th/cmp-buffer', after = 'cmp-nvim-lsp' }
   use { 'hrsh7th/cmp-path', after = 'cmp-buffer' }
   use { 'hrsh7th/cmp-cmdline', after = 'cmp-path' }
-  use { 'L3MON4D3/LuaSnip', requires = { { 'rafamadriz/friendly-snippets', after = { "nvim-cmp" } },
-    { "saadparwaiz1/cmp_luasnip", after = { "nvim-cmp" } }
-  }, event = "InsertEnter" }
-  use("andersevenrud/cmp-tmux")
+  use { 'L3MON4D3/LuaSnip' }
 
-  --use "b0o/schemastore.nvim"
-  -- for prime
-  -- use({
-  --   "theprimeagen/harpoon",
-  --   requires = { "nvim-lua/plenary.nvim" },
-  --   config = function() require('plugins.configs.harpoon') end
-  -- })
+
+  use "b0o/schemastore.nvim"
 
   -- autosuggestion ai
   use({
@@ -181,12 +148,7 @@ return packer.startup(function(use)
     end,
     cmd = { "Copilot" },
   })
-  use {"tamton-aquib/staline.nvim", config = function() require("plugins.staline") end }
-  -- use {
-  --   'nvim-lualine/lualine.nvim',
-  --   config = function() require('plugins.lualine') end,
-  --   requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-  -- }
+  use { "tamton-aquib/staline.nvim", config = function() require("plugins.staline") end }
   -- color the colors like #33214 that looks orange
   use {
     "norcalli/nvim-colorizer.lua",
@@ -265,3 +227,4 @@ return packer.startup(function(use)
     require('packer').sync()
   end
 end)
+

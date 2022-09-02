@@ -1,4 +1,3 @@
---vim.g.loaded_clipboard_provider=0
 require 'impatient'
 vim.opt.termguicolors = true
 vim.g.mapleader = ' '
@@ -38,4 +37,5 @@ local disabled_built_ins = {
 for _, plugin in pairs(disabled_built_ins) do
   vim.g["loaded_" .. plugin] = 1
 end
+
 

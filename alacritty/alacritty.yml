@@ -3,7 +3,7 @@ env:
   TERM: alacritty
 window:
   opacity: 0.80
-  dynamic_title: false
+  dynamic_title: true
   dimensions:
     columns: 0
     lines: 0

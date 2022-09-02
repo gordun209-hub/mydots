@@ -24,7 +24,7 @@ nls.setup({
                 dgn.jsonlint,
                 dgn.markdownlint,
                 fmt.mdformat,
-                dgn.yamllint,
+    fmt.yamlfmt,
                 -- fmt.raco_fmt.with({
                 --   filetypes = { 'scheme', 'racket' },
                 --   --arg = { "fsmt --widhsst 30" },
