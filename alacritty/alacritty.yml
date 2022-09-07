@@ -1,6 +1,4 @@
 ---
-env:
-  TERM: alacritty
 window:
   opacity: 0.80
   dynamic_title: true

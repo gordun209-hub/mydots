@@ -28,7 +28,11 @@ end
 --   settings = require('lsp.settings.tailwindcss').settings,
 -- }
 
-
+lspconfig.julials.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  handlers = handlers
+}
 lspconfig.eslint.setup {
   capabilities = capabilities,
   on_attach = require('lsp.settings.eslint').on_attach,
@@ -42,6 +46,11 @@ lspconfig.sumneko_lua.setup {
   handlers = handlers,
   on_attach = on_attach,
   settings = require('lsp.settings.sumneko-lua').settings,
+  capabilities = capabilities
+}
+lspconfig.svelte.setup {
+  handlers = handlers,
+  on_attach = on_attach,
   capabilities = capabilities
 }
 lspconfig.clojure_lsp.setup {
@@ -100,50 +109,29 @@ lspconfig.marksman.setup {
   handlers = handlers
 }
 
- lspconfig.jsonls.setup({
-   capabilities = capabilities,
-   on_attach = function(client)
-   end,
-   settings = {
-     json = {
-       validate = { enable = true },
-       schemas = require('schemastore').json.schemas(),
-     },
-   },
+lspconfig.jsonls.setup({
+  capabilities = capabilities,
+  on_attach = function(client)
+  end,
+  settings = {
+    json = {
+      validate = { enable = true },
+      schemas = require('schemastore').json.schemas(),
+    },
+  },
 })
 
--- lspconfig.clangd.setup {
---     capabilities = capabilities,
---     on_attach = on_attach,
--- }
--- lspconfig.purescriptls.setup {
---     capabilities = capabilities,
---     on_attach = on_attach,
--- }
--- lspconfig.rescriptls.setup {
---     capabilities = capabilities,
---     on_attach = on_attach,
--- }
--- lspconfig.hls.setup {
---     cmd = { 'haskell-language-server-wrapper', '--lsp' },
---     settings = {
---         haskell = {
---             formatter = 'fourmolu',
---         },
---     },
---     capabilities = capabilities,
---     on_attach = on_attach,
--- }
--- lspconfig.ltex.setup {
---     settings = {
---         filetypes = {
---             "markdown", "org", "norg", "plaintex", "rst", "gitcommit"
---         }
---     },
---     capabilities = capabilities,
---     on_attach = on_attach
--- }
--- lspconfig.elmls.setup {
---     capabilities = capabilities,
---     on_attach = on_attach
--- }
+lspconfig.clangd.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+lspconfig.hls.setup {
+  cmd = { 'haskell-language-server-wrapper', '--lsp' },
+  settings = {
+    haskell = {
+      formatter = 'fourmolu',
+    },
+  },
+  capabilities = capabilities,
+  on_attach = on_attach,
+}

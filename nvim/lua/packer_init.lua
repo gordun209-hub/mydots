@@ -59,7 +59,7 @@ return packer.startup(function(use)
     event = { "InsertEnter" },
     keys = { 'c' }
   }
-  use { 'onsails/lspkind-nvim'}
+  use { 'onsails/lspkind-nvim' }
   use {
     "simrat39/symbols-outline.nvim",
     cmd = "SymbolsOutline",
@@ -71,6 +71,9 @@ return packer.startup(function(use)
     end,
     cmd = "Trouble",
   }
+  -- use({
+  --   "themercorp/themer.lua", config = function() require('plugins.themer') end
+  -- })
   use { 'folke/tokyonight.nvim', config = function() require('colorschemes.tokyonight') end }
   -- Telescope
   use {
@@ -227,4 +230,3 @@ return packer.startup(function(use)
     require('packer').sync()
   end
 end)
-

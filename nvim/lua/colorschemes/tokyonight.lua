@@ -1,21 +1,35 @@
-vim.g.tokyonight_italic_comments = true
-vim.g.tokyonight_terminal_colors = true
-vim.g.tokyonight_italic_keywords = true
-vim.g.tokyonight_style = "night"
-vim.g.tokyonight_transparent = true
-vim.g.tokyonight_transparent_sidebar = true
-vim.g.tokyonight_dark_float = true
+require("tokyonight").setup({
+  -- your configuration comes here
+  -- or leave it empty to use the default settings
+  style = "night", -- The theme comes in three styles, `storm`, a darker variant `night` and `day`
+  transparent = true, -- Enable this to disable setting the background color
+  terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim                                                                                                  |
+  styles = {
+    -- Style to be applied to different syntax groups
+    -- Value is any valid attr-list value `:help attr-list`
+    comments = "italic",
+    keywords = "italic",
+    functions = "NONE",
+    variables = "NONE",
+    -- Background styles. Can be "dark", "transparent" or "normal"
+    sidebars = "transparent", -- style for sidebars, see below
+    floats = "transparent", -- style for floating windows
+  },
+  day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors                                                  |
+  hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**. |
+  dim_inactive = false, -- dims inactive windows
+  lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold                                                                                                  |
+
+  --- You can override specific color groups to use other groups or a hex color                                                                                       |
+  --- fucntion will be called with a ColorScheme table
+  on_colors = function(colors) end,
+
+  --- You can override specific highlights to use other groups or a hex color                                                                                       |
+  --- fucntion will be called with a Highlights and ColorScheme table
+  on_highlights = function(highlights, colors) end,
+})
 
 
-local present, tk_colors = pcall(require, "tokyonight.colors")
-if not present then
-  return
-end
-
-local tokyonight_colors = tk_colors.setup({})
-vim.g.tokyonight_colors = {
-  border = '#1A1B26';
-}
 
 vim.cmd [[colorscheme tokyonight]]
 
@@ -29,26 +43,5 @@ vim.api.nvim_set_hl(0, 'VertSplit', { bg = "#16161e", fg = "#16161e" });
 vim.api.nvim_set_hl(0, 'BqfPreviewBorder', { link = 'FloatBorder' })
 
 -- Completion Menu Colors
-local highlights = {
-  CmpItemAbbr            = { fg = tokyonight_colors.dark3, bg = "NONE" },
-  CmpItemKindClass       = { fg = tokyonight_colors.orange },
-  CmpItemKindConstructor = { fg = tokyonight_colors.purple },
-  CmpItemKindFolder      = { fg = tokyonight_colors.blue2 },
-  CmpItemKindFunction    = { fg = tokyonight_colors.blue },
-  CmpItemKindInterface   = { fg = tokyonight_colors.teal, bg = "NONE" },
-  CmpItemKindKeyword     = { fg = tokyonight_colors.magneta2 },
-  CmpItemKindMethod      = { fg = tokyonight_colors.red },
-  CmpItemKindReference   = { fg = tokyonight_colors.red1 },
-  CmpItemKindSnippet     = { fg = tokyonight_colors.dark3 },
-  CmpItemKindVariable    = { fg = tokyonight_colors.cyan, bg = "NONE" },
-  CmpItemKindText        = { fg = "LightGrey" },
-  CmpItemMenu            = { fg = "#C586C0", bg = "NONE" },
-  CmpItemAbbrMatch       = { fg = "#569CD6", bg = "NONE" },
-  CmpItemAbbrMatchFuzzy  = { fg = "#569CD6", bg = "NONE" },
-}
 
-vim.api.nvim_set_hl(0, "CmpBorderedWindow_FloatBorder", { fg = tokyonight_colors.blue0 })
 
-for group, hl in pairs(highlights) do
-  vim.api.nvim_set_hl(0, group, hl)
-end

@@ -7,6 +7,7 @@ export DEBUG_MODE=false
 export CURRENT_SHELL=zsh
 export BROWSER=firefox
 export PACKPATH="$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim"
+export PATH="$HOME/.cabal/bin:$PATH"
 
 # FZF
 #export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
