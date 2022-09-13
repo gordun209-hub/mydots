@@ -58,10 +58,7 @@ bspc rule -a VirtualBox Machine state=fullscreen
 #bspc rule -a Gimp state=fullscreen
 
 #Floating applications
-bspc rule -a Arandr state=floating
 #bspc rule -a Archlinux-tweak-tool.py state=floating
-bspc rule -a Arcolinux-welcome-app.py state=floating
-bspc rule -a Arcolinux-calamares-tool.py state=floating
 bspc rule -a feh state=floating
 #bspc rule -a mpv state=floating sticky=on
 #bspc rule -a Font-manager state=floating
@@ -75,7 +72,6 @@ bspc rule -a Oblogout state=floating
 #bspc rule -a Skype state=floating
 #bspc rule -a Stacer state=floating
 #bspc rule -a Xfce4-appfinder state=floating sticky=on
-bspc rule -a Xfce4-terminal state=floating
 
 #Tiled applications
 bspc rule -a Gnome-disks state=tiled

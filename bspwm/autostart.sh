@@ -14,7 +14,7 @@ function run {
 #xrandr --output HDMI2 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off
 #autorandr horizontal
 
-$HOME/.config/polybar/launch.sh &
+# $HOME/.config/polybar/launch.sh &
 
 #change your keyboard if you need it
 #setxkbmap -layout be
@@ -27,18 +27,10 @@ else
   run sxhkd -c ~/.config/bspwm/sxhkd/sxhkdrc &
 fi
 
-~/.fehbg &
-
-xsetroot -cursor_name left_ptr &
-conky -c $HOME/.config/bspwm/system-overview &
-run nm-applet &
-run pamac-tray &
-numlockx on &
-blueberry-tray &
-picom --experimental-backends &
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-/usr/lib/xfce4/notifyd/xfce4-notifyd &
-run volumeicon &
+# conky -c $HOME/.config/bspwm/system-overview &
+# /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+# /usr/lib/xfce4/notifyd/xfce4-notifyd &
+# run volumeicon &
 #nitrogen --restore &
 #run caffeine &
 #run vivaldi-stable &
