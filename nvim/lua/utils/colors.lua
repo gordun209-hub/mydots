@@ -13,4 +13,3 @@ return {
     grey_light = "#3e4452",
     grey_lighter = "#2c323c",
 }
-

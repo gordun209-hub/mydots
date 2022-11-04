@@ -1,6 +1,6 @@
 ---
 window:
-  opacity: 0.80
+  opacity: 1.0
   dynamic_title: true
   dimensions:
     columns: 0
@@ -24,16 +24,16 @@ window:
 
 font:
   normal:
-    family: MonoLisa
+    family: GoMono Nerd Font
 
   bold:
-    family: MonoLisa
+    family: GoMono Nerd Font
 
   italic:
-    family: MonoLisa
+    family: GoMono Nerd Font
 
   bold_italic:
-    family: MonoLisa
+    family: GoMono Nerd Font
 
   # Point size
   size: 16.0
@@ -66,35 +66,39 @@ shell:
 colors:
   # Default colors
   primary:
-    background: '0x1a1b26'
-    foreground: '0xc0caf5'
+    background: '0x020221'
+    foreground: '0xb4b4b9'
+
+  # Colors the cursor will use if `custom_cursor_colors` is true
+  cursor:
+    text: '0x020221'
+    cursor: '0xffe8c0'
 
   # Normal colors
   normal:
-    black:   '0x15161E'
-    red:     '0xf7768e'
-    green:   '0x9ece6a'
-    yellow:  '0xe0af68'
-    blue:    '0x7aa2f7'
-    magenta: '0xbb9af7'
-    cyan:    '0x7dcfff'
-    white:   '0xa9b1d6'
+    black:   '0x000004'
+    red:     '0xff3600'
+    green:   '0x859933'
+    yellow:  '0xffc552'
+    blue:    '0x635196'
+    magenta: '0xff761a'
+    cyan:    '0x34bfa4'
+    white:   '0xb4b4b9'
 
   # Bright colors
   bright:
-    black:   '0x414868'
-    red:     '0xf7768e'
-    green:   '0x9ece6a'
-    yellow:  '0xe0af68'
-    blue:    '0x7aa2f7'
-    magenta: '0xbb9af7'
-    cyan:    '0x7dcfff'
-    white:   '0xc0caf5'
+    black:   '0x020221'
+    red:     '0xff8e78'
+    green:   '0xb2bc55'
+    yellow:  '0xffd392'
+    blue:    '0x99a4bc'
+    magenta: '0xffb07b'
+    cyan:    '0x8bccbf'
+    white:   '0xf8f8ff'
 
-  indexed_colors:
-    - { index: 16, color: '0xff9e64' }
-    - { index: 17, color: '0xdb4b4b' }
-    
+# Use custom cursor colors. If true, display the cursor in the cursor.foreground
+# and cursor.background colors, otherwise invert the colors of the cursor.
+custom_cursor_colors: true    
   
     # Use custom cursor colors. If true, display the cursor in the cursor.foreground
 # and cursor.background colors, otherwise invert the colors of the cursor.
