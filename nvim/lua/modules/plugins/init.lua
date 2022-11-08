@@ -1,0 +1,15 @@
+require('modules.plugins.packer')
+require('modules.plugins.cmp')
+require('modules.plugins.notify')
+require('modules.plugins.surround')
+require('modules.plugins.telescope')
+require('modules.plugins.treesitter')
+require('modules.plugins.illuminate')
+require('modules.plugins.treesitter')
+require('modules.plugins.gitsigns')
+require('modules.plugins.colorizer')
+require('modules.plugins.go')
+require('modules.plugins.tmux')
+require('modules.plugins.diaglist')
+
+
