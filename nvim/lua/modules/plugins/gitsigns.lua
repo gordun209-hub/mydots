@@ -67,7 +67,7 @@ else
             topdelete = { hl = 'GitSignsDelete', text = '│ ' },
             changedelete = { hl = 'GitSignsChange', text = '│ ' },
         },
-        word_diff = true,
+        word_diff = false,
         on_attach = mappings(),
         preview_config = { border = 'rounded' },
     })

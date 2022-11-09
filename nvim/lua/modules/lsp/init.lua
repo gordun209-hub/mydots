@@ -1,8 +1,6 @@
--- heavily inspired by jose-elias-alvarez config
--- https://github.com/jose-elias-alvarez/dotfiles/blob/main/config/nvim/lua/lsp/init.lua
-local u = require('utils')
+
 local lsp = vim.lsp
-local border_opts = { border = 'rounded', focusable = false, scope = 'line' }
+local border_opts = { border = 'double' }
 
 -- lsp comp items
 lsp.protocol.CompletionItemKind = {
@@ -38,46 +36,44 @@ lsp.handlers['textDocument/signatureHelp'] = lsp.with(lsp.handlers.signature_hel
 lsp.handlers['textDocument/hover'] = lsp.with(lsp.handlers.hover, border_opts)
 
 
+
+local config = {
+    -- disable virtual text
+    virtual_text = false,
+    -- show signs
+    update_in_insert = false,
+    underline = true,
+    severity_sort = true,
+    float = {
+        focusable = false,
+        style = "minimal",
+        border = "rounded",
+        source = "always",
+        header = "",
+        prefix = "",
+    },
+}
+
+vim.diagnostic.config(config)
 --- on_attach
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
     -- commands
-    u.buf_command(bufnr, 'LspDiagPrev', vim.diagnostic.goto_prev)
-    u.buf_command(bufnr, 'LspDiagNext', vim.diagnostic.goto_next)
-    u.buf_command(bufnr, 'LspDiagLine', vim.diagnostic.open_float)
-    u.buf_command(bufnr, 'LspDiagQuickfix', vim.diagnostic.setqflist)
-    u.buf_command(bufnr, 'LspSignatureHelp', vim.lsp.buf.signature_help)
-    u.buf_command(bufnr, 'LspTypeDef', vim.lsp.buf.type_definition)
-    u.buf_command(bufnr, 'LspDef', vim.lsp.buf.definition)
-    u.buf_command(bufnr, 'LspRangeAct', vim.lsp.buf.code_action)
-    u.buf_command(bufnr, 'LspAct', vim.lsp.buf.code_action)
-    u.buf_command(bufnr, 'LspRename', function()
-        vim.lsp.buf.rename()
-    end)
-    if client.name == 'rust-analyzer' then
-        -- hover_with_actions has been deprecated from rust-tools settings
-        u.buf_command(bufnr, 'LspHover', ':RustHoverActions<CR>')
-    else
-        u.buf_command(bufnr, 'LspHover', vim.lsp.buf.hover)
-    end
+    local opts = { noremap = true, silent = true }
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>Telescope lsp_declarations<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gI", "<cmd>Telescope lsp_implementations<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ws", "<cmd>Telescope lsp_workspace_symbols<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>fa", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
 
-    --- bindings
-    u.buf_map(bufnr, 'n', '<leader>rn', ':LspRename<CR>')
-    u.buf_map(bufnr, 'n', 'gd', ':LspDef<CR>')
-    u.buf_map(bufnr, 'n', 'K', ':LspHover<CR>')
-    u.buf_map(bufnr, 'n', '[d', ':LspDiagPrev<CR>')
-    u.buf_map(bufnr, 'n', ']d', ':LspDiagNext<CR>')
-    u.buf_map(bufnr, 'n', 'gl', ':LspDiagLine<CR>')
-    u.buf_map(bufnr, 'n', '<leader>q', ':LspDiagQuickfix<CR>')
-    u.buf_map(bufnr, 'i', 'gs', '<cmd>LspSignatureHelp<CR>')
-    vim.keymap.set("n", "<leader>fa", "<cmd>lua vim.lsp.buf.format({async=true})<CR>")
-    --- telescope
-    u.buf_map(bufnr, 'n', '<leader>lr', ':Telescope lsp_references<CR>')
-    u.buf_map(bufnr, 'n', '<leader>gd', ':Telescope lsp_type_definitions<CR>')
-    u.buf_map(bufnr, 'n', '<leader>ca', '<cmd>LspAct<CR>')
-    u.buf_map(bufnr, 'n', '<leader>CA', '<cmd>LspRangeAct<CR>')
-
-
-    require('illuminate').on_attach(client)
 end
 
 -- capabilities

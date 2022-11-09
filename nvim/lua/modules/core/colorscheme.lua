@@ -10,7 +10,7 @@ require('material').setup({
     },
     contrast = {
         sidebars = true,
-        floating_windows = false,
+        floating_windows = true,
         cursor_line = true,
         popup_menu = false,
         filetypes = {

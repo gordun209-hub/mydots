@@ -11,8 +11,17 @@ else
         highlight = {
             enable = true,
         },
+
+        context_commentstring = {
+            enable = true,
+            enable_autocmd = false,
+        },
+        rainbow = {
+            enable = true
+        },
+        autotag = { enable = true },
         indent = {
-            enable = false,
+            enable = true,
         },
         textobjects = {
             lookahead = true,
@@ -58,3 +67,5 @@ else
         autopairs = { enable = true },
     })
 end
+
+

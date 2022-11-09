@@ -28,14 +28,6 @@ local settings = {
 local M = {}
 
 M.setup = function(on_attach, capabilities)
-    require('neodev').setup({
-        override = function(root_dir, library)
-            if root_dir:match('dotfiles') then
-                library.enabled = true
-                library.plugins = true
-            end
-        end,
-    })
 
     require('lspconfig').sumneko_lua.setup({
         on_attach = on_attach,

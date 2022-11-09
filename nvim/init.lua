@@ -1,20 +1,19 @@
 local o = vim.opt
-local fn = vim.fn
 
-local u = require('utils')
 
 -- global settings
 o.shiftwidth = 4
+o.completeopt = "menu,menuone,noselect"
 o.tabstop = 4
 o.expandtab = true
 o.smartindent = true
 o.undofile = true
-o.cursorline =false
+o.cursorline = false
 o.list = true
 o.number = true
 o.relativenumber = true
 o.wrap = false
-o.signcolumn = 'yes'
+o.signcolumn = 'yes:1'
 o.shortmess:append('cS')
 o.hidden = true
 o.ignorecase = true
@@ -30,18 +29,13 @@ o.inccommand = 'nosplit'
 o.errorbells = false
 o.swapfile = false
 o.backup = false
-o.cmdheight = 1
 o.showbreak = '↪'
 o.termguicolors = true
 o.colorcolumn = '80'
-o.pumheight = 10
-o.pumblend = 10
 o.shada = "!,'100,<50,s10,h,:1000,/1000"
 o.lazyredraw = true
 o.foldlevel = 99
 o.foldmethod = 'indent'
-o.redrawtime = 3000
-
 
 _G.global = {}
 -- diagnostics

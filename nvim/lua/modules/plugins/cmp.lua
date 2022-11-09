@@ -7,7 +7,6 @@ local cmp_autopair_ok, cmp_autopairs = pcall(require, 'nvim-autopairs.completion
 require('luasnip.loaders.from_vscode').lazy_load()
 vim.api.nvim_command('hi LuasnipChoiceNodePassive cterm=italic')
 
-vim.opt.completeopt = 'menu,menuone,noselect'
 
 if not cmp_ok then
     u.notif('Plugins :', 'Something went wrong with nvim-cmp', vim.log.levels.WARN)
@@ -76,15 +75,6 @@ else
                 end,
             },
             ['<CR>'] = cmp.mapping.confirm({ select = true }),
-            ['<Tab>'] = function(fallback)
-                if cmp.visible() then
-                    cmp.select_next_item()
-                elseif luasnip.expand_or_jumpable() then
-                    luasnip.expand_or_jump()
-                else
-                    fallback()
-                end
-            end,
             ['<S-Tab>'] = function(fallback)
                 if cmp.visible() then
                     cmp.select_prev_item()

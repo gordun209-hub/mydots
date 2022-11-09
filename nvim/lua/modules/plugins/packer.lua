@@ -1,5 +1,5 @@
 vim.cmd('packadd packer.nvim')
-local cmd = vim.api.nvim_command
+
 local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 local fn = vim.fn
 
@@ -45,8 +45,8 @@ return require('packer').startup(function(use)
             'neovim/nvim-lspconfig',
         },
     })
-    use({ "zbirenbaum/copilot.lua",
-        event = "VimEnter" })
+    use({ "zbirenbaum/copilot.lua" })
+
     -- Completion
     use({
         'hrsh7th/nvim-cmp',
@@ -64,6 +64,7 @@ return require('packer').startup(function(use)
         'L3MON4D3/luasnip',
         requires = {
             'rafamadriz/friendly-snippets',
+
         },
     })
 
@@ -90,38 +91,52 @@ return require('packer').startup(function(use)
     })
 
     --- Navigation like boss
-    use({
-        'is0n/fm-nvim'
-    })
+    use { 'is0n/fm-nvim' }
 
-    use({ 'aserowy/tmux.nvim' })
+
+    -- Commenting
+
+    use {
+        "numToStr/Comment.nvim",
+    }
+
+    use { "aserowy/tmux.nvim", }
     --- Treesitter
     use({
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
+
     })
 
     use({ 'nvim-treesitter/nvim-treesitter-textobjects' })
+    -- Treesitter utils
 
-
+    use { 'windwp/nvim-ts-autotag' }
+    use { 'p00f/nvim-ts-rainbow' }
+    use { 'JoosepAlviste/nvim-ts-context-commentstring' }
     -- Dev div tools
     use({
         'editorconfig/editorconfig-vim',
-        'b3nj5m1n/kommentary',
         'kylechui/nvim-surround',
-        'onsails/diaglist.nvim',
         'RRethy/vim-illuminate',
         'b0o/schemastore.nvim',
         'windwp/nvim-autopairs',
         'simrat39/rust-tools.nvim',
         'norcalli/nvim-colorizer.lua',
-    })
 
+    })
+    use {
+        'sindrets/diffview.nvim',
+        cmd = { 'DiffviewOpen', 'DiffviewFileHistory' },
+        config = [[require('diffview').setup()]]
+    }
     use({
         'kevinhwang91/nvim-bqf',
         config = [[require('bqf').setup()]],
+        ft = { "qf" }
     })
 
+    -- Packer
     -- Git
     use({
         'lewis6991/gitsigns.nvim',
@@ -135,30 +150,25 @@ return require('packer').startup(function(use)
     })
 
     -- Statusline
-    use({
-        'nvim-lualine/lualine.nvim',
-        requires = {
-            'nvim-web-devicons',
-            opt = true,
-        },
-    })
+    use { "tamton-aquib/staline.nvim" }
 
-    use { "ray-x/go.nvim" }
-    use { "ray-x/guihua.lua", after = "go.nvim" }
     -- Notify
     use({ 'rcarriga/nvim-notify' })
 
-    use({ 'arkav/lualine-lsp-progress' })
 
-    use({ 'folke/neodev.nvim' })
     -- Markdown
     use({ 'davidgranstrom/nvim-markdown-preview' })
 
     -- Div
     use({
         'lukas-reineke/indent-blankline.nvim',
-        'tpope/vim-repeat',
+
     })
+    -- Language spesific
+    use { "ray-x/go.nvim" }
+    use { "ray-x/guihua.lua", after = "go.nvim" }
+
+    use { 'gpanders/nvim-parinfer', ft = { 'scheme', 'racket' } }
 
     if packer_bootstrap then
         require('packer').sync()

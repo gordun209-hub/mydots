@@ -30,9 +30,6 @@ u.map("n", "-", "<cmd>Nnn<cr>")
 u.map('n', '<leader>gh', ':diffget //3<cr>')
 u.map('n', '<leader>gu', ':diffget //2<cr>')
 
---- keep text selected after indentation
-u.map('v', '<', '<gv')
-u.map('v', '>', '>gv')
 
 --- move current line up/down
 u.map('v', 'J', ":m '>+1<CR>gv=gv")
@@ -40,12 +37,37 @@ u.map('v', 'K', ":m '<-2<CR>gv=gv")
 
 
 -- close current window
-u.map('n', '<C-c><C-c>', '<cmd>close<cr>')
 
---- Copy-paste
-u.map('v', '<leader>p', '"_dP')
-u.map('n', '<leader>y', '"+y')
-u.map('v', '<leader>y', '"+y')
-u.map('n', '<leader>Y', 'gg"+yG')
-u.map('n', '<leader>d', '"_d')
-u.map('v', '<leader>d', '"_d')
+
+
+u.map("n", "<leader>fk", "<CMD>Telescope keymaps<CR>")
+u.map("n", "<leader>fc", "<CMD>Telescope commands<CR>")
+--keymap("n", "<leader>fp", "<cmd>lua require('telescope').extensions.projects.projects()<cr>", opts)
+u.map("n", "<leader>fl", "<cmd>Telescope live_grep theme=ivy<cr>")
+u.map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
+u.map("n", "<leader>fe", "<cmd>Telescope file_browser<cr>")
+--keymap("n", "<leader>fr", "<cmd>lua require'telescope'.extensions.repo.list{fd_opts={'--no-ignore-vcs'}}<cr>", opts)
+u.map("n", "<leader>rl", "<cmd>Telescope repo list<cr>")
+u.map("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
+u.map("n", "<leader>fs", "<cmd>Telescope grep_string<cr>")
+
+u.map("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
+u.map("n", "<leader>o", "<cmd>Telescope history<cr>")
+
+
+
+--git * commands
+u.command('BCommits', 'Telescope git_bcommits')
+u.command('Commits', 'Telescope git_commits')
+u.command('Branchs', 'Telescope git_branches')
+u.command('GStatus', 'Telescope git_status')
+
+u.map('n', '<Leader>gc', '<cmd>Commits<CR>')
+u.map('n', '<Leader>gp', '<cmd>BCommits<CR>')
+u.map('n', '<Leader>gb', '<cmd>Branchs<CR>')
+u.map('n', '<Leader>gs', '<cmd>GStatus<CR>')
+
+--help commands
+u.command('ManPages', 'Telescope man_pages')
+
+u.map('n', '<leader>m', ':ManPages<CR>')

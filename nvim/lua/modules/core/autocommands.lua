@@ -11,13 +11,11 @@ autocmd('BufEnter', {
 
 
 
-
-
 autocmd({ 'BufReadPost' }, {
     desc = 'return to last position known inside a buffer',
     pattern = '*',
     callback = function()
-        local line = vim.fn.line
+
         local test_line = vim.api.nvim_buf_get_mark(0, '"')
         local last_line = vim.api.nvim_buf_line_count(0)
 
@@ -27,25 +25,3 @@ autocmd({ 'BufReadPost' }, {
     end,
     group = vim.api.nvim_create_augroup('LastPosition', { clear = true }),
 })
-
-autocmd({ 'BufWritePre' }, {
-    desc = 'trim buffer whitespaces',
-    pattern = '*',
-    command = 'TrimTrailingWhitespace',
-})
-
-autocmd({ 'BufWinLeave' }, {
-    desc = 'Remember current folds',
-    pattern = '*.*',
-    command = 'mkview',
-    group = 'UI',
-})
-
-autocmd({ 'BufWinEnter' }, {
-    desc = 'Reload folds as they were',
-    pattern = '*.*',
-    command = 'loadview',
-    group = 'UI',
-})
-
-
