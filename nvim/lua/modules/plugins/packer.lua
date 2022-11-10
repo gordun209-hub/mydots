@@ -69,8 +69,6 @@ return require('packer').startup(function(use)
     })
 
 
-
-
     --- Telescope
     use({
         'nvim-telescope/telescope.nvim',
@@ -80,8 +78,6 @@ return require('packer').startup(function(use)
             'nvim-telescope/telescope-ui-select.nvim',
         },
     })
-
-
 
     use({
         'nvim-telescope/telescope-project.nvim',
@@ -96,9 +92,8 @@ return require('packer').startup(function(use)
 
     -- Commenting
 
-    use {
-        "numToStr/Comment.nvim",
-    }
+    use { "numToStr/Comment.nvim" }
+
 
     use { "aserowy/tmux.nvim", }
     --- Treesitter

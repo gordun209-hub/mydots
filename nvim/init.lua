@@ -1,6 +1,4 @@
 local o = vim.opt
-
-
 -- global settings
 o.shiftwidth = 4
 o.completeopt = "menu,menuone,noselect"

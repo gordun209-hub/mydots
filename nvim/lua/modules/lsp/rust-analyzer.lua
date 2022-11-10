@@ -55,9 +55,6 @@ local srv_settings = {
             methodReferences = true,
             references = true,
         },
-        notifications = {
-            cargoTomlNotFound = true,
-        },
         procMacro = {
             enable = true,
         },
