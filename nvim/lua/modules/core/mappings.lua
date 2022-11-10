@@ -1,73 +1,64 @@
---- Mappings
-local u = require('utils')
+local opts = { noremap = true, silent = true }
+local silent    = { silent = true }
+local term_opts = { silent = true }
+local keymap    = vim.api.nvim_set_keymap
+keymap("n", "H", "^", silent)
+-- Better window navigation
+keymap("n", "<C-h>", "<C-w>h", opts)
+keymap("n", "<C-j>", "<C-w>j", opts)
+keymap("n", "<C-k>", "<C-w>k", opts)
+keymap("n", "<C-l>", "<C-w>l", opts)
+-- Save file with ctrl + s
+keymap("n", "<C-s>", ":w<CR>", silent)
+keymap("i", "<C-s>", "<ESC> :w<CR>", silent)
 
--- map key
-vim.g.mapleader = ' '
-
-
--- fix indentation
-
--- easier windows jump
-u.map('n', '<C-Left>', '<C-w>h')
-u.map('n', '<C-Right>', '<C-w>l')
-u.map('n', '<C-Down>', '<C-w>j')
-u.map('n', '<C-Up>', '<C-w>k')
-
---- Resize windows
-u.map('n', '<leader>+', '<cmd>vertical resize +10<cr>')
-u.map('n', '<leader>-', '<cmd>vertical resize -10<cr>')
-
-u.map('n', '<space>+', '<cmd>resize +5<cr>')
-u.map('n', '<space>-', '<cmd>resize -5<cr>')
-
---- Quick file save
-u.map("n", "<C-s>", ":w<CR>")
-u.map("i", "<C-s>", ":<ESC> :w<CR>")
-u.map("n", "-", "<cmd>Nnn<cr>")
--- Format
-
---- Git
-u.map('n', '<leader>gh', ':diffget //3<cr>')
-u.map('n', '<leader>gu', ':diffget //2<cr>')
-
-
---- move current line up/down
-u.map('v', 'J', ":m '>+1<CR>gv=gv")
-u.map('v', 'K', ":m '<-2<CR>gv=gv")
-
-
--- close current window
-
-
-
-u.map("n", "<leader>fk", "<CMD>Telescope keymaps<CR>")
-u.map("n", "<leader>fc", "<CMD>Telescope commands<CR>")
+-- vim.api.nvim_set_keymap(
+--     'n',
+--     '<C-p>',
+--     ":lua require'telescope'.extensions.project.project{}<CR>",
+--     { noremap = true, silent = true }
+-- )
+keymap("n", "<leader>fk", "<CMD>Telescope keymaps<CR>", {})
+keymap("n", "<leader>fc", "<CMD>Telescope commands<CR>", {})
 --keymap("n", "<leader>fp", "<cmd>lua require('telescope').extensions.projects.projects()<cr>", opts)
-u.map("n", "<leader>fl", "<cmd>Telescope live_grep theme=ivy<cr>")
-u.map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
-u.map("n", "<leader>fe", "<cmd>Telescope file_browser<cr>")
+keymap("n", "<leader>fl", "<cmd>Telescope live_grep theme=ivy<cr>", opts)
+keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", opts)
+keymap("n", "<leader>fe", "<cmd>Telescope file_browser<cr>", opts)
 --keymap("n", "<leader>fr", "<cmd>lua require'telescope'.extensions.repo.list{fd_opts={'--no-ignore-vcs'}}<cr>", opts)
-u.map("n", "<leader>rl", "<cmd>Telescope repo list<cr>")
-u.map("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
-u.map("n", "<leader>fs", "<cmd>Telescope grep_string<cr>")
+keymap("n", "<leader>rl", "<cmd>Telescope repo list<cr>", opts)
+keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
+-- keymap("n", "<Leader>fw",
+--     "<CMD>lua require('plugins.configs.telescope').project_files({ default_text = vim.fn.expand('<cword>'), initial_mode = 'normal' })<CR>"
+--     , opts)
+-- Navigate buffersbuffers
+keymap("n", "<S-l>", ":bnext<CR>", opts)
+keymap("n", "<S-h>", ":bprevious<CR>", opts)
+-- Move text up and down
+keymap("v", "<A-j>", ":m .+1<CR>==", opts)
+keymap("v", "<A-k>", ":m .-2<CR>==", opts)
+keymap("v", "p", '"_dP', opts)
+-- Better terminal navigation
+keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
+keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
+keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
+keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+-- Search and Replace
+keymap("n", "c.", ":%s//g<Left><Left>", opts)
+keymap("n", "\\c.", ":%s/\\<<C-r><C-w>\\>//g<Left><Left>", opts)
+keymap("n", "-", "<cmd>Nnn<cr>", { noremap = true })
+-- Move selected line / block of text in visual mode
+-- ctrl + a: select all
+vim.keymap.set('n', '<C-a>', '<esc>ggVG<CR>')
+-- sensible defaults
+vim.keymap.set('', 'Q', '') -- disable
+vim.keymap.set('n', 'x', '"_x') -- delete char without yank
+vim.keymap.set('x', 'x', '"_x') -- delete visual selection without yank
+-- quickfix navigation
+vim.keymap.set('n', ']q', ':cnext<CR>')
+vim.keymap.set('n', '[q', ':cprevious<CR>')
+--  ctrl + / nohighlight
+-- cycle tabs
+vim.keymap.set('n', ']]', '<cmd>tabnext<CR>')
+vim.keymap.set('n', '[[', '<cmd>tabprevious<CR>')
 
-u.map("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
-u.map("n", "<leader>o", "<cmd>Telescope history<cr>")
-
-
-
---git * commands
-u.command('BCommits', 'Telescope git_bcommits')
-u.command('Commits', 'Telescope git_commits')
-u.command('Branchs', 'Telescope git_branches')
-u.command('GStatus', 'Telescope git_status')
-
-u.map('n', '<Leader>gc', '<cmd>Commits<CR>')
-u.map('n', '<Leader>gp', '<cmd>BCommits<CR>')
-u.map('n', '<Leader>gb', '<cmd>Branchs<CR>')
-u.map('n', '<Leader>gs', '<cmd>GStatus<CR>')
-
---help commands
-u.command('ManPages', 'Telescope man_pages')
-
-u.map('n', '<leader>m', ':ManPages<CR>')
+keymap("n", "<leader>fa", "<cmd>lua vim.lsp.buf.format({async = true})<CR>", silent)

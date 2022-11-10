@@ -10,20 +10,20 @@ local with_root_file = function(builtin, file)
     })
 end
 
+
 -- null-ls sources
 local sources = {
     ---actions
-    -- b.code_actions.gitrebase,
+    b.code_actions.eslint,
     b.code_actions.shellcheck,
     ---formatting
     b.formatting.eslint_d,
-    b.formatting.prettier.with({
-        disabled_filetypes = { 'typescript', 'typescriptreact' },
-    }),
     with_root_file(b.formatting.stylua, 'stylua.toml'),
     b.formatting.shfmt,
     b.formatting.rustfmt,
     ---diagnostics
+    b.diagnostics.shellcheck.with({ diagnostics_format = '#{m} [#{c}]' }),
+    b.diagnostics.zsh,
 }
 
 local M = {

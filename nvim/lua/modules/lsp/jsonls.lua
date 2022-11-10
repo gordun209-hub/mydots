@@ -1,46 +1,15 @@
-local M = {
-    setup = function(on_attach, capabilities)
-        local lspconfig = require('lspconfig')
+local M = {}
 
-        lspconfig['eslint'].setup({
-            root_dir = lspconfig.util.root_pattern(
-                '.eslintrc.js',
-                '.eslintrc.cjs',
-                '.eslintrc.yaml',
-                '.eslintrc.yml',
-                '.eslintrc.json'
-            ),
-            on_attach = function(client, bufnr)
-                client.server_capabilities.documentFormattingProvider = false
-                on_attach(client, bufnr)
-            end,
-            capabilities = capabilities,
-            settings = {
-                codeAction = {
-                    disableRuleComment = {
-                        enable = true,
-                        location = 'separateLine',
-                    },
-                    showDocumentation = {
-                        enable = true,
-                    },
-                },
-                codeActionOnSave = {
-                    enable = false,
-                    mode = 'all',
-                },
-                format = {
-                    enable = false,
-                },
-                useESLintClass = true,
-                packageManager = 'yarn',
-                workingDirectory = {
-                    mode = 'location',
-                },
+M.setup = function(on_attach, capabilities)
+    require('lspconfig').jsonls.setup({
+        settings = {
+            json = {
+                schemas = require('schemastore').json.schemas(),
             },
-            root_dir = require('lspconfig.util').find_git_ancestor,
-        })
-    end,
-}
+        },
+        on_attach = on_attach,
+        capabilities = capabilities,
+    })
+end
 
 return M

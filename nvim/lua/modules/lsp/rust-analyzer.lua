@@ -1,7 +1,6 @@
 local srv_settings = {
     ['rust-analyzer'] = {
         updates = { channel = 'stable' },
-        notifications = { cargoTomlNotFound = false },
         assist = {
             importGroup = true,
             importMergeBehaviour = 'full',
@@ -54,6 +53,9 @@ local srv_settings = {
             run = true,
             methodReferences = true,
             references = true,
+        },
+        notifications = {
+            cargoTomlNotFound = true,
         },
         procMacro = {
             enable = true,
