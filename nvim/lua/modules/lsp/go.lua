@@ -4,7 +4,7 @@ M.setup = function(on_attach, _)
     require('go').setup(
 
         {
-            goimport = "goimport", -- if set to 'gopls' will use gopls format, also goimport
+            goimport = "gopls", -- if set to 'gopls' will use gopls format, also goimport
             fillstruct = "gopls",
             gofmt = "gofumpt", -- if set to gopls will use gopls format
             max_line_len = 120,

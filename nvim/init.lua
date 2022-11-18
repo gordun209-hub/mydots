@@ -26,8 +26,11 @@ local options = {
     shiftwidth = 4, -- the number of spaces inserted for each indentation
     tabstop = 4, -- insert 2 spaces for a tab
     softtabstop = 4,
+    hidden = true, -- Required to keep multiple buffers open multiple buffers
     cursorline = false, -- highlight the current line
     number = true, -- set numbered lines
+    cmdheight = 1,
+    wildmenu = true,
     relativenumber = true, -- set relative numbered lines
     signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
     wrap = false, -- display lines as one long line
@@ -41,6 +44,18 @@ vim.o.ch = 0
 for key, value in pairs(options) do
     vim.opt[key] = value
 end
+
+
+-- Folding
+vim.o.foldenable = true
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+-- vim.o.foldcolumn = "1"
+
+-- Use ripgrep as grep tool
+vim.o.grepprg = "rg --vimgrep --no-heading"
+vim.o.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 
 
 local disable_builtin_plugins = {
@@ -70,3 +85,4 @@ end
 
 require('modules.packer')
 require('modules.core')
+vim.cmd("colorscheme falcon")

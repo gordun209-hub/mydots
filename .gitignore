@@ -2,5 +2,4 @@
 ./awesome_backup/*
 ./leftwm_backup 
 ./polybarbackup 
-
-
+./zsh/.zhistory

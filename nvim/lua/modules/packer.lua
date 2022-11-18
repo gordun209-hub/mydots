@@ -5,17 +5,39 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
     -- Packer can manage itself
+
     use 'wbthomason/packer.nvim'
     -- Language server configurations
     use { 'neovim/nvim-lspconfig', config = function() require('modules.lsp') end } -- Configurations for Nvim LSP
+
+    -- Signatures
+
+    use {
+        "ray-x/lsp_signature.nvim",
+    }
+    use {'simrat39/symbols-outline.nvim', config=function()require('modules.plugins.symbols-outline')end}
     -- extra rust
     use({ 'simrat39/rust-tools.nvim' })
 
     -- Json like configs
     use "b0o/schemastore.nvim"
-
+    -- project --
+    use({
+        "ahmedkhalf/project.nvim",
+        config = function()
+            require("modules.plugins.project").setup()
+        end,
+        requires = "nvim-telescope/telescope.nvim",
+    })
 
     use { "jose-elias-alvarez/null-ls.nvim" }
+    -- indent --
+    use({
+        "lukas-reineke/indent-blankline.nvim",
+        config = function()
+            require("modules.plugins.indent-blankline").setup()
+        end,
+    })
     -- Icons --
 
     use({
@@ -30,7 +52,7 @@ return require('packer').startup(function(use)
     use { 'JoosepAlviste/nvim-ts-context-commentstring', after = "nvim-treesitter" } -- for commenting
 
     -- statusline --
-    use { "tamton-aquib/staline.nvim", config = function() require("modules.core.statusline") end }
+    use { 'tamton-aquib/staline.nvim', config = function() require('modules.core.statusline') end }
     -- Rainbow parentheses by using tree-sitter
     use({
         "p00f/nvim-ts-rainbow",
@@ -52,7 +74,7 @@ return require('packer').startup(function(use)
     use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" })
 
     -- autocomplete AI --
-    use('zbirenbaum/copilot.lua')
+    use { 'zbirenbaum/copilot.lua', config = function() require('modules.plugins.copilot') end }
     -- Tmux navigation --
 
     -- tree trying neotree
@@ -71,7 +93,7 @@ return require('packer').startup(function(use)
 
 
 
-    use { "fenetikm/falcon", config = function() require("modules.core.colorscheme") end }
+    use { "fenetikm/falcon" }
     -- Git --
     use {
         'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' },
