@@ -91,6 +91,7 @@ for _, server in ipairs({
     'go',
     'jsonls',
     'null-ls',
+    'clang',
     'rust-analyzer',
     'sumneko_lua',
     'dockerls'

@@ -16,7 +16,8 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=6'
 export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"
 
 [ ! -x /usr/bin/yay ] && [ -x /usr/bin/paru ] && alias yay='paru'
-export DISCORD_TOKEN="MTAzODQ2MzA0OTQ5NDk1ODIyMA.GBNLBN.k0s7ZfFRmlw0eT_ZPk14D_USECtTHamtgg7nd8"
+export DISCORD_TOKEN="MTAzODQ2MzA0OTQ5NDk1ODIyMA.GaVIkJ.7x8UjEYY-0y6P7YYV53NXYu2ao5EV59D5hf-CA"
+
 export PATH=$PATH:$(go env GOPATH)/bin
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then

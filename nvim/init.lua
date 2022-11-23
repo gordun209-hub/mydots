@@ -5,7 +5,7 @@ vim.g.maplocalleader = " "
 local options = {
     backup = false, -- creates a backup file
     clipboard = "unnamedplus,unnamed", -- allows neovim to access the system clipboard
-    completeopt = { "menuone", "noselect" }, -- mostly just for cmp
+    completeopt = { "menu", "menuone", "noselect" }, -- mostly just for cmp
     conceallevel = 0, -- so that `` is visible in markdown files
     fileencoding = "utf-8", -- the encoding written to a file
     hlsearch = true, -- highlight all matches on previous search pattern
@@ -20,16 +20,23 @@ local options = {
     swapfile = false, -- creates a swapfile
     termguicolors = true, -- set term gui colors (most terminals support this)
     undofile = true, -- enable persistent undo
+    showtabline = 0, -- always show tabs
+    winwidth = 30, -- set window width
     updatetime = 50, -- faster completion (4000ms default)
     writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
     expandtab = true, -- convert tabs to spaces
     shiftwidth = 4, -- the number of spaces inserted for each indentation
+    showcmd = false, -- display incomplete commands
     tabstop = 4, -- insert 2 spaces for a tab
     softtabstop = 4,
     hidden = true, -- Required to keep multiple buffers open multiple buffers
+    pumblend = 10, -- transparent popup menu
+    winblend = 10, -- transparent window
+    smarttab = true, -- insert indents automatically
+    autoindent = true, -- copy indent from current line
     cursorline = false, -- highlight the current line
     number = true, -- set numbered lines
-    cmdheight = 1,
+    cmdheight = 0,
     wildmenu = true,
     relativenumber = true, -- set relative numbered lines
     signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
@@ -59,8 +66,8 @@ vim.o.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 
 
 local disable_builtin_plugins = {
-    -- "netrw",
-    -- "netrwPlugin",
+    "netrw",
+    "netrwPlugin",
     "netrwSettings",
     "netrwFileHandlers",
     "2html_plugin",
@@ -85,4 +92,3 @@ end
 
 require('modules.packer')
 require('modules.core')
-vim.cmd("colorscheme falcon")

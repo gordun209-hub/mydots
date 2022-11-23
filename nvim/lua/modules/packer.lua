@@ -15,7 +15,7 @@ return require('packer').startup(function(use)
     use {
         "ray-x/lsp_signature.nvim",
     }
-    use {'simrat39/symbols-outline.nvim', config=function()require('modules.plugins.symbols-outline')end}
+    use { 'simrat39/symbols-outline.nvim', config = function() require('modules.plugins.symbols-outline') end }
     -- extra rust
     use({ 'simrat39/rust-tools.nvim' })
 
@@ -35,7 +35,7 @@ return require('packer').startup(function(use)
     use({
         "lukas-reineke/indent-blankline.nvim",
         config = function()
-            require("modules.plugins.indent-blankline").setup()
+            require("modules.plugins.indent-blankline")
         end,
     })
     -- Icons --
@@ -93,6 +93,8 @@ return require('packer').startup(function(use)
 
 
 
+    use 'Yazeed1s/minimal.nvim'
+    use { "aktersnurra/no-clown-fiesta.nvim" }
     use { "fenetikm/falcon" }
     -- Git --
     use {
@@ -144,7 +146,7 @@ return require('packer').startup(function(use)
     -- Auto pair --
 
     use({ 'windwp/nvim-autopairs', after = "nvim-cmp"
-        , config = function() require("nvim-autopairs").setup() end })
+        , config = function() require('modules.plugins.autopairs') end })
 
     use {
         "nvim-telescope/telescope.nvim",

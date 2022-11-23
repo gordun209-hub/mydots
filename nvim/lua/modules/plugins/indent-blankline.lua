@@ -1,36 +1,13 @@
-local M = {}
+local blankline = require 'indent_blankline'
 
-M.config = {
-	space_char_blankline = " ",
-	buftype_exclude = { "telescope", "terminal", "nofile", "quickfix", "prompt" },
-	filetype_exclude = {
-		"starter",
-		"packer",
-		"Trouble",
-		"TelescopePrompt",
-		"Float",
-		"OverseerForm",
-		"lspinfo",
-		"packer",
-		"checkhealth",
-		"help",
-		"man",
-		"",
-	},
-}
-
-M.config_function = function()
-	vim.opt.listchars:append("space:⋅")
-	vim.opt.listchars:append("eol:↴")
-end
-
-M.setup = function()
-	local status_ok, indent_blankline = pcall(require, "indent_blankline")
-	if not status_ok then
-		return
-	end
-	M.config_function()
-	indent_blankline.setup(M.config)
-end
-
-return M
+blankline.setup({
+    char_highlight = 'LineNr',
+    char = '▏',
+    filetype_exclude = { 'lspinfo', 'packer', 'checkhealth', 'help', 'man', 'terminal', '' },
+    buftype_exclude = { 'terminal', 'nofile', 'quickfix' },
+    use_treesitter = true,
+    max_indent_increase = 1,
+    show_first_indent_level = false,
+    show_trailing_blankline_indent = false,
+    show_current_context = true,
+})

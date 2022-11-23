@@ -1,4 +1,7 @@
 local vimrc_group = vim.api.nvim_create_augroup("vimrc", { clear = true })
+local autocmd = vim.api.nvim_create_autocmd
+vim.api.nvim_create_augroup('UI', { clear = false })
+
 vim.api.nvim_create_autocmd("BufEnter", {
     desc = "Don't auto commenting new lines",
     pattern = "*",
@@ -24,4 +27,19 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         require('go.format').goimport()
     end,
     group = vimrc_group,
+})
+
+
+autocmd({ 'BufWinEnter' }, {
+    desc = 'Reload folds as they were',
+    pattern = '*.*',
+    command = 'loadview',
+    group = 'UI',
+})
+
+autocmd({ 'BufWinLeave' }, {
+    desc = 'Remember current folds',
+    pattern = '*.*',
+    command = 'mkview',
+    group = 'UI',
 })
