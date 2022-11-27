@@ -39,7 +39,7 @@ require('telescope').setup {
         height = 0.95,
         preview_cutoff = 120,
     },
-    file_ignore_patterns = { "node_modules", "^.git/" },
+    file_ignore_patterns = { "node_modules", "^.git/", "_build", "*.build","*.deps","*credo" },
     winblend = 0,
     border = {},
     borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },

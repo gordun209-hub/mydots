@@ -7,8 +7,8 @@ local options = {
     clipboard = "unnamedplus,unnamed", -- allows neovim to access the system clipboard
     completeopt = { "menu", "menuone", "noselect" }, -- mostly just for cmp
     conceallevel = 0, -- so that `` is visible in markdown files
-    fileencoding = "utf-8", -- the encoding written to a file
-    hlsearch = true, -- highlight all matches on previous search pattern
+   
+    hlsearch = false, -- highlight all matches on previous search pattern
     ignorecase = true, -- ignore case in search patterns
     mouse = "a", -- allow the mouse to be used in neovim
     pumheight = 10, -- pop up menu height
@@ -30,8 +30,6 @@ local options = {
     tabstop = 4, -- insert 2 spaces for a tab
     softtabstop = 4,
     hidden = true, -- Required to keep multiple buffers open multiple buffers
-    pumblend = 10, -- transparent popup menu
-    winblend = 10, -- transparent window
     smarttab = true, -- insert indents automatically
     autoindent = true, -- copy indent from current line
     cursorline = false, -- highlight the current line
@@ -64,6 +62,12 @@ vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 vim.o.grepprg = "rg --vimgrep --no-heading"
 vim.o.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 
+
+-- Autom. read file when changed outside of Vim
+vim.o.autoread = true
+
+-- Autom. save file before some action
+vim.o.autowrite = true
 
 local disable_builtin_plugins = {
     "netrw",

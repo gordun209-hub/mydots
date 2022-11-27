@@ -30,16 +30,3 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 
-autocmd({ 'BufWinEnter' }, {
-    desc = 'Reload folds as they were',
-    pattern = '*.*',
-    command = 'loadview',
-    group = 'UI',
-})
-
-autocmd({ 'BufWinLeave' }, {
-    desc = 'Remember current folds',
-    pattern = '*.*',
-    command = 'mkview',
-    group = 'UI',
-})

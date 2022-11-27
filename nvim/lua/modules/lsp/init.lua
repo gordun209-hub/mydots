@@ -94,7 +94,8 @@ for _, server in ipairs({
     'clang',
     'rust-analyzer',
     'sumneko_lua',
-    'dockerls'
+    'dockerls',
+    'elixir'
 }) do
     require('modules.lsp.' .. server).setup(on_attach, capabilities)
 end

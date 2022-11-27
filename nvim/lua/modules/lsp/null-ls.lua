@@ -25,6 +25,7 @@ local sources = {
     b.diagnostics.shellcheck.with({ diagnostics_format = '#{m} [#{c}]' }),
     b.diagnostics.zsh,
     b.diagnostics.hadolint,
+    b.diagnostics.credo,
 }
 
 local M = {
