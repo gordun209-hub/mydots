@@ -1,4 +1,8 @@
---vim.cmd[[colorscheme falcon]]
+vim.g.falcon_background=0
+vim.g.falcon_inactive=1
+
+vim.cmd[[colorscheme falcon]]
+
 -- require("no-clown-fiesta").setup({
 --     transparent = false, -- Enable this to disable the bg color
 --     styles = {
@@ -11,8 +15,4 @@
 --     },
 -- })
 -- vim.cmd [[colorscheme no-clown-fiesta]]
-
-vim.g.minimal_italic_functions=true
-vim.g.minimal_italic_comments=true
-vim.cmd [[colorscheme minimal-base16]]
 

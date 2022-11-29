@@ -1,5 +1,4 @@
 #!/usr/bin/sh
-eval "$(fnm env --use-on-cd)"
 export DOTFILES="$HOME/dots"
 source $DOTFILES/zsh/aliases.zsh
 source $DOTFILES/zsh/env.zsh
@@ -14,6 +13,9 @@ source ~/.fzf/shell/key-bindings.zsh
 bindkey -v
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=6'
 export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"
+
+export PATH="/home/ali/.local/share/fnm:$PATH"
+eval "`fnm env`"
 
 [ ! -x /usr/bin/yay ] && [ -x /usr/bin/paru ] && alias yay='paru'
 export DISCORD_TOKEN="MTAzODQ2MzA0OTQ5NDk1ODIyMA.GaVIkJ.7x8UjEYY-0y6P7YYV53NXYu2ao5EV59D5hf-CA"

@@ -7,7 +7,6 @@ local options = {
     clipboard = "unnamedplus,unnamed", -- allows neovim to access the system clipboard
     completeopt = { "menu", "menuone", "noselect" }, -- mostly just for cmp
     conceallevel = 0, -- so that `` is visible in markdown files
-   
     hlsearch = false, -- highlight all matches on previous search pattern
     ignorecase = true, -- ignore case in search patterns
     mouse = "a", -- allow the mouse to be used in neovim

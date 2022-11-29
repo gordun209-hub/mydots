@@ -1,7 +1,4 @@
 require('telescope').setup {
-    defaults = {
-        path_display = { truncate = 3 },
-    },
     mappings = {
         i = {
             ["<esc>"] = require("telescope.actions").close,
@@ -39,7 +36,7 @@ require('telescope').setup {
         height = 0.95,
         preview_cutoff = 120,
     },
-    file_ignore_patterns = { "node_modules", "^.git/", "_build", "*.build","*.deps","*credo" },
+    file_ignore_patterns = { "node_modules", "^.git/", "_build", "*.build", "*.deps", "*credo" },
     winblend = 0,
     border = {},
     borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },

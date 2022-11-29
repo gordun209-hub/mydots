@@ -45,7 +45,7 @@ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 -- Search and Replace
 keymap("n", "c.", ":%s//g<Left><Left>", opts)
 keymap("n", "\\c.", ":%s/\\<<C-r><C-w>\\>//g<Left><Left>", opts)
-keymap("n", "-", "<cmd>Nnn<cr>", { noremap = true })
+keymap("n", "-", "<cmd>Lf<cr>", { noremap = true })
 -- Move selected line / block of text in visual mode
 -- ctrl + a: select all
 vim.keymap.set('n', '<C-a>', '<esc>ggVG<CR>')

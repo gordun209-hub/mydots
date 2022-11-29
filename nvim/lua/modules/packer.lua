@@ -93,8 +93,6 @@ return require('packer').startup(function(use)
 
 
 
-    use 'Yazeed1s/minimal.nvim'
-    use { "aktersnurra/no-clown-fiesta.nvim" }
     use { "fenetikm/falcon" }
     -- Git --
     use {
