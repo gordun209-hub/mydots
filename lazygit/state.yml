@@ -1,10 +1,10 @@
 lastupdatecheck: 0
 recentrepos:
 - /home/ali/dots
+- /home/ali/dmenu
 - /home/ali/.config/chadwm
 - /home/ali/dwm
 - /home/ali/st
-- /home/ali/dmenu
 - /home/ali/.config/st
 startuppopupversion: 5
 customcommandshistory: []
