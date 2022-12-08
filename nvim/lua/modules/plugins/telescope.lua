@@ -36,7 +36,7 @@ require('telescope').setup {
         height = 0.95,
         preview_cutoff = 120,
     },
-    file_ignore_patterns = { "node_modules", "^.git/", "_build", "*.build", "*.deps", "*credo" },
+    file_ignore_patterns = { "node_modules", "^.git/", "_build", "_build", "deps", "credo" },
     winblend = 0,
     border = {},
     borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
@@ -58,3 +58,4 @@ require('telescope').setup {
 require 'telescope'.load_extension('project')
 require('telescope').load_extension('fzf')
 require('telescope').load_extension('file_browser')
+

@@ -5,7 +5,7 @@ vim.g.maplocalleader = " "
 local options = {
     backup = false, -- creates a backup file
     clipboard = "unnamedplus,unnamed", -- allows neovim to access the system clipboard
-    completeopt = { "menu", "menuone", "noselect" }, -- mostly just for cmp
+    completeopt = { "menuone", "noselect" }, -- mostly just for cmp
     conceallevel = 0, -- so that `` is visible in markdown files
     hlsearch = false, -- highlight all matches on previous search pattern
     ignorecase = true, -- ignore case in search patterns
@@ -13,12 +13,10 @@ local options = {
     pumheight = 10, -- pop up menu height
     showmode = false, -- we don't need to see things like -- INSERT -- anymore
     smartcase = true, -- smart case
-    smartindent = true, -- make indenting smarter again
-    splitbelow = true, -- force all horizontal splits to go below current window
-    splitright = true, -- force all vertical splits to go to the right of current window
     swapfile = false, -- creates a swapfile
     termguicolors = true, -- set term gui colors (most terminals support this)
     undofile = true, -- enable persistent undo
+    history = 2000,
     showtabline = 0, -- always show tabs
     winwidth = 30, -- set window width
     updatetime = 50, -- faster completion (4000ms default)
@@ -43,8 +41,6 @@ local options = {
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.opt.shortmess:append("c")
-vim.o.ls = 3
-vim.o.ch = 0
 for key, value in pairs(options) do
     vim.opt[key] = value
 end
@@ -62,11 +58,6 @@ vim.o.grepprg = "rg --vimgrep --no-heading"
 vim.o.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 
 
--- Autom. read file when changed outside of Vim
-vim.o.autoread = true
-
--- Autom. save file before some action
-vim.o.autowrite = true
 
 local disable_builtin_plugins = {
     "netrw",

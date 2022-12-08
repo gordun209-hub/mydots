@@ -12,12 +12,14 @@ source ~/.fzf/shell/completion.zsh
 source ~/.fzf/shell/key-bindings.zsh
 bindkey -v
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=6'
+export DENO_INSTALL="/home/ali/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
 export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"
 
 export PATH="/home/ali/.local/share/fnm:$PATH"
 eval "`fnm env`"
 
-[ ! -x /usr/bin/yay ] && [ -x /usr/bin/paru ] && alias yay='paru'
+##[ ! -x /usr/bin/yay ] && [ -x /usr/bin/paru ] && alias yay='paru'
 export DISCORD_TOKEN="MTAzODQ2MzA0OTQ5NDk1ODIyMA.GaVIkJ.7x8UjEYY-0y6P7YYV53NXYu2ao5EV59D5hf-CA"
 
 export PATH=$PATH:$(go env GOPATH)/bin

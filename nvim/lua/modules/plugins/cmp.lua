@@ -1,7 +1,15 @@
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
+
+
+local check_backspace = function()
+    local col = vim.fn.col(".") - 1
+    return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+end
+
 vim.api.nvim_command('hi LuasnipChoiceNodePassive cterm=italic')
+
 local kind_icons = {
     Text = "",
     Method = "m",
@@ -34,10 +42,18 @@ local kind_icons = {
 cmp.setup({
     snippet = {
         expand = function(args)
-            require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+            luasnip.lsp_expand(args.body) -- For `luasnip` users.
         end,
     },
 
+    confirm_opts = {
+        behavior = cmp.ConfirmBehavior.Replace,
+        select = false,
+    },
+    experimental = {
+        ghost_text = false,
+        native_menu = false,
+    },
     window = {
         completion = {
             border = 'rounded',
@@ -53,7 +69,7 @@ cmp.setup({
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         ['<S-Tab>'] = function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
@@ -66,7 +82,6 @@ cmp.setup({
     }),
 
     formatting = {
-
         fields = { "kind", "abbr", "menu" },
         format = function(entry, vim_item)
             -- Kind icons
@@ -85,7 +100,6 @@ cmp.setup({
     },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-    }, {
         { name = 'buffer' },
         { name = 'luasnip' },
         { name = "path" },
@@ -109,4 +123,3 @@ cmp.setup.cmdline(':', {
         { name = 'cmdline' }
     })
 })
-

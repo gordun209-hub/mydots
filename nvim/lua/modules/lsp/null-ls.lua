@@ -21,6 +21,8 @@ local sources = {
     with_root_file(b.formatting.stylua, 'stylua.toml'),
     b.formatting.shfmt,
     b.formatting.rustfmt,
+    b.formatting.stylish_haskell,
+    b.formatting.ocamlformat,
     ---diagnostics
     b.diagnostics.shellcheck.with({ diagnostics_format = '#{m} [#{c}]' }),
     b.diagnostics.zsh,

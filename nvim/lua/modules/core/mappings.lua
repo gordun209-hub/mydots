@@ -1,4 +1,5 @@
 local opts = { noremap = true, silent = true }
+
 local silent    = { silent = true }
 local term_opts = { silent = true }
 local keymap    = vim.api.nvim_set_keymap
@@ -27,10 +28,6 @@ keymap("n", "<leader>fe", "<cmd>Telescope file_browser<cr>", opts)
 --keymap("n", "<leader>fr", "<cmd>lua require'telescope'.extensions.repo.list{fd_opts={'--no-ignore-vcs'}}<cr>", opts)
 keymap("n", "<leader>rl", "<cmd>Telescope repo list<cr>", opts)
 keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
--- keymap("n", "<Leader>fw",
---     "<CMD>lua require('plugins.configs.telescope').project_files({ default_text = vim.fn.expand('<cword>'), initial_mode = 'normal' })<CR>"
---     , opts)
--- Navigate buffersbuffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 -- Move text up and down
@@ -62,3 +59,6 @@ vim.keymap.set('n', ']]', '<cmd>tabnext<CR>')
 vim.keymap.set('n', '[[', '<cmd>tabprevious<CR>')
 
 keymap("n", "<leader>fa", "<cmd>lua vim.lsp.buf.format({async = true})<CR>", silent)
+
+-- Suggested keymaps that do not depend on haskell-language-server
+-- Toggle a GHCi repl for the current package

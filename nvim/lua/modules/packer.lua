@@ -10,15 +10,16 @@ return require('packer').startup(function(use)
     -- Language server configurations
     use { 'neovim/nvim-lspconfig', config = function() require('modules.lsp') end } -- Configurations for Nvim LSP
 
+    use { "jose-elias-alvarez/typescript.nvim" }
     -- Signatures
-
+    use { "williamboman/mason.nvim", config = function() require('modules.lsp.mason') end }
     use {
         "ray-x/lsp_signature.nvim",
     }
     use { 'simrat39/symbols-outline.nvim', config = function() require('modules.plugins.symbols-outline') end }
     -- extra rust
     use({ 'simrat39/rust-tools.nvim' })
-
+    -- noice?
     -- Json like configs
     use "b0o/schemastore.nvim"
     -- project --
@@ -29,7 +30,6 @@ return require('packer').startup(function(use)
         end,
         requires = "nvim-telescope/telescope.nvim",
     })
-
     use { "jose-elias-alvarez/null-ls.nvim" }
     -- indent --
     use({
@@ -68,6 +68,15 @@ return require('packer').startup(function(use)
         keys = { "cc", "gc", "gb" }
     }
     -- Language spesific --
+    use {
+        'MrcJkb/haskell-tools.nvim',
+        requires = {
+            'neovim/nvim-lspconfig',
+            'nvim-lua/plenary.nvim',
+            'nvim-telescope/telescope.nvim', -- optional
+        },
+        -- tag = 'x.y.z' -- [^1]
+    }
     use { 'ray-x/go.nvim' }
     use { 'ray-x/guihua.lua', after = "go.nvim" }
     -- Autocreate/update html tags
@@ -90,7 +99,6 @@ return require('packer').startup(function(use)
             '<C-l>',
         },
         config = function() require('modules.plugins.tmux') end, }
-
 
 
     use { "fenetikm/falcon" }
