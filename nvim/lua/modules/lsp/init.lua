@@ -22,11 +22,10 @@ local config = {
         active = signs,
     },
     update_in_insert = false,
-    underline = false,
+    underline = true,
     severity_sort = true,
     float = {
         focusable = true,
-
         border = "rounded",
         source = "always",
         header = "",
@@ -58,7 +57,7 @@ local on_attach = function(client, bufnr)
     -- Enable completion triggered by <c-x><c-o>
 
     if client.name == "hls" then
-        vim.keymap.set('n', '<space>ca', vim.lsp.codelens.run, opts)
+        vim.keymap.set('n', '<space>cr', vim.lsp.codelens.run, opts)
         vim.keymap.set('n', '<space>hs', ht.hoogle.hoogle_signature, opts)
         vim.keymap.set('n', '<leader>rr', ht.repl.toggle, def_opts)
         -- roggle a GHCi repl for the current buffer
@@ -73,7 +72,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<leader>g', vim.lsp.buf.definition, bufopts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+    vim.keymap.set('n', '<C-n>', vim.lsp.buf.signature_help, bufopts)
     vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
     vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
     vim.keymap.set('n', '<space>wl', function()
@@ -84,8 +83,6 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
     vim.keymap.set('n', '<space>fa', function() vim.lsp.buf.format { async = true } end, bufopts)
-
-
 end
 
 
@@ -103,7 +100,8 @@ for _, server in ipairs({
     'elixir',
     'ocaml',
     'haskell',
-    'typescript'
+    -- 'typescript'
+    'deno'
 }) do
     require('modules.lsp.' .. server).setup(on_attach, capabilities)
 end

@@ -1,7 +1,9 @@
 -- global settings
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-
+vim.g.markdown_fenced_languages = {
+    "ts=typescript"
+}
 local options = {
     backup = false, -- creates a backup file
     clipboard = "unnamedplus,unnamed", -- allows neovim to access the system clipboard
@@ -15,44 +17,49 @@ local options = {
     smartcase = true, -- smart case
     swapfile = false, -- creates a swapfile
     termguicolors = true, -- set term gui colors (most terminals support this)
-    undofile = true, -- enable persistent undo
     history = 2000,
     showtabline = 0, -- always show tabs
     winwidth = 30, -- set window width
+    splitright=true,
+    splitbelow=true,
     updatetime = 50, -- faster completion (4000ms default)
     writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
     expandtab = true, -- convert tabs to spaces
+    undofile = true,
     shiftwidth = 4, -- the number of spaces inserted for each indentation
     showcmd = false, -- display incomplete commands
     tabstop = 4, -- insert 2 spaces for a tab
     softtabstop = 4,
     hidden = true, -- Required to keep multiple buffers open multiple buffers
     smarttab = true, -- insert indents automatically
+    smartindent = true,
     autoindent = true, -- copy indent from current line
     cursorline = false, -- highlight the current line
     number = true, -- set numbered lines
     cmdheight = 0,
-    wildmenu = true,
     relativenumber = true, -- set relative numbered lines
     signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
     wrap = false, -- display lines as one long line
     scrolloff = 8, -- is one of my fav
+    -- these are new 
+    shiftround = true,
 }
+
+vim.opt.shada = "!,'100,<50,s10,h,:1000,/1000"
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.opt.shortmess:append("c")
 for key, value in pairs(options) do
     vim.opt[key] = value
 end
-
-
 -- Folding
 vim.o.foldenable = true
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 -- vim.o.foldcolumn = "1"
-
+vim.opt.colorcolumn = '100'
 -- Use ripgrep as grep tool
 vim.o.grepprg = "rg --vimgrep --no-heading"
 vim.o.grepformat = "%f:%l:%c:%m,%f:%l:%m"

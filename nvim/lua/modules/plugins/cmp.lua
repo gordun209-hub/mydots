@@ -3,11 +3,6 @@ local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
 
 
-local check_backspace = function()
-    local col = vim.fn.col(".") - 1
-    return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
-end
-
 vim.api.nvim_command('hi LuasnipChoiceNodePassive cterm=italic')
 
 local kind_icons = {
@@ -38,6 +33,10 @@ local kind_icons = {
     TypeParameter = "",
 }
 
+local check_backspace = function()
+    local col = vim.fn.col '.' - 1
+    return col == 0 or vim.fn.getline('.'):sub(col, col):match '%s'
+end
 
 cmp.setup({
     snippet = {
@@ -45,15 +44,23 @@ cmp.setup({
             luasnip.lsp_expand(args.body) -- For `luasnip` users.
         end,
     },
-
-    confirm_opts = {
-        behavior = cmp.ConfirmBehavior.Replace,
-        select = false,
-    },
+    enabled = function()
+        -- disable completion in comments
+        local context = require 'cmp.config.context'
+        -- keep command mode completion enabled when cursor is in a comment
+        if vim.api.nvim_get_mode().mode == 'c' then
+            return true
+        else
+            return not context.in_treesitter_capture("comment")
+                and not context.in_syntax_group("Comment")
+        end
+    end,
+    preselect = cmp.PreselectMode.Item,
     experimental = {
         ghost_text = false,
-        native_menu = false,
+        native_menu = false
     },
+
     window = {
         completion = {
             border = 'rounded',
@@ -64,13 +71,28 @@ cmp.setup({
             winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None',
         },
     },
-    mapping = cmp.mapping.preset.insert({
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-        ['<S-Tab>'] = function(fallback)
+    mapping = {
+
+        ["<C-k>"] = cmp.mapping.select_prev_item(),
+        ["<C-j>"] = cmp.mapping.select_next_item(),
+        ['<Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif luasnip.jumpable(1) then
+                luasnip.jump(1)
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            elseif luasnip.expandable() then
+                luasnip.expand()
+            elseif check_backspace() then
+                -- cmp.complete()
+                fallback()
+            else
+                fallback()
+            end
+        end, { 'i', 's' }),
+        ["<CR>"] = cmp.mapping.confirm({ select = false }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
             elseif luasnip.jumpable(-1) then
@@ -78,9 +100,9 @@ cmp.setup({
             else
                 fallback()
             end
-        end
-    }),
+        end, { "i", "s" }),
 
+    },
     formatting = {
         fields = { "kind", "abbr", "menu" },
         format = function(entry, vim_item)
@@ -100,6 +122,7 @@ cmp.setup({
     },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
+    }, {
         { name = 'buffer' },
         { name = 'luasnip' },
         { name = "path" },

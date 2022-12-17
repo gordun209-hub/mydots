@@ -1,5 +1,7 @@
 local blankline = require 'indent_blankline'
 
+vim.opt.listchars:append("space:⋅")
+vim.opt.listchars:append("eol:↴")
 blankline.setup({
     char_highlight = 'LineNr',
     char = '▏',

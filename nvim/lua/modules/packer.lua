@@ -10,6 +10,21 @@ return require('packer').startup(function(use)
     -- Language server configurations
     use { 'neovim/nvim-lspconfig', config = function() require('modules.lsp') end } -- Configurations for Nvim LSP
 
+    use({
+        "jackMort/ChatGPT.nvim",
+        config = function()
+            require("chatgpt").setup({
+                -- optional configuration
+            })
+        end,
+        requires = {
+            "MunifTanjim/nui.nvim",
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope.nvim"
+        }
+    })
+
+    use({ "nvim-telescope/telescope-live-grep-args.nvim" })
     use { "jose-elias-alvarez/typescript.nvim" }
     -- Signatures
     use { "williamboman/mason.nvim", config = function() require('modules.lsp.mason') end }
@@ -48,7 +63,6 @@ return require('packer').startup(function(use)
     -- Highlight --
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'
         , config = function() require('modules.plugins.treesitter') end }
-
     use { 'JoosepAlviste/nvim-ts-context-commentstring', after = "nvim-treesitter" } -- for commenting
 
     -- statusline --
@@ -82,9 +96,9 @@ return require('packer').startup(function(use)
     -- Autocreate/update html tags
     use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" })
 
-    -- autocomplete AI --
-    use { 'zbirenbaum/copilot.lua', config = function() require('modules.plugins.copilot') end }
-    -- Tmux navigation --
+    -- -- autocomplete AI --
+    -- use { 'zbirenbaum/copilot.lua', config = function() require('modules.plugins.copilot') end }
+    
 
     -- tree trying neotree
     use { 'is0n/fm-nvim', cmd = { "Joshuto", "Lf", 'Fzf', 'Nnn', 'Lazygit' },
@@ -150,7 +164,6 @@ return require('packer').startup(function(use)
         cmd = "Trouble",
     }
     -- Auto pair --
-
     use({ 'windwp/nvim-autopairs', after = "nvim-cmp"
         , config = function() require('modules.plugins.autopairs') end })
 

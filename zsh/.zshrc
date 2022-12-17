@@ -16,9 +16,11 @@ export DENO_INSTALL="/home/ali/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"
 
+export OPENAI_API_KEY=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
 export PATH="/home/ali/.local/share/fnm:$PATH"
 eval "`fnm env`"
 
+[[ ! -r /home/ali/.opam/opam-init/init.zsh ]] || source /home/ali/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 ##[ ! -x /usr/bin/yay ] && [ -x /usr/bin/paru ] && alias yay='paru'
 export DISCORD_TOKEN="MTAzODQ2MzA0OTQ5NDk1ODIyMA.GaVIkJ.7x8UjEYY-0y6P7YYV53NXYu2ao5EV59D5hf-CA"
 

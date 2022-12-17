@@ -20,6 +20,6 @@ else
             enable = true
         },
         sync_install = true,
-        autotag = {enable = true}
+        autotag = { enable = true },
     })
 end
