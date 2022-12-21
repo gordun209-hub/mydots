@@ -15,8 +15,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=6'
 export DENO_INSTALL="/home/ali/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"
-
-export OPENAI_API_KEY=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
+export OPENAI_API_KEY=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
 export PATH="/home/ali/.local/share/fnm:$PATH"
 eval "`fnm env`"
 

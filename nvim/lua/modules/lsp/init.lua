@@ -100,6 +100,7 @@ for _, server in ipairs({
     'elixir',
     'ocaml',
     'haskell',
+    'racket_langserver',
     -- 'typescript'
     'deno'
 }) do

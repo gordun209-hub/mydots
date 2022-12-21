@@ -20,8 +20,8 @@ local options = {
     history = 2000,
     showtabline = 0, -- always show tabs
     winwidth = 30, -- set window width
-    splitright=true,
-    splitbelow=true,
+    splitright = true,
+    splitbelow = true,
     updatetime = 50, -- faster completion (4000ms default)
     writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
     expandtab = true, -- convert tabs to spaces
@@ -41,8 +41,8 @@ local options = {
     signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
     wrap = false, -- display lines as one long line
     scrolloff = 8, -- is one of my fav
-    -- these are new 
-    shiftround = true,
+    -- these are new
+
 }
 
 vim.opt.shada = "!,'100,<50,s10,h,:1000,/1000"
@@ -53,17 +53,15 @@ vim.opt.shortmess:append("c")
 for key, value in pairs(options) do
     vim.opt[key] = value
 end
--- Folding
-vim.o.foldenable = true
-vim.o.foldlevel = 99
-vim.o.foldlevelstart = 99
-vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
--- vim.o.foldcolumn = "1"
+
 vim.opt.colorcolumn = '100'
--- Use ripgrep as grep tool
+
 vim.o.grepprg = "rg --vimgrep --no-heading"
 vim.o.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 
+vim.g.netrw_browse_split = 0
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 25
 
 
 local disable_builtin_plugins = {

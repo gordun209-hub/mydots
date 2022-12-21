@@ -23,6 +23,8 @@ return require('packer').startup(function(use)
             "nvim-telescope/telescope.nvim"
         }
     })
+    use {"trmckay/based.nvim", config = function() require("based").setup({}) end }
+
 
     use({ "nvim-telescope/telescope-live-grep-args.nvim" })
     use { "jose-elias-alvarez/typescript.nvim" }
@@ -98,7 +100,7 @@ return require('packer').startup(function(use)
 
     -- -- autocomplete AI --
     -- use { 'zbirenbaum/copilot.lua', config = function() require('modules.plugins.copilot') end }
-    
+
 
     -- tree trying neotree
     use { 'is0n/fm-nvim', cmd = { "Joshuto", "Lf", 'Fzf', 'Nnn', 'Lazygit' },
@@ -183,3 +185,4 @@ return require('packer').startup(function(use)
     }
 
 end)
+
