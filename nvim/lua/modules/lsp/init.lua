@@ -1,39 +1,9 @@
-local ht       = require('haskell-tools')
 local def_opts = { noremap = true, silent = true, }
-local signs    = {
-    { name = "DiagnosticSignError", text = "" },
-    { name = "DiagnosticSignWarn", text = "" },
-    { name = "DiagnosticSignHint", text = "" },
-    { name = "DiagnosticSignInfo", text = "" },
-}
 
-for _, sign in ipairs(signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-end
 
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-local config = {
-    -- disable virtual text
-    virtual_text = true,
 
-    -- show signs
-    signs = {
-        active = signs,
-    },
-    update_in_insert = false,
-    underline = true,
-    severity_sort = true,
-    float = {
-        focusable = true,
-        border = "rounded",
-        source = "always",
-        header = "",
-        prefix = "",
-    },
-}
-
-vim.diagnostic.config(config)
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = "double",
@@ -53,19 +23,7 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-    -- Enable completion triggered by <c-x><c-o>
-
-    if client.name == "hls" then
-        vim.keymap.set('n', '<space>cr', vim.lsp.codelens.run, opts)
-        vim.keymap.set('n', '<space>hs', ht.hoogle.hoogle_signature, opts)
-        vim.keymap.set('n', '<leader>rr', ht.repl.toggle, def_opts)
-        -- roggle a GHCi repl for the current buffer
-        vim.keymap.set('n', '<leader>rf', function()
-            ht.repl.toggle(vim.api.nvim_buf_get_name(0))
-        end, def_opts)
-        vim.keymap.set('n', '<leader>rq', ht.repl.quit, def_opts)
-    end
+local on_attach = function(_, bufnr)
     -- Mappings.
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
     vim.keymap.set('n', '<leader>G', vim.lsp.buf.declaration, bufopts)
@@ -90,7 +48,7 @@ end
 for _, server in ipairs({
     'bashls',
     'eslint',
-    'go',
+
     'jsonls',
     'null-ls',
     'clang',
@@ -99,7 +57,6 @@ for _, server in ipairs({
     'dockerls',
     'elixir',
     'ocaml',
-    'haskell',
     'racket_langserver',
     -- 'typescript'
     'deno'

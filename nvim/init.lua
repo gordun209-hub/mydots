@@ -1,4 +1,5 @@
 -- global settings
+require("impatient").enable_profile()
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.g.markdown_fenced_languages = {
@@ -85,6 +86,38 @@ local disable_builtin_plugins = {
     "zipPlugin",
 }
 
+local signs = {
+    { name = "DiagnosticSignError", text = "" },
+    { name = "DiagnosticSignWarn", text = "" },
+    { name = "DiagnosticSignHint", text = "" },
+    { name = "DiagnosticSignInfo", text = "" },
+}
+
+
+for _, sign in ipairs(signs) do
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+end
+local config = {
+    -- disable virtual text
+    virtual_text = true,
+
+    -- show signs
+    signs = {
+        active = signs,
+    },
+    update_in_insert = false,
+    underline = true,
+    severity_sort = true,
+    float = {
+        focusable = true,
+        border = "rounded",
+        source = "always",
+        header = "",
+        prefix = "",
+    },
+}
+
+vim.diagnostic.config(config)
 for _, builtin_plugin in ipairs(disable_builtin_plugins) do
     vim.g["loaded_" .. builtin_plugin] = 1
 end

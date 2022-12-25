@@ -1,17 +1,4 @@
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-local on_attach = function(client, bufnr)
-    -- Enable completion triggered by <c-x><c-o>
-
-    if client.name == "hls" then
-        vim.keymap.set('n', '<space>cr', vim.lsp.codelens.run, opts)
-        vim.keymap.set('n', '<space>hs', ht.hoogle.hoogle_signature, opts)
-        vim.keymap.set('n', '<leader>rr', ht.repl.toggle, def_opts)
-        -- roggle a GHCi repl for the current buffer
-        vim.keymap.set('n', '<leader>rf', function()
-            ht.repl.toggle(vim.api.nvim_buf_get_name(0))
-        end, def_opts)
-        vim.keymap.set('n', '<leader>rq', ht.repl.quit, def_opts)
-    end
+local on_attach = function(_, bufnr)
     -- Mappings.
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
     vim.keymap.set('n', '<leader>G', vim.lsp.buf.declaration, bufopts)
@@ -31,16 +18,15 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>fa', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
-ht.setup {
-    hls = {
-        -- See nvim-lspconfig's  suggested configuration for keymaps, etc.
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+require("typescript").setup({
+    disable_commands = false, -- prevent the plugin from creating Vim commands
+    debug = false, -- enable debug logging for commands
+    go_to_source_definition = {
+        fallback = true, -- fall back to standard LSP definition on failure
+    },
+    server = { -- pass options to lspconfig's setup method
         on_attach = on_attach,
         capabilities = capabilities,
-        settings = {
-            haskell = { -- haskell-language-server options
-                formattingProvider = 'stylish-haskell',
-                checkProject = true, -- Setting this to true could have a performance impact on large mono repos.
-            }
-        }
     },
-}
+})
