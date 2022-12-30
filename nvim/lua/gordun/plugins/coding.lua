@@ -1,21 +1,5 @@
 return {
 
-  -- git signs
-  {
-    "lewis6991/gitsigns.nvim",
-    event = "BufReadPre",
-    config = {
-      signs = {
-        add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-        change = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
-        delete = { hl = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
-        topdelete = { hl = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
-        changedelete = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
-        untracked = { hl = "GitSignsAdd", text = "▍", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-      },
-    },
-  },
-
   -- snippets
   {
     "L3MON4D3/LuaSnip",
@@ -40,25 +24,130 @@ return {
     },
 
     config = function()
+      local kind_icons = {
+        Text = "",
+        Method = "m",
+        Function = "",
+        Constructor = "",
+        Field = "",
+        Variable = "",
+        Class = "",
+        Interface = "",
+        Module = "",
+        Property = "",
+        Unit = "",
+        Value = "",
+        Enum = "",
+        Keyword = "",
+        Snippet = "",
+        Color = "",
+        File = "",
+        Reference = "",
+        Folder = "",
+        EnumMember = "",
+        Constant = "",
+        Struct = "",
+        Event = "",
+        Operator = "",
+        TypeParameter = "",
+      }
+
+      local check_backspace = function()
+        local col = vim.fn.col(".") - 1
+        return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+      end
       local cmp = require("cmp")
+      local luasnip = require("luasnip")
       cmp.setup({
         snippet = {
           expand = function(args)
             require("luasnip").lsp_expand(args.body)
           end,
         },
-        mapping = cmp.mapping.preset.insert({
-          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-f>"] = cmp.mapping.scroll_docs(4),
-          ["<C-Space>"] = cmp.mapping.complete(),
-          ["<C-e>"] = cmp.mapping.abort(),
-          ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-        }),
+        enabled = function()
+          -- disable completion in comments
+          local context = require("cmp.config.context")
+          -- keep command mode completion enabled when cursor is in a comment
+          if vim.api.nvim_get_mode().mode == "c" then
+            return true
+          else
+            return not context.in_treesitter_capture("comment") and not context.in_syntax_group("Comment")
+          end
+        end,
+        preselect = cmp.PreselectMode.Item,
+        experimental = {
+          ghost_text = false,
+          native_menu = false,
+        },
+
+        mapping = {
+          ["<C-k>"] = cmp.mapping.select_prev_item(),
+          ["<C-j>"] = cmp.mapping.select_next_item(),
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif luasnip.jumpable(1) then
+              luasnip.jump(1)
+            elseif luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            elseif luasnip.expandable() then
+              luasnip.expand()
+            elseif check_backspace() then
+              -- cmp.complete()
+              fallback()
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+          ["<CR>"] = cmp.mapping.confirm({ select = false }),
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+        },
+        formatting = {
+          fields = { "kind", "abbr", "menu" },
+          format = function(entry, vim_item)
+            -- Kind icons
+            vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+            -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+            vim_item.menu = ({
+              nvim_lsp = "[LSP]",
+              luasnip = "[Snip]",
+              nvim_lua = "[API]",
+              buffer = "[Buf]",
+              path = "[Path]",
+            })[entry.source.name]
+            return vim_item
+          end,
+        },
+
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "luasnip" },
           { name = "buffer" },
           { name = "path" },
+        }),
+      })
+      cmp.setup.cmdline({ "/", "?" }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = "buffer" },
+        },
+      })
+
+      -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = "path" },
+        }, {
+          { name = "cmdline" },
         }),
       })
     end,
@@ -84,6 +173,49 @@ return {
           pre = function()
             require("ts_context_commentstring.internal").update_commentstring({})
           end,
+        },
+      })
+    end,
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    config = function()
+      vim.defer_fn(function()
+        require("copilot").setup({
+          suggestion = {
+            enabled = true,
+            auto_trigger = false,
+            debounce = 75,
+            keymap = {
+              accept = "<M-l>",
+              accept_word = false,
+              accept_line = false,
+              next = "<M-]>",
+              prev = "<M-[>",
+              dismiss = "<C-]>",
+            },
+          },
+        })
+      end, 100)
+    end,
+  },
+  {
+    "kylechui/nvim-surround",
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        keymaps = { -- vim-surround style keymaps
+          insert = "<C-g>s",
+          insert_line = "<C-g>S",
+          normal = "s",
+          normal_cur = "ss",
+          normal_line = "S",
+          normal_cur_line = "SS",
+          visual = "s",
+          visual_line = "gS",
+          delete = "ds",
+          change = "cs",
         },
       })
     end,

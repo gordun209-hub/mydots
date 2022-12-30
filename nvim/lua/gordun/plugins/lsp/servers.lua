@@ -1,4 +1,3 @@
----@type lspconfig.options
 local servers = {
   bashls = {},
   clangd = {},

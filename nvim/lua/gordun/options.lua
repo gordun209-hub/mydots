@@ -6,13 +6,11 @@ vim.opt.clipboard = "unnamedplus" -- sync with system clipboard
 vim.opt.cmdheight = 1
 vim.opt.completeopt = "menu,menuone,noselect"
 vim.opt.conceallevel = 3 -- Hide * markup for bold and italic
-vim.opt.confirm = true -- confirm to save changes before exiting modified buffer
-vim.opt.cursorline = true -- Enable highlighting of the current line
+vim.opt.cursorline = false -- Enable highlighting of the current line
 vim.opt.expandtab = true -- Use spaces instead of tabs
 vim.opt.formatoptions = "jcroqlnt" -- tcqj
 vim.opt.grepformat = "%f:%l:%c:%m"
 vim.opt.grepprg = "rg --vimgrep"
-vim.opt.guifont = "FiraCode Nerd Font:h11"
 vim.opt.hidden = true -- Enable modified buffers in background
 vim.opt.ignorecase = true -- Ignore case
 vim.opt.inccommand = "nosplit" -- preview incremental substitute
@@ -25,10 +23,8 @@ vim.opt.pumblend = 10 -- Popup blend
 vim.opt.pumheight = 10 -- Maximum number of entries in a popup
 vim.opt.relativenumber = true -- Relative line numbers
 vim.opt.scrolloff = 4 -- Lines of context
-vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 vim.opt.shiftround = true -- Round indent
 vim.opt.shiftwidth = 2 -- Size of an indent
-vim.opt.shortmess = "filnxtToOFWIcC"
 vim.opt.showmode = false -- dont show mode since we have a statusline
 vim.opt.sidescrolloff = 8 -- Columns of context
 vim.opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
@@ -43,9 +39,40 @@ vim.opt.termguicolors = true -- True color support
 vim.opt.timeoutlen = 300
 vim.opt.undofile = true
 vim.opt.undolevels = 10000
-vim.opt.updatetime = 200 -- save swap file and trigger CursorHold
-vim.opt.wildmode = "longest:full,full" -- Command-line completion mode
+vim.opt.updatetime = 50
 vim.opt.wrap = false -- Disable line wrap
-
+vim.opt.shada = "!,'100,<50,s10,h,:1000,/1000"
 -- fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
+
+local signs = {
+  { name = "DiagnosticSignError", text = "" },
+  { name = "DiagnosticSignWarn", text = "" },
+  { name = "DiagnosticSignHint", text = "" },
+  { name = "DiagnosticSignInfo", text = "" },
+}
+
+for _, sign in ipairs(signs) do
+  vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+end
+local config = {
+  -- disable virtual text
+  virtual_text = true,
+
+  -- show signs
+  signs = {
+    active = signs,
+  },
+  update_in_insert = false,
+  underline = true,
+  severity_sort = true,
+  float = {
+    focusable = true,
+    border = "rounded",
+    source = "always",
+    header = "",
+    prefix = "",
+  },
+}
+
+vim.diagnostic.config(config)

@@ -36,6 +36,7 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
     },
+    ft = "hs",
     config = function()
       require("haskell-tools").setup({})
     end,
@@ -45,6 +46,13 @@ return {
     "jose-elias-alvarez/null-ls.nvim",
     event = "BufReadPre",
     config = function()
+      local with_root_file = function(builtin, file)
+        return builtin.with({
+          condition = function(utils)
+            return utils.root_has_file(file)
+          end,
+        })
+      end
       local nls = require("null-ls")
       nls.setup({
         on_attach = on_attach,
@@ -52,6 +60,20 @@ return {
           -- nls.builtins.formatting.prettierd,
           nls.builtins.formatting.stylua,
           nls.builtins.diagnostics.flake8,
+          nls.builtins.code_actions.eslint,
+          nls.builtins.code_actions.shellcheck,
+          ---formatting
+          nls.builtins.formatting.eslint_d,
+          with_root_file(nls.builtins.formatting.stylua, "stylua.toml"),
+          nls.builtins.formatting.shfmt,
+          nls.builtins.formatting.rustfmt,
+          nls.builtins.formatting.stylish_haskell,
+          nls.builtins.formatting.ocamlformat,
+          ---diagnostics
+          nls.builtins.diagnostics.shellcheck.with({ diagnostics_format = "#{m} [#{c}]" }),
+          nls.builtins.diagnostics.zsh,
+          nls.builtins.diagnostics.hadolint,
+          nls.builtins.diagnostics.credo,
         },
       })
     end,
