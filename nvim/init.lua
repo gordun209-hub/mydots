@@ -1,4 +1,4 @@
-require("gordun.options")
-require("gordun.lazy")
-require("gordun.autocommands")
-require("gordun.mappings")
+require("gordun.config.options")
+require("gordun.config.lazy")
+require("gordun.config.autocmds")
+require("gordun.config.keymaps")

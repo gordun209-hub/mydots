@@ -8,27 +8,14 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.highlight.on_yank()
   end,
 })
--- Run gofmt + goimport on save
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*.go",
-  callback = function()
-    require("go.format").goimport()
-  end,
-  group = vimrc_group,
-})
 -- go to last loc when opening a buffer
-vim.api.nvim_create_autocmd("BufReadPre", {
-  pattern = "*",
+vim.api.nvim_create_autocmd("BufReadPost", {
   callback = function()
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = "<buffer>",
-      once = true,
-      callback = function()
-        vim.cmd(
-          [[if &ft !~# 'commit\|rebase' && line("'\"") > 1 && line("'\"") <= line("$") | exe 'normal! g`"' | endif]]
-        )
-      end,
-    })
+    local mark = vim.api.nvim_buf_get_mark(0, '"')
+    local lcount = vim.api.nvim_buf_line_count(0)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
   end,
 })
 

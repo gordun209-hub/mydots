@@ -8,8 +8,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("gordun.plugins", {
+
   defaults = { lazy = true, version = "*" },
-  install = { colorscheme = { "habamax", "falcon" } },
+  install = { colorscheme = { "falcon" } },
   checker = { enabled = true },
   performance = {
     rtp = {
@@ -36,4 +37,3 @@ require("lazy").setup("gordun.plugins", {
     },
   },
 })
-vim.keymap.set("n", "<leader>l", "<cmd>:Lazy<cr>")

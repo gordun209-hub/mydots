@@ -1,5 +1,5 @@
 vim.g.neo_tree_remove_legacy_commands = 1
-
+local util = require("gordun.util")
 return {
   -- fuzzy finder
   {
@@ -14,8 +14,48 @@ return {
       { "nvim-telescope/telescope-project.nvim" },
       { "nvim-telescope/telescope-file-browser.nvim" },
     },
-
-    keys = { { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" } },
+    keys = {
+      { "<leader>/", util.telescope("live_grep"), desc = "Find in Files (Grep)" },
+      { "<leader><space>", util.telescope("find_files"), desc = "Find Files" },
+      { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+      { "<leader>ff", util.telescope("find_files"), desc = "Find Files" },
+      { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
+      { "<leader>gc", "<Cmd>Telescope git_commits<CR>", desc = "commits" },
+      { "<leader>gs", "<Cmd>Telescope git_status<CR>", desc = "status" },
+      { "<leader>ha", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
+      { "<leader>hc", "<cmd>Telescope commands<cr>", desc = "Commands" },
+      { "<leader>hf", "<cmd>Telescope filetypes<cr>", desc = "File Types" },
+      { "<leader>hh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
+      { "<leader>hk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
+      { "<leader>hm", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
+      { "<leader>ho", "<cmd>Telescope vim_options<cr>", desc = "Options" },
+      { "<leader>hs", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
+      { "<leader>ht", "<cmd>Telescope builtin<cr>", desc = "Telescope" },
+      { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
+      { "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+      { "<leader>sg", util.telescope("live_grep"), desc = "Grep" },
+      { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
+      { "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
+      { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+      {
+        "<leader>ss",
+        util.telescope("lsp_document_symbols", {
+          symbols = {
+            "Class",
+            "Function",
+            "Method",
+            "Constructor",
+            "Interface",
+            "Module",
+            "Struct",
+            "Trait",
+            "Field",
+            "Property",
+          },
+        }),
+        desc = "Goto Symbol",
+      },
+    },
     config = function()
       require("telescope").setup({
         mappings = {
@@ -91,18 +131,61 @@ return {
       require("telescope").load_extension("live_grep_args")
     end,
   },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    cmd = "Neotree",
+    keys = {
+      {
+        "<leader>ft",
+        function()
+          require("neo-tree.command").execute({ toggle = true, dir = require("lazyvim.util").get_root() })
+        end,
+        desc = "NeoTree",
+      },
+    },
+    config = {
+      filesystem = {
+        follow_current_file = true,
+        hijack_netrw_behavior = "open_current",
+      },
+    },
+  },
 
   {
+
+    "windwp/nvim-spectre",
+    keys = {
+      {
+        "<leader>sr",
+        function()
+          require("spectre").open()
+        end,
+        desc = "Replace in files (Spectre)",
+      },
+    },
+  },
+  -- references
+  {
     "RRethy/vim-illuminate",
-    event = "VeryLazy",
+    event = "BufReadPost",
     config = function()
-      require("illuminate").configure({
-        providers = {
-          "lsp",
-          "treesitter",
-          "regex",
-        },
-      })
+      require("illuminate").configure({ delay = 200 })
     end,
+    keys = {
+      {
+        "]]",
+        function()
+          require("illuminate").goto_next_reference(false)
+        end,
+        desc = "Next Reference",
+      },
+      {
+        "[[",
+        function()
+          require("illuminate").goto_prev_reference(false)
+        end,
+        desc = "Prev Reference",
+      },
+    },
   },
 }

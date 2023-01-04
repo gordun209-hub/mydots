@@ -32,7 +32,6 @@ vim.opt.smartcase = true -- Don't ignore case with capitals
 vim.opt.smartindent = true -- Insert indents automatically
 vim.opt.spelllang = { "en" }
 vim.opt.splitbelow = true -- Put new windows below current
-vim.opt.splitkeep = "screen"
 vim.opt.splitright = true -- Put new windows right of current
 vim.opt.tabstop = 2 -- Number of spaces tabs count for
 vim.opt.termguicolors = true -- True color support
@@ -44,35 +43,12 @@ vim.opt.wrap = false -- Disable line wrap
 vim.opt.shada = "!,'100,<50,s10,h,:1000,/1000"
 -- fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
-
-local signs = {
-  { name = "DiagnosticSignError", text = "" },
-  { name = "DiagnosticSignWarn", text = "" },
-  { name = "DiagnosticSignHint", text = "" },
-  { name = "DiagnosticSignInfo", text = "" },
-}
-
-for _, sign in ipairs(signs) do
-  vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-end
-local config = {
-  -- disable virtual text
-  virtual_text = true,
-
-  -- show signs
-  signs = {
-    active = signs,
-  },
-  update_in_insert = false,
-  underline = true,
-  severity_sort = true,
-  float = {
-    focusable = true,
-    border = "rounded",
-    source = "always",
-    header = "",
-    prefix = "",
-  },
-}
-
-vim.diagnostic.config(config)
+vim.opt.shortmess:append("c") -- for nvim-cmp
+vim.opt.shortmess:append("I") -- Hide the startup screen
+vim.opt.shortmess:append("A") -- Ignore swap file messages
+vim.opt.shortmess:append("a") -- Shorter message formats
+vim.opt.wildignore:append(
+  "*.png,*.jpg,*.jpeg,*.gif,*.wav,*.aiff,*.dll,*.pdb,*.mdb,*.so,*.swp,*.zip,*.gz,*.bz2,*.meta,*.svg,*.cache,*/.git/*"
+)
+vim.o.wildmenu = true
+vim.o.wildmode = "longest,list,full"
