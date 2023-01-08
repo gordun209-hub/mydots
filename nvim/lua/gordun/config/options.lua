@@ -6,7 +6,6 @@ vim.opt.clipboard = "unnamedplus" -- sync with system clipboard
 vim.opt.cmdheight = 1
 vim.opt.completeopt = "menu,menuone,noselect"
 vim.opt.conceallevel = 3 -- Hide * markup for bold and italic
-vim.opt.cursorline = false -- Enable highlighting of the current line
 vim.opt.expandtab = true -- Use spaces instead of tabs
 vim.opt.formatoptions = "jcroqlnt" -- tcqj
 vim.opt.grepformat = "%f:%l:%c:%m"
@@ -38,6 +37,10 @@ vim.opt.termguicolors = true -- True color support
 vim.opt.timeoutlen = 300
 vim.opt.undofile = true
 vim.opt.undolevels = 10000
+
+if vim.fn.has("nvim-0.9.0") == 1 then
+  vim.keymap.set("n", "<leader>hl", vim.show_pos, { desc = "Highlight Groups at cursor" })
+end
 vim.opt.updatetime = 50
 vim.opt.wrap = false -- Disable line wrap
 vim.opt.shada = "!,'100,<50,s10,h,:1000,/1000"

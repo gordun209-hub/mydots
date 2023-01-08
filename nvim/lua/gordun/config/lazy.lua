@@ -8,7 +8,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("gordun.plugins", {
-
+  spec = "gordun.plugins",
   defaults = { lazy = true, version = "*" },
   install = { colorscheme = { "falcon" } },
   checker = { enabled = true },

@@ -4,11 +4,34 @@ return {
     event = "BufReadPre",
     dependencies = {
       { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
-      { "williamboman/mason.nvim", config = true },
-      { "williamboman/mason-lspconfig.nvim", config = { automatic_installation = true } },
+      { "folke/neodev.nvim", config = true },
+      "mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
     },
-    servers = nil,
+    servers = {
+      jsonls = {},
+      clangd = {},
+      gopls = {},
+      sumneko_lua = {
+        settings = {
+          Lua = {
+            workspace = {
+              checkThirdParty = false,
+            },
+            completion = {
+              callSnippet = "Replace",
+            },
+          },
+        },
+      },
+    },
+    -- you can do any additional lsp server setup here
+    -- return true if you don't want this server to be setup with lspconfig
+    ---@param server string lsp server name
+    setup_server = function(server, opts)
+      return false
+    end,
     config = function(plugin)
       -- setup formatting and keymaps
       require("gordun.util").on_attach(function(client, buffer)
@@ -16,7 +39,8 @@ return {
         require("gordun.plugins.lsp.keymaps").on_attach(client, buffer)
       end)
 
-      for name, icon in pairs(require("gordun.config.icons").diagnostics) do
+      -- diagnostics
+      for name, icon in pairs(require("gordun.config.settings").icons.diagnostics) do
         name = "DiagnosticSign" .. name
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
       end
@@ -26,13 +50,21 @@ return {
         virtual_text = { spacing = 4, prefix = "●" },
         severity_sort = true,
       })
+
+      ---@type lspconfig.options
+      local servers = plugin.servers or {}
       local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-      local servers = plugin.servers or require("gordun.plugins.lsp.servers")
-      for server, opts in pairs(servers) do
-        opts.capabilities = capabilities
-        require("lspconfig")[server].setup(opts)
-      end
+      require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers) })
+      require("mason-lspconfig").setup_handlers({
+        function(server)
+          local opts = servers[server] or {}
+          opts.capabilities = capabilities
+          if not plugin.setup_server(opts) then
+            require("lspconfig")[server].setup(opts)
+          end
+        end,
+      })
     end,
   },
 
@@ -47,18 +79,6 @@ return {
     "weilbith/nvim-code-action-menu",
     cmd = "CodeActionMenu",
   },
-  -- {
-  --   "MrcJkb/haskell-tools.nvim",
-  --   dependencies = {
-  --     "neovim/nvim-lspconfig",
-  --     "nvim-lua/plenary.nvim",
-  --     "nvim-telescope/telescope.nvim",
-  --   },
-  --   ft = "hs",
-  --   config = function()
-  --     require("haskell-tools").setup({})
-  --   end,
-  -- },
   -- formatters
   {
     "jose-elias-alvarez/null-ls.nvim",
