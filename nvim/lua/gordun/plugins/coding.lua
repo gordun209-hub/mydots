@@ -67,13 +67,14 @@ return {
         }),
         formatting = {
           format = function(_, item)
-            local icons = require("gordun.config.settings").icons.kinds
+            local icons = require("gordun.config").icons.kinds
             if icons[item.kind] then
               item.kind = icons[item.kind] .. item.kind
             end
             return item
           end,
         },
+
         experimental = {
           ghost_text = {
             hl_group = "LspCodeLens",
@@ -119,7 +120,7 @@ return {
             auto_trigger = false,
             debounce = 75,
             keymap = {
-              accept = "<M-l>",
+              accept = "<C-j>",
               accept_word = false,
               accept_line = false,
               next = "<M-]>",

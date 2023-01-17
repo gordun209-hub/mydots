@@ -5,32 +5,26 @@ function M.on_attach(client, buffer)
 
   self:map("<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
   self:map("<leader>cl", "LspInfo", { desc = "Lsp Info" })
-  self:map("<leader>xd", "Telescope diagnostics", { desc = "Telescope Diagnostics" })
   self:map("gd", "Telescope lsp_definitions", { desc = "Goto Definition" })
   self:map("gr", "Telescope lsp_references", { desc = "References" })
   self:map("gD", "Telescope lsp_declarations", { desc = "Goto Declaration" })
   self:map("gI", "Telescope lsp_implementations", { desc = "Goto Implementation" })
   self:map("gt", "Telescope lsp_type_definitions", { desc = "Goto Type Definition" })
   self:map("K", vim.lsp.buf.hover, { desc = "Hover" })
-  self:map("[d", M.diagnostic_goto(true), { desc = "Next Diagnostic" })
-  self:map("]d", M.diagnostic_goto(false), { desc = "Prev Diagnostic" })
+  self:map("gK", vim.lsp.buf.signature_help, { desc = "Signature Help", has = "signatureHelp" })
+  self:map("<c-k>", vim.lsp.buf.signature_help, { mode = "i", desc = "Signature Help", has = "signatureHelp" })
+  self:map("]d", M.diagnostic_goto(true), { desc = "Next Diagnostic" })
+  self:map("[d", M.diagnostic_goto(false), { desc = "Prev Diagnostic" })
   self:map("]e", M.diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
   self:map("[e", M.diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
   self:map("]w", M.diagnostic_goto(true, "WARNING"), { desc = "Next Warning" })
   self:map("[w", M.diagnostic_goto(false, "WARNING"), { desc = "Prev Warning" })
-
-  self:map("<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help", mode = { "i", "n" }, has = "signatureHelp" })
   self:map("<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", mode = { "n", "v" }, has = "codeAction" })
 
   local format = require("gordun.plugins.lsp.format").format
   self:map("<leader>fa", format, { desc = "Format Document", has = "documentFormatting" })
   self:map("<leader>fa", format, { desc = "Format Range", mode = "v", has = "documentRangeFormatting" })
   self:map("<leader>cr", M.rename, { expr = true, desc = "Rename", has = "rename" })
-
-  if client.name == "tsserver" and pcall(require, "typescript") then
-    self:map("<leader>co", "TypescriptOrganizeImports", { desc = "Organize Imports" })
-    self:map("<leader>cR", "TypescriptRenameFile", { desc = "Rename File" })
-  end
 end
 
 function M.new(client, buffer)

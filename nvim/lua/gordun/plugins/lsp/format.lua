@@ -1,3 +1,5 @@
+local Util = require("lazy.core.util")
+
 local M = {}
 
 M.autoformat = true
@@ -5,42 +7,37 @@ M.autoformat = true
 function M.toggle()
   M.autoformat = not M.autoformat
   if M.autoformat then
-    vim.notify("enabled format on save")
+    Util.info("Enabled format on save", { title = "Format" })
   else
-    vim.notify("disabled format on save")
+    Util.warn("Disabled format on save", { title = "Format" })
   end
 end
 
 function M.format()
-  if M.autoformat then
-    vim.lsp.buf.format()
-  end
-end
+  local buf = vim.api.nvim_get_current_buf()
+  local ft = vim.bo[buf].filetype
+  local have_nls = #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
 
-function M.nls_formatter(ft)
-  local sources = require("null-ls.sources")
-  local available = sources.get_available(ft, "NULL_LS_FORMATTING")
-  return #available > 0
+  vim.lsp.buf.format(vim.tbl_deep_extend("force", {
+    bufnr = buf,
+    filter = function(client)
+      if have_nls then
+        return client.name == "null-ls"
+      end
+      return client.name ~= "null-ls"
+    end,
+  }, require("gordun.util").opts("nvim-lspconfig").format or {}))
 end
 
 function M.on_attach(client, buf)
-  local ft = vim.api.nvim_buf_get_option(buf, "filetype")
-
-  local enable = false
-  if M.nls_formatter(ft) then
-    enable = client.name == "null-ls"
-  else
-    enable = not (client.name == "null-ls")
-  end
-
-  client.server_capabilities.documentFormattingProvider = enable
-  -- format on save
-  if client.server_capabilities.documentFormattingProvider then
+  if client.supports_method("textDocument/formatting") then
     vim.api.nvim_create_autocmd("BufWritePre", {
-      group = vim.api.nvim_create_augroup("LspFormat", {}),
-      buffer = 0,
+      group = vim.api.nvim_create_augroup("LspFormat." .. buf, {}),
+      buffer = buf,
       callback = function()
-        M.format()
+        if M.autoformat then
+          M.format()
+        end
       end,
     })
   end

@@ -1,6 +1,5 @@
 return {
   {
-
     "nvim-treesitter/nvim-treesitter",
     version = false, -- last release is way too old and doesn't work on Windows
     build = ":TSUpdate",
@@ -9,11 +8,12 @@ return {
       { "<c-space>", desc = "Increment selection" },
       { "<bs>", desc = "Schrink selection", mode = "x" },
     },
-
+    ---@type TSConfig
     opts = {
       highlight = { enable = true },
       indent = { enable = true },
       context_commentstring = { enable = true, enable_autocmd = false },
+      ensure_installed = "all",
       incremental_selection = {
         enable = true,
         keymaps = {
@@ -24,9 +24,10 @@ return {
         },
       },
     },
+    ---@param opts TSConfig
     config = function(plugin, opts)
       if plugin.ensure_installed then
-        require("lazyvim.util").deprecate("treesitter.ensure_installed", "treesitter.opts.ensure_installed")
+        require("gordun.util").deprecate("treesitter.ensure_installed", "treesitter.opts.ensure_installed")
       end
       require("nvim-treesitter.configs").setup(opts)
     end,
