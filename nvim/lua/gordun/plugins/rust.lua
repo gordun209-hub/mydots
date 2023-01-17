@@ -2,6 +2,7 @@ local function on_attach(client, bufnr)
   require("gordun.plugins.lsp.format").on_attach(client, bufnr)
   require("gordun.plugins.lsp.mappings").on_attach(client, bufnr)
 end
+
 return {
   "simrat39/rust-tools.nvim",
   dependencies = {

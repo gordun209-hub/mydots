@@ -79,7 +79,7 @@ return {
     "weilbith/nvim-code-action-menu",
     cmd = "CodeActionMenu",
   },
-  -- formatters
+
   {
     "jose-elias-alvarez/null-ls.nvim",
     event = "BufReadPre",
