@@ -36,6 +36,6 @@ vim.opt.wrap = false -- Disable line wrap
 vim.g.markdown_recommended_style = 0
 
 if vim.fn.has("nvim-0.9.0") == 1 then
-  vim.opt.splitkeep = "screen"
-  vim.opt.shortmess = "filnxtToOFWIcC"
+    vim.opt.splitkeep = "screen"
+    vim.opt.shortmess = "filnxtToOFWIcC"
 end

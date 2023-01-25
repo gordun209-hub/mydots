@@ -104,7 +104,6 @@ return {
 
   -- active indent guide and indent text objects
 
-  -- noicer ui
 
   -- dashboard
   {

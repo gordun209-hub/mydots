@@ -1,108 +1,88 @@
 return {
-  -- lspconfig
-  {
-    "neovim/nvim-lspconfig",
-    event = "BufReadPre",
-    dependencies = {
-      { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
-      { "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
-      "mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-      "hrsh7th/cmp-nvim-lsp",
-    },
-    opts = {
-      -- options for vim.diagnostic.config()
-      diagnostics = {
-        underline = true,
-        update_in_insert = false,
-        virtual_text = { spacing = 4, prefix = "●" },
-        severity_sort = true,
-      },
-      servers = {
-        jsonls = {},
-        pyright = {},
-        sumneko_lua = {},
-      },
-      setup = {},
-    },
-    config = function(_, opts)
-      -- setup formatting and keymaps
-      require("gordun.util").on_attach(function(client, buffer)
-        require("gordun.plugins.lsp.format").on_attach(client, buffer)
-        require("gordun.plugins.lsp.keymaps").on_attach(client, buffer)
-      end)
-
-      -- diagnostics
-      for name, icon in pairs(require("gordun.config").icons.diagnostics) do
-        name = "DiagnosticSign" .. name
-        vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
-      end
-      vim.diagnostic.config(opts.diagnostics)
-
-      local servers = opts.servers
-      local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
-      require("mason-lspconfig").setup_handlers({
-        function(server_name)
-          local server_opts = servers[server_name] or {}
-          server_opts.capabilities = capabilities
-          if opts.setup[server_name] then
-            if opts.setup[server_name](server_name, server_opts) then
-              return
-            end
-          elseif opts.setup["*"] then
-            if opts.setup["*"](server_name, server_opts) then
-              return
-            end
-          end
-          require("lspconfig")[server_name].setup(server_opts)
-        end,
-      })
-    end,
-  },
-  -- formatters
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    event = "BufReadPre",
-    dependencies = { "mason.nvim" },
-    opts = function()
-      local nls = require("null-ls")
-      return {
-        sources = {
-          -- nls.builtins.formatting.prettierd,
-          nls.builtins.formatting.stylua,
-          nls.builtins.diagnostics.flake8,
+    -- lspconfig
+    {
+        "neovim/nvim-lspconfig",
+        event = "BufReadPre",
+        dependencies = {
+            "hrsh7th/cmp-nvim-lsp",
+            "simrat39/rust-tools.nvim",
         },
-      }
-    end,
-  },
 
-  -- cmdline tools and lsp servers
-  {
+        config = function()
+            local opts = { noremap = true, silent = true }
+            vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
+            vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+            vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+            vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
+            local on_attach = function(client, bufnr)
+                -- Enable completion triggered by <c-x><c-o>
+                vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
-    "williamboman/mason.nvim",
-    cmd = "Mason",
-    keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
-    opts = {
-      ensure_installed = {
-        "stylua",
-        "shellcheck",
-        "shfmt",
-        "flake8",
-      },
+                -- Mappings.
+                -- See `:help vim.lsp.*` for documentation on any of the below functions
+                local bufopts = { noremap = true, silent = true, buffer = bufnr }
+                vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+                vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+                vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+                vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+                vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
+                vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
+                vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
+                vim.keymap.set("n", "<space>wl", function()
+                    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+                end, bufopts)
+                vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
+                vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
+                vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
+                vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+                vim.keymap.set("n", "<leader>fa", function()
+                    vim.lsp.buf.format({ async = true })
+                end, bufopts)
+            end
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            require("lspconfig")["pyright"].setup({
+                on_attach = on_attach,
+            })
+            require("lspconfig")["tsserver"].setup({
+                on_attach = on_attach,
+            })
+            require("lspconfig")["sumneko_lua"].setup({
+                on_attach = on_attach,
+                capabilities = capabilities,
+            })
+            require("lspconfig")["rust_analyzer"].setup({
+                on_attach = on_attach,
+                capabilities = capabilities,
+                -- Server-specific settings...
+                settings = {
+                    ["rust-analyzer"] = {},
+                },
+            })
+        end,
     },
-    config = function(plugin, opts)
-      if plugin.ensure_installed then
-        require("gordun.util").deprecate("treesitter.ensure_installed", "treesitter.opts.ensure_installed")
-      end
-      require("mason").setup(opts)
-      local mr = require("mason-registry")
-      for _, tool in ipairs(opts.ensure_installed) do
-        local p = mr.get_package(tool)
-        if not p:is_installed() then
-          p:install()
-        end
-      end
-    end,
-  },
+    -- formatters
+    -- 
+    {
+        "jose-elias-alvarez/null-ls.nvim",
+        event = "BufReadPre",
+
+        opts = function()
+            local nls = require("null-ls")
+            return {
+                sources = {
+                    -- nls.builtins.formatting.prettierd,
+                    nls.builtins.formatting.stylua,
+                    nls.builtins.diagnostics.flake8,
+                },
+            }
+        end,
+    },
+
+    {
+        "williamboman/mason.nvim",
+        event = "BufReadPre",
+        config = function()
+            require("mason").setup()
+        end,
+    },
 }
