@@ -5,7 +5,6 @@ return {
         event = "BufReadPre",
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
-            "simrat39/rust-tools.nvim",
         },
 
         config = function()

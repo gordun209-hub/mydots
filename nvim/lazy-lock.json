@@ -12,9 +12,9 @@
   "fm-nvim": { "branch": "master", "commit": "8e6a77049330e7c797eb9e63affd75eb796fe75e" },
   "friendly-snippets": { "branch": "main", "commit": "a6f7a1609addb4e57daa6bedc300f77f8d225ab7" },
   "indent-blankline.nvim": { "branch": "master", "commit": "8299fe7703dfff4b1752aeed271c3b95281a952d" },
-  "lazy.nvim": { "branch": "main", "commit": "326556008a1574389be7fa9d670abada10ce1323" },
+  "lazy.nvim": { "branch": "main", "commit": "9b208696e139a404d159963b975a5b90af38439b" },
   "lualine.nvim": { "branch": "master", "commit": "0050b308552e45f7128f399886c86afefc3eb988" },
-  "mason.nvim": { "branch": "main", "commit": "357ef668b91dd1404e8730db644ca39b3c7232b3" },
+  "mason.nvim": { "branch": "main", "commit": "6f8f1ab3f4c5193578797b0d89afa7c497398bb1" },
   "mini.comment": { "branch": "main", "commit": "de539cac52a8df702758c6a026b63323130be596" },
   "mini.pairs": { "branch": "main", "commit": "50f07af5e47a67e74ec1a9b25bfb2eec93783d44" },
   "nui.nvim": { "branch": "main", "commit": "d147222a1300901656f3ebd5b95f91732785a329" },
@@ -35,6 +35,5 @@
   "telescope-vim-bookmarks.nvim": { "branch": "main", "commit": "92498cbf7c127dea37c3d27117b60dd7ab9baef4" },
   "telescope.nvim": { "branch": "master", "commit": "203bf5609137600d73e8ed82703d6b0e320a5f36" },
   "vim-startuptime": { "branch": "master", "commit": "6580cf539c33a212f4f5542068a3b4dd2b3ad834" },
-  "vimtex": { "branch": "master", "commit": "8ef5b0d9b85e7bb57b00b4571db4804aec0e10eb" },
-  "which-key.nvim": { "branch": "main", "commit": "684e96c5e8477f1ee9b3f2e9a12d802fd12c5531" }
+  "vimtex": { "branch": "master", "commit": "8ef5b0d9b85e7bb57b00b4571db4804aec0e10eb" }
 }
