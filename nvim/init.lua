@@ -16,21 +16,17 @@ require("lazy").setup({
 
         { import = "gordun.plugins" },
     },
-
     install = { colorscheme = { "falcon" } },
     defaults = {
         lazy = true,
     },
-
     checker = {
         enabled = true,
     },
-
     change_detection = {
         enabled = true,
         notify = false,
     },
-
     ui = {
         icons = {
             cmd = " ",
